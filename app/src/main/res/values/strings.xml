@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Todo_Tobuy</string>
+    <string name="underline"> <u>Forget Password?</u>.</string>
 </resources>

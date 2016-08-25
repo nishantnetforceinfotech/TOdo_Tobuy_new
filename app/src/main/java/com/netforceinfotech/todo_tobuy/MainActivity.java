@@ -26,20 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // do something
-                try {
-                    PackageInfo info = getPackageManager().getPackageInfo(
-                            "com.netforceinfotech.elipseexpress",
-                            PackageManager.GET_SIGNATURES);
-                    for (Signature signature : info.signatures) {
-                        MessageDigest md = MessageDigest.getInstance("SHA");
-                        md.update(signature.toByteArray());
-                        Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-                    }
-                } catch (PackageManager.NameNotFoundException e) {
 
-                } catch (NoSuchAlgorithmException e) {
-
-                }
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
@@ -47,4 +34,4 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
     }
-}
+
