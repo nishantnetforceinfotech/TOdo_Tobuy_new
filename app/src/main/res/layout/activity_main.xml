@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_screenbg"
+    android:background="@drawable/splashscreenbg"
+    android:id="@+id/rl_spalsh"
     tools:context="com.netforceinfotech.todo_tobuy.MainActivity">
 
 

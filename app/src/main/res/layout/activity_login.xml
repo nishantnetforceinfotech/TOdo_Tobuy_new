@@ -72,15 +72,32 @@
                                         android:layout_width="wrap_content"
                                         android:layout_centerHorizontal="true"
                                         android:layout_centerVertical="true"
-                                        android:layout_height="match_parent">
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/relativeLayout">
 
                                         <CheckBox
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="TO BUY        "
-                                            android:textColor="#ffffff"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+
+android:checked="true"
+                                            android:layout_centerVertical="true"
+                                           android:button="@null"
+                                            android:background="@drawable/checkbox_background"
                                             android:id="@+id/checkBox2" />
+                                        <ImageView
+                                            android:layout_width="100dp"
+                                            android:layout_height="20dp"
+                                            android:id="@+id/imageView15"
+                                            android:src="@drawable/tobuy_text_icon"
+                                            android:scaleType="fitCenter"
+                                            android:layout_toRightOf="@id/checkBox2"
+                                            android:layout_centerVertical="true"
+
+                                            />
                                     </RelativeLayout>
+
+
+
                                 </RelativeLayout>
                             </LinearLayout>
 
@@ -100,6 +117,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerInParent="true"
                                         android:scaleType="fitCenter"
+
                                         android:src="@drawable/logo_header_basket"
                                         android:id="@+id/imageView2" />
 
@@ -128,16 +146,30 @@
                                             android:layout_width="wrap_content"
                                             android:layout_centerHorizontal="true"
                                             android:layout_centerVertical="true"
-                                            android:layout_height="match_parent" >
+                                            android:layout_height="match_parent"
+                                            android:id="@+id/relativeLayout2">
 
                                             <CheckBox
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:text="To DO          "
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
                                                 android:textColor="#ffffff"
                                                 android:id="@+id/checkBox3"
+                                                android:button="@null"
+                                                android:background="@drawable/checkbox_background"
+                                                android:layout_centerVertical="true"
                                                 android:checked="false" />
+
+                                            <ImageView
+                                                android:layout_width="100dp"
+                                                android:layout_height="20dp"
+                                                android:id="@+id/imageView19"
+                                                android:scaleType="fitCenter"
+                                                android:src="@drawable/todo_text_icon"
+                                                android:layout_centerVertical="true"
+                                                android:layout_toRightOf="@id/checkBox3"
+                                                />
                                         </RelativeLayout>
+
                                     </RelativeLayout>
                                 </LinearLayout>
                             </LinearLayout>
@@ -213,6 +245,7 @@ android:textColorHint="#AE8F50"
                 android:layout_weight="1"
                 android:background="#32A007"
                 android:layout_marginTop="10dp"
+                android:id="@+id/rl_login"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="0dp">
