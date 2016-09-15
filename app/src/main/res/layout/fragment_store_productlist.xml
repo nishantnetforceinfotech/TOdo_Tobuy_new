@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.netforceinfotech.todo_tobuy.DashBoard.Offers.Strores.Store_productlist">
+
+    <!-- TODO: Update blank fragment layout -->
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="vertical"
+       android:weightSum="4"
+       android:layout_height="match_parent">
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_weight="1"
+           android:layout_height="0dp">
+
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:id="@+id/recycleview_offers" />
+
+           <ImageView
+               android:layout_width="40dp"
+               android:layout_height="match_parent"
+               android:src="@drawable/offers_green"
+               android:id="@+id/imageView41" />
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_weight="1"
+           android:layout_height="0dp">
+
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:id="@+id/recycleview_offers_combo"
+              />
+
+           <ImageView
+               android:layout_width="40dp"
+               android:layout_height="match_parent"
+               android:id="@+id/imageView42"
+               android:layout_centerVertical="true"
+               android:src="@drawable/combo_green"
+               android:layout_alignParentLeft="true"
+               android:layout_alignParentStart="true" />
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_weight="1"
+           android:layout_height="0dp">
+
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:id="@+id/recycleview_news"
+              />
+
+           <ImageView
+               android:layout_width="40dp"
+               android:layout_height="match_parent"
+               android:id="@+id/imageView43"
+               android:layout_centerVertical="true"
+               android:layout_alignParentLeft="true"
+               android:src="@drawable/news_green"
+               android:layout_alignParentStart="true" />
+       </RelativeLayout>
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_weight="1"
+           android:layout_height="0dp" >
+
+           <android.support.v7.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:id="@+id/recycleview_brands" />
+
+       </RelativeLayout>
+   </LinearLayout>
+
+</FrameLayout>

@@ -102,6 +102,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:id="@+id/rl_All_group"
                         android:layout_centerVertical="true"
                         android:layout_height="match_parent">
 
@@ -160,6 +161,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:id="@+id/rl_open_offers"
                         android:layout_height="match_parent">
 
                         <ImageView
@@ -176,6 +178,28 @@
 
             </RelativeLayout>
 
+            <View
+                android:background="@color/translution"
+                android:layout_width="match_parent"
+                android:id="@+id/show_transparency"
+                android:visibility="invisible"
+                android:layout_height="match_parent"
+                />
+
+            <fragment
+                android:id="@+id/fragment_offers"
+                android:name="com.netforceinfotech.todo_tobuy.DashBoard.Offers.Offers_Fragments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+
+                android:layout_marginTop="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="100dp"
+                tools:layout="@layout/fragment_offers">
+
+            </fragment>
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -187,15 +211,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         tools:layout="@layout/fragment_navigation">
-
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_offers"
-        android:name="com.netforceinfotech.todo_tobuy.DashBoard.Offers.Offers_Fragments"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        tools:layout="@layout/fragment_offers">
 
     </fragment>
 

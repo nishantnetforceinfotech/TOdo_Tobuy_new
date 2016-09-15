@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+
+    android:background="#5d5d5d"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView45"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"
+            android:src="@drawable/news_demo"
+            android:layout_gravity="center_horizontal" />
+    </RelativeLayout>
+</RelativeLayout>

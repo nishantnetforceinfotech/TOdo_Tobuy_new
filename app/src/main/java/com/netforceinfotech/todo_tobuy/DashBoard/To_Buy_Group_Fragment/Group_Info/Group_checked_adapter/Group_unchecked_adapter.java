@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -15,7 +18,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.New_group_description.Add_product_info;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Keypad_dialog;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.group_info_fragment;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Group_recycleview_subfragment_main;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
@@ -31,9 +37,12 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
     static int position_et;
     ArrayList checkedlist = new ArrayList();
     ArrayList uncheckedlist = new ArrayList();
+
     // ArrayList<CommomData> commomDatas;
     CommonHolder_selected_items viewHolder;
+    Add_product_info add_product_info;
     int itemsize;
+    private String tagName;
     ArrayList<GroupData> groupDatas;
     public static final int keypad_fragment = 1;
 
@@ -64,7 +73,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
             @Override
             public void onClick(View view) {
                 holder.checkBox.setBackgroundResource(R.drawable.cross_icon_fr_delete);
-                Confirm_delete_item confirm_delete_item=new Confirm_delete_item();
+                Confirm_delete_item confirm_delete_item = new Confirm_delete_item();
                 holder.groupname.setText(groupDatas.get(position).toString());
 
 
@@ -74,7 +83,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
                 confirm_delete_item.show(context3.getFragmentManager(), "confirm_delete_item");
             }
         });
-
+        holder.rl_description_unchecked.setOnClickListener(this);
 
         //checkbox listener
 
@@ -142,6 +151,10 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
                 kd.show(context3.getFragmentManager(), "Keypad_dialog");
 
                 break;
+            case R.id.rl_description_unchecked:
+
+                setUpFragment();
+                break;
         }
 
     }
@@ -151,4 +164,19 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
         InputMethodManager imm = (InputMethodManager) context3.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
     }
+
+
+    private void replaceFragment(Fragment newFragment, String tag) {
+        FragmentTransaction transaction = ((FragmentActivity)context3).getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container_main, newFragment, tag);
+        transaction.commit();
+    }
+
+    private void setUpFragment() {
+        add_product_info=new Add_product_info();
+        tagName = add_product_info.getClass().getName();
+        replaceFragment(add_product_info, tagName);
+    }
+
+
 }
