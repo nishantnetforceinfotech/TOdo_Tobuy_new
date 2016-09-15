@@ -9,10 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.facebook.FacebookSdk;
-import com.netforceinfotech.todo_tobuy.All_group_tobuy.main_recycleview.Recycle_adapter_main;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Item_recycler_adapter;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
