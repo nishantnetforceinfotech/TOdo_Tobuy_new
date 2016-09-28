@@ -23,7 +23,7 @@ public class All_group_tobuy_Fragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    Recycle_adapter_main recycle_adapter_main;
+    //Recycle_adapter_main recycle_adapter_main;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,8 +92,8 @@ temp_arraylistdata();
         recyclerView_all_group_main=(RecyclerView)v.findViewById(R.id.recycleview_allgroup);
         recycle_allgrp_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView_all_group_main.setLayoutManager(recycle_allgrp_layoutmanager);
-        recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
-        recyclerView_all_group_main.setAdapter(recycle_adapter_main);
+       // recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
+        //recyclerView_all_group_main.setAdapter(recycle_adapter_main);
 
 
 
