@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Offer_storelist_adapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Services.Beauty.Beauty_adapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Services.Brands.Service_brands_adpater;
 import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Services.Food.Food_adapter;

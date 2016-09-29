@@ -2,11 +2,6 @@ package com.netforceinfotech.todo_tobuy.All_group_tobuy.main_recycleview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.netforceinfotech.todo_tobuy.R;
 

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Services.Brands.CommonHolder_Recycler_Service_brands_adapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Strores.Store_productlist;
 import com.netforceinfotech.todo_tobuy.R;
 

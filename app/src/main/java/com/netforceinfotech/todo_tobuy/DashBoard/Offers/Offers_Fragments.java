@@ -1,6 +1,5 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.Offers;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,8 +15,6 @@ import android.widget.TextView;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
-
-import okhttp3.internal.http.StreamAllocation;
 
 
 public class Offers_Fragments extends Fragment implements View.OnClickListener {

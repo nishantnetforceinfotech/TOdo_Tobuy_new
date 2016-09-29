@@ -20,8 +20,6 @@ import android.widget.Toast;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.New_group_description.Add_product_info;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Keypad_dialog;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.group_info_fragment;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Group_recycleview_subfragment_main;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;

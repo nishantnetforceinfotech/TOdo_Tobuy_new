@@ -3,7 +3,6 @@ package com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +13,6 @@ import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Fra
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.group_info_fragment;
 import com.netforceinfotech.todo_tobuy.R;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 /**
  * Created by Ritesh on 22-Aug-16.

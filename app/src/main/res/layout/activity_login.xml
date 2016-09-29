@@ -30,7 +30,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1">
 
                 <LinearLayout
@@ -42,7 +42,9 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"></RelativeLayout>
+                        android:layout_weight="1">
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -79,7 +81,6 @@
                                         <CheckBox
                                             android:id="@+id/tobuy"
                                             android:layout_width="20dp"
-
                                             android:layout_height="20dp"
                                             android:layout_centerVertical="true"
                                             android:background="@drawable/checkbox_background"
@@ -176,7 +177,9 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"></RelativeLayout>
+                        android:layout_weight="1">
+
+                    </RelativeLayout>
                 </LinearLayout>
 
             </RelativeLayout>
@@ -201,9 +204,9 @@
 
                 <EditText
                     android:id="@+id/username"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/transparent"
                     android:ems="10"
@@ -224,14 +227,14 @@
 
                 <EditText
                     android:id="@+id/password"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/transparent"
                     android:ems="10"
                     android:hint="Password"
-                    android:inputType="textPersonName"
+                    android:inputType="textPassword"
                     android:textColorHint="#AE8F50" />
             </LinearLayout>
 
@@ -253,7 +256,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:text="LOGIN"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="#ffffff" />
             </RelativeLayout>
@@ -278,7 +281,6 @@
                         android:id="@+id/cbox_remember"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:checked="true"

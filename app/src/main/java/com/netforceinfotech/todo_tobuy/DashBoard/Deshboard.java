@@ -3,7 +3,6 @@ package com.netforceinfotech.todo_tobuy.DashBoard;
 import android.content.Context;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,12 +16,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.netforceinfotech.todo_tobuy.All_group_tobuy.All_group_tobuy_Fragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment.Fragment_main;
-import com.netforceinfotech.todo_tobuy.DashBoard.Offers.Offers_Fragments;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.New_group_description.Add_product_info;
 import com.netforceinfotech.todo_tobuy.DashBoard.navigation.NavigationFragment;
 import com.netforceinfotech.todo_tobuy.R;
 

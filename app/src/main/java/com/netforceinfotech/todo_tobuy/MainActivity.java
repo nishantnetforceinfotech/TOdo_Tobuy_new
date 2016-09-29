@@ -2,26 +2,17 @@ package com.netforceinfotech.todo_tobuy;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Build;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.Login.LoginActivity;
-import com.squareup.picasso.Picasso;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
     RelativeLayout rl;

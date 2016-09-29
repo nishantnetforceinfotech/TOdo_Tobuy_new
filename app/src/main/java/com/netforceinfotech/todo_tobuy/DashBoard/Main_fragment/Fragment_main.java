@@ -4,16 +4,12 @@ package com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.R;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

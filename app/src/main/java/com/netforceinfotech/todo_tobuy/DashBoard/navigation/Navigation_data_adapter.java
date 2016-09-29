@@ -1,7 +1,6 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.navigation;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.view.ViewGroup;
 
 
 import com.netforceinfotech.todo_tobuy.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by abcd on 8/26/2016.
