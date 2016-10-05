@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -65,10 +66,26 @@ public class Signup extends AppCompatActivity {
         }
 
         ButterKnife.inject(this);
-
+        allClickEvents();
     }
 
+     private void allClickEvents(){
 
+         already_login.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+
+                 finish();
+             }
+         });
+     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+    }
 
     private void setspinner() {
 

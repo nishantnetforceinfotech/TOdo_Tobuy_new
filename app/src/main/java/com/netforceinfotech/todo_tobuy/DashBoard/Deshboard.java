@@ -22,15 +22,16 @@ import com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment.Fragment_main;
 import com.netforceinfotech.todo_tobuy.DashBoard.navigation.NavigationFragment;
 import com.netforceinfotech.todo_tobuy.R;
 
-public class Deshboard extends AppCompatActivity implements View.OnClickListener{
+public class Deshboard extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;
     Context context;
     NavigationFragment drawer;
     ImageView downbutton;
-    RelativeLayout rl_all_group,rl_open_offers;
+    RelativeLayout rl_all_group, rl_open_offers;
     int counter;
     Fragment offers_fragments;
-    View  transparency_on;
+    View transparency_on;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +49,7 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // only for gingerbread and newer versions
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.greentranparent));
         }
@@ -57,30 +57,27 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
     }
 
     public void initview() {
-        rl_all_group=(RelativeLayout)findViewById(R.id.rl_All_group);
+        rl_all_group = (RelativeLayout) findViewById(R.id.rl_All_group);
         rl_all_group.setOnClickListener(this);
-        transparency_on=(View)findViewById(R.id.show_transparency);
-       // rl_open_offers=(RelativeLayout)findViewById(R.id.rl_open_offers);
+        transparency_on = (View) findViewById(R.id.show_transparency);
+        // rl_open_offers=(RelativeLayout)findViewById(R.id.rl_open_offers);
         //rl_open_offers.setOnClickListener(this);
-        downbutton=(ImageView)findViewById(R.id.imageView13);
+        downbutton = (ImageView) findViewById(R.id.imageView13);
         downbutton.setOnClickListener(this);
-        offers_fragments=getSupportFragmentManager().findFragmentById(R.id.fragment_offers);
+        offers_fragments = getSupportFragmentManager().findFragmentById(R.id.fragment_offers);
         offers_fragments.getView().setVisibility(View.INVISIBLE);
 
 
     }
 
     private void Replace_fragment_main() {
-        Fragment_main f=new Fragment_main();
+        Fragment_main f = new Fragment_main();
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container_main, f,"Fragment_main")
+                .replace(R.id.container_main, f, "Fragment_main")
                 .addToBackStack("Fragment_main")
                 .commit();
-
-
-
 
 
     }
@@ -92,9 +89,9 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
 
     private void setupToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setContentInsetsAbsolute(0,0);
+        toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
-        context=this;
+        context = this;
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 //        String teams = "Home";
@@ -103,42 +100,36 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.dashboard, menu);
 //        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
 //                , ActionItemBadge.BadgeStyles.GREY, 3);
         return true;
     }
-//    @Override
+
+    //    @Override
     public void onBackPressed() {
         //final Fragment_main fragment = (Fragment_main) getSupportFragmentManager().findFragmentByTag("Fragment_main");
- //       super.onBackPressed();
-        if (getSupportFragmentManager().getBackStackEntryCount()>1)
-        { // and then you define a method allowBackPressed with the logic to allow back pressed or not
+        //       super.onBackPressed();
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
             super.onBackPressed();
-if(offers_fragments.getView().getVisibility()==View.VISIBLE)
-{
-    offers_fragments.getView().setVisibility(View.INVISIBLE);
-    transparency_on.setVisibility(View.INVISIBLE);
-    downbutton.setImageResource(R.drawable.arrowicon_left);
-}
-
-
-
-        }
-        else{
-            if(offers_fragments.getView().getVisibility()==View.VISIBLE)
-            {
+            if (offers_fragments.getView().getVisibility() == View.VISIBLE) {
                 offers_fragments.getView().setVisibility(View.INVISIBLE);
                 transparency_on.setVisibility(View.INVISIBLE);
                 downbutton.setImageResource(R.drawable.arrowicon_left);
             }
-            else {
+
+
+        } else {
+            if (offers_fragments.getView().getVisibility() == View.VISIBLE) {
+                offers_fragments.getView().setVisibility(View.INVISIBLE);
+                transparency_on.setVisibility(View.INVISIBLE);
+                downbutton.setImageResource(R.drawable.arrowicon_left);
+            } else {
                 finish();
             }
         }
@@ -146,47 +137,41 @@ if(offers_fragments.getView().getVisibility()==View.VISIBLE)
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.rl_All_group:
                 Replace_all_fragment_main();
                 break;
             case R.id.imageView13:
 
-                if(counter==0)
-                {downbutton.setImageResource(R.drawable.down_arrow);
+                if (counter == 0) {
+                    downbutton.setImageResource(R.drawable.down_arrow);
                     offers_fragments.getView().setVisibility(View.VISIBLE);
                     transparency_on.setVisibility(View.VISIBLE);
-                counter=1;
-                Log.e("visible","visible");}
-                else {
+                    counter = 1;
+                    Log.e("visible", "visible");
+                } else {
                     downbutton.setImageResource(R.drawable.arrowicon_left);
                     offers_fragments.getView().setVisibility(View.INVISIBLE);
-                    counter=0;
+                    counter = 0;
                     transparency_on.setVisibility(View.INVISIBLE);
-                    Log.e("visible","invisible");
+                    Log.e("visible", "invisible");
                 }
 
                 break;
 
 
-
-
-
         }
 
     }
+
     private void Replace_all_fragment_main() {
-        All_group_tobuy_Fragment f=new All_group_tobuy_Fragment();
+        All_group_tobuy_Fragment f = new All_group_tobuy_Fragment();
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container_main, f,"All_group_tobuy_Fragment")
+                .replace(R.id.container_main, f, "All_group_tobuy_Fragment")
                 .addToBackStack("All_group_tobuy_Fragment")
                 .commit();
-
-
-
 
 
     }

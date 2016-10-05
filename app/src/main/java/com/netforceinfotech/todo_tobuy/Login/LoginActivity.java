@@ -160,6 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
                 startActivity(i2);
+                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();
             }
         });
@@ -170,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent i3 = new Intent(LoginActivity.this, ForgotPassword.class);
                 startActivity(i3);
+                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
             }
         });
 
@@ -177,8 +179,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 Intent i = new Intent(LoginActivity.this, Signup.class);
                 startActivity(i);
+                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
             }
         });
     }
