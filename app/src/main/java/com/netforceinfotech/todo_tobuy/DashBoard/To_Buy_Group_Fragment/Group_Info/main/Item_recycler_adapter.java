@@ -49,20 +49,25 @@ public class Item_recycler_adapter extends RecyclerView.Adapter<CommonHolder_ite
 
     @Override
     public CommonHolder_items onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_group_listitem_row, parent, false);
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_group_listitem_row,
+                parent, false);
         viewHolder = new CommonHolder_items(view);
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(CommonHolder_items holder, final int position) {
+
+        GroupData data = groupDatas.get(position);
+        holder.quantity.setTag(position);
+
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     Group_recycleview_subfragment.selectedGroupData.add(groupDatas.get(position));
-
-
 
                 } else {
 
@@ -72,8 +77,11 @@ public class Item_recycler_adapter extends RecyclerView.Adapter<CommonHolder_ite
 
             }
         });
-        holder.quantity.setOnClickListener(this);
+
+
+       // holder.quantity.setOnClickListener(this);
         //holder.rl_quantity.setOnClickListener(this);
+/*
         holder.quantity.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -83,7 +91,8 @@ public class Item_recycler_adapter extends RecyclerView.Adapter<CommonHolder_ite
                 return false;
             }
         });
-        holder.button3.setText(groupDatas.get(position).name);
+*/
+      //  holder.button3.setText(groupDatas.get(position).name);
 
     }
 
@@ -95,17 +104,13 @@ public class Item_recycler_adapter extends RecyclerView.Adapter<CommonHolder_ite
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
+
             case R.id.editText10:
-
-                //quantity.clearFocus();
-               // hideSoftKeyboard(quantity);
-               // Toast.makeText(context3, "clicked", Toast.LENGTH_SHORT).show();
-
+                int pos = (int)viewHolder.quantity.getTag();
                 Keypad_dialog kd2 = new Keypad_dialog();
-
-
                 Bundle args2 = new Bundle();
-                args2.putString("et_position", "" + position_et);
+                args2.putString("et_position", "" + pos);
                 kd2.setArguments(args2);
 
                 // setup link back to use and display
@@ -118,14 +123,11 @@ public class Item_recycler_adapter extends RecyclerView.Adapter<CommonHolder_ite
                 // quantity.clearFocus();
                // hideSoftKeyboard(quantity);
                 //Toast.makeText(context2, "clicked", Toast.LENGTH_SHORT).show();
-
+                int pos1 = (int)viewHolder.quantity.getTag();
                 Keypad_dialog kd = new Keypad_dialog();
-
-
                 Bundle args = new Bundle();
-                args.putString("et_position", "" + position_et);
+                args.putString("et_position", "" + pos1);
                 kd.setArguments(args);
-
                 // setup link back to use and display
                 // kd.setTargetFragment(this, keypad_fragment);
                 kd.show(activity.getFragmentManager(), "Keypad_dialog");

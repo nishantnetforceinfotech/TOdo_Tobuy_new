@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * Use the {@link group_info_fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class group_info_fragment extends Fragment  implements View.OnClickListener{
+public class group_info_fragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,8 +86,6 @@ public class group_info_fragment extends Fragment  implements View.OnClickListen
         Initview(v);
 
 
-
-
         setUpFragment();
 
         // Inflate the layout for this fragment
@@ -97,14 +95,11 @@ public class group_info_fragment extends Fragment  implements View.OnClickListen
     private void Initview(View v) {
 
 
-         et_add_item=(EditText)v.findViewById(R.id.editText9);
-        RelativeLayout rl_addItem=(RelativeLayout)v.findViewById(R.id.rl_add_items);
+        et_add_item = (EditText) v.findViewById(R.id.editText9);
+        RelativeLayout rl_addItem = (RelativeLayout) v.findViewById(R.id.rl_add_items);
         rl_addItem.setOnClickListener(this);
-        img_add_items=(ImageView)v.findViewById(R.id.imageView21);
+        img_add_items = (ImageView) v.findViewById(R.id.imageView21);
         img_add_items.setOnClickListener(this);
-
-
-
 
 
     }
@@ -125,21 +120,20 @@ public class group_info_fragment extends Fragment  implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.rl_add_items:
                 //Log.e(" Group_recycleview_subfragment.unselectedGroupData 1",Group_recycleview_subfragment.unselectedGroupData.size()+"");
-              GroupData gp =new GroupData(et_add_item.getText().toString(),"",false,false);
+                GroupData gp = new GroupData(et_add_item.getText().toString(), "", false, false);
                 Group_recycleview_subfragment.unselectedGroupData.add(gp);
                 Group_recycleview_subfragment.grp_uncheck_adapter.notifyDataSetChanged();
-               // Log.e("add Sucessfully", "clicked 1");
-               // Log.e(" Group_recycleview_subfragment.unselectedGroupData 2",Group_recycleview_subfragment.unselectedGroupData.size()+"");
+                // Log.e("add Sucessfully", "clicked 1");
+                // Log.e(" Group_recycleview_subfragment.unselectedGroupData 2",Group_recycleview_subfragment.unselectedGroupData.size()+"");
 
                 break;
             case R.id.imageView21:
-               // Log.e(" Group_recycleview_subfragment.unselectedGroupData 3",Group_recycleview_subfragment.unselectedGroupData.size()+"");
+                // Log.e(" Group_recycleview_subfragment.unselectedGroupData 3",Group_recycleview_subfragment.unselectedGroupData.size()+"");
 
-                GroupData gp2 =new GroupData(et_add_item.getText().toString(),"",false,false);
+                GroupData gp2 = new GroupData(et_add_item.getText().toString(), "", false, false);
 
                 Group_recycleview_subfragment.unselectedGroupData.add(gp2);
                 Group_recycleview_subfragment.grp_uncheck_adapter.notifyDataSetChanged();

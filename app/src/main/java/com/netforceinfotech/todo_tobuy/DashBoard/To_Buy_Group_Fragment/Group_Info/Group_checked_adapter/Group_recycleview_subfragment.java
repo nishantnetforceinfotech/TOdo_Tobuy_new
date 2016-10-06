@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ public class Group_recycleview_subfragment extends Fragment implements View.OnCl
     private String mParam2;
     LinearLayoutManager rl_itemlist_layoutmanager, rl_itemlist_layoutmanager2;
     public static RecyclerView recycle_selected_itemlist, recycle_unselected_itemlist;
-    Item_recycler_adapter item_recycler_adapter;
     public static Group_unchecked_adapter grp_uncheck_adapter;
     public static Group_checked_adapter grp_checked_adapter;
     public static ArrayList<GroupData> selectedGroupData = new ArrayList<>();
@@ -48,12 +48,15 @@ public class Group_recycleview_subfragment extends Fragment implements View.OnCl
         initView(v);
         Intializeecycleview(v);
         // Inflate the layout for this fragment
+
+        Log.e("hhh",selectedGroupData.size()+"");
+        Log.e("ddd",unselectedGroupData.size()+"");
         return v;
     }
 
     private void initView(View v) {
-        v.findViewById(R.id.imageView22).setOnClickListener(this);
-        v.findViewById(R.id.imageView23).setOnClickListener(this);
+       // v.findViewById(R.id.done).setOnClickListener(this);
+       // v.findViewById(R.id.clearlist).setOnClickListener(this);
 
     }
 
@@ -74,6 +77,7 @@ public class Group_recycleview_subfragment extends Fragment implements View.OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+/*
             case R.id.imageView22:
                break;
             case R.id.imageView23:
@@ -95,6 +99,7 @@ public class Group_recycleview_subfragment extends Fragment implements View.OnCl
 //                grp_uncheck_adapter.notifyDataSetChanged();
 
                 break;
+*/
         }
     }
 

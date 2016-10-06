@@ -21,9 +21,9 @@ public class CommonHolder_Recycler_offerlist extends RecyclerView.ViewHolder {
 
     public CommonHolder_Recycler_offerlist(View itemView) {
         super(itemView);
-        store_name=(TextView)itemView.findViewById(R.id.textView19);
-        recyclerView=(RecyclerView)itemView.findViewById(R.id.recycleview_allgroup_sub);
-        ll_store_name=(LinearLayout)itemView.findViewById(R.id.ll_store_name);
+        store_name = (TextView) itemView.findViewById(R.id.textView19);
+        recyclerView = (RecyclerView) itemView.findViewById(R.id.recycleview_allgroup_sub);
+        ll_store_name = (LinearLayout) itemView.findViewById(R.id.ll_store_name);
 
 
     }

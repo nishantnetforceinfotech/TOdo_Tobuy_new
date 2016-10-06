@@ -66,7 +66,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
         quantity.setInputType(InputType.TYPE_NULL);
         quantity.setOnClickListener(this);
         holder.rl_quantity.setOnClickListener(this);
-        holder.groupname.setText(groupDatas.get(position).name);
+        //holder.groupname.setText(groupDatas.get(position).name);
         holder.rl_delete_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +86,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
         //checkbox listener
 
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      /*  holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
@@ -103,7 +103,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<CommonHolder_s
 
             }
         });
-
+*/
 
         position_et = position;
         //Picasso.with(context2).load(R.drawable.vegetables).into(holder.imageview);

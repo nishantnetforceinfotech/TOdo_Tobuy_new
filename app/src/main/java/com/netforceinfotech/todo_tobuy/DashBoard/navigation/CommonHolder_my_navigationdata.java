@@ -16,8 +16,8 @@ public class CommonHolder_my_navigationdata extends RecyclerView.ViewHolder {
 
     public CommonHolder_my_navigationdata(View itemView) {
         super(itemView);
-        data_title=(TextView)itemView.findViewById(R.id.textView8);
-        data_icon =(ImageView)itemView.findViewById(R.id.imageView6);
+        data_title = (TextView) itemView.findViewById(R.id.textView8);
+        data_icon = (ImageView) itemView.findViewById(R.id.imageView6);
         //cardview = (CardView) itemView.findViewById(R.id.cardview_myreviews_outer);
 
     }

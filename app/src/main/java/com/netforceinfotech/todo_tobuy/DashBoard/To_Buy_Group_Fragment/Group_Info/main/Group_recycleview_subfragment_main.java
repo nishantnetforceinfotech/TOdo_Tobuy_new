@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.Group_checked_adapter;
@@ -21,14 +22,14 @@ import com.netforceinfotech.todo_tobuy.R;
 import java.util.ArrayList;
 
 
-public class Group_recycleview_subfragment_main extends Fragment implements View.OnClickListener {
+public class Group_recycleview_subfragment_main extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     LinearLayoutManager rl_itemlist_layoutmanager;
     public static RecyclerView recycle_itemlist;
-    Item_recycler_adapter item_recycler_adapter;
+    ItemDetailsAdapter item_recycler_adapter;
     Group_checked_adapter gp_checked;
     Group_unchecked_adapter gp_unchecked;
     // TODO: Rename and change types of parameters
@@ -52,7 +53,7 @@ public class Group_recycleview_subfragment_main extends Fragment implements View
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_group_recycleview_subfragment_main, container, false);
         rl_itemlist_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        item_recycler_adapter = new Item_recycler_adapter(getActivity(), groupDatas);
+        item_recycler_adapter = new ItemDetailsAdapter(getActivity(), groupDatas);
         initView(v);
         Intializeecycleview(v);
 
@@ -62,14 +63,47 @@ public class Group_recycleview_subfragment_main extends Fragment implements View
     }
 
     private void initView(View v) {
-        v.findViewById(R.id.imageView22).setOnClickListener(this);
-        v.findViewById(R.id.imageView23).setOnClickListener(this);
+
+        groupDatas.clear();
+
+       // v.findViewById(R.id.done).setOnClickListener(this);
+       // v.findViewById(R.id.clearlist).setOnClickListener(this);
+
+        ((ImageView)v.findViewById(R.id.done)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               // groupDatas.removeAll(Group_recycleview_subfragment.selectedGroupData);
+
+
+                for (int i = 0; i < groupDatas.size(); i++) {
+
+                    if (!groupDatas.get(i).getQuantity().equals("0") && groupDatas.get(i).isChecked()== true){
+
+                        Group_recycleview_subfragment.selectedGroupData = groupDatas;
+
+                    }else {
+
+                        Group_recycleview_subfragment.unselectedGroupData = groupDatas;
+                    }
+                }
+
+                item_recycler_adapter.notifyDataSetChanged();
+
+                setUpFragment();
+
+            }
+        });
     }
 
+
     private void setDummyData() {
+
+
+
         for (int i = 0; i < 10; i++) {
             //GroupData(String name,String quantity,boolean checked,boolean fav){
-            groupDatas.add(new GroupData("name", "5", false, false));
+            groupDatas.add(new GroupData("name", " ", false, false));
         }
         item_recycler_adapter.notifyDataSetChanged();
     }
@@ -94,10 +128,10 @@ public class Group_recycleview_subfragment_main extends Fragment implements View
         replaceFragment(dashboardFragment, tagName);
     }
 
-    @Override
+   /* @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.imageView22:
+            case R.id.done:
 
                 groupDatas.removeAll(Group_recycleview_subfragment.selectedGroupData);
                Log.e("groupDatas.remove",Group_recycleview_subfragment.selectedGroupData.get(0).toString());
@@ -108,5 +142,5 @@ public class Group_recycleview_subfragment_main extends Fragment implements View
                 setUpFragment();
                 break;
         }
-    }
+    }*/
 }

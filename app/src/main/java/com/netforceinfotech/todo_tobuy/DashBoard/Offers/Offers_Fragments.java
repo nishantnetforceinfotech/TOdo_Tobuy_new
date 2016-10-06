@@ -113,7 +113,6 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
         crossButton.setOnClickListener(this);
         storemain_container=(LinearLayout)v.findViewById(R.id.ll_store_main_container);
 
-
     }
 
     @Override
@@ -185,7 +184,8 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
 
 
         rl_store_list.setLayoutManager(rl_itemlist_layoutmanager);
-        Offer_storelist_adapter offer_storelist_adapter=new Offer_storelist_adapter(getActivity(),data,getActivity().getSupportFragmentManager(),a);
+        Offer_storelist_adapter offer_storelist_adapter=new Offer_storelist_adapter(getActivity(),
+                data,getActivity().getSupportFragmentManager(),a);
         rl_store_list.setAdapter(offer_storelist_adapter);
         if(store_container.getVisibility()==View.INVISIBLE)
         {
@@ -198,11 +198,7 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
 
         rl_store_list = (RecyclerView) v.findViewById(R.id.rl_store_list);
 
-
-
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
 
 
 

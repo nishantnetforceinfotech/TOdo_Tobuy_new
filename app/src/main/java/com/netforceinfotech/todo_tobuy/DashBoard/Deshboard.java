@@ -166,7 +166,6 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
 
     private void Replace_all_fragment_main() {
         All_group_tobuy_Fragment f = new All_group_tobuy_Fragment();
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container_main, f, "All_group_tobuy_Fragment")

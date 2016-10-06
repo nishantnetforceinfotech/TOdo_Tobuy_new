@@ -4,49 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
     android:background="@drawable/header_top"
-    android:contentInsetLeft="0dp"
-    android:contentInsetStart="0dp"
-    app:contentInsetLeft="0dp"
-    app:contentInsetStart="0dp"
-    android:contentInsetRight="0dp"
     android:contentInsetEnd="0dp"
-    app:contentInsetRight="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetRight="0dp"
+    android:contentInsetStart="0dp"
     app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    >
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-<ImageView
-    android:layout_width="20dp"
-    android:layout_height="20dp"
-    android:scaleType="fitCenter"
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scaleType="fitCenter"
 
-    android:src="@drawable/logout_icon_white"/>
+        android:src="@drawable/logout_icon_white" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:gravity="right|center_vertical"
+        android:layout_height="match_parent"
 
-        android:layout_height="match_parent">
+        android:gravity="right|center_vertical">
 
         <ImageView
+            android:id="@+id/imageView7"
             android:layout_width="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/imageview9"
             android:layout_height="20dp"
+            android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
 
-            android:src="@mipmap/logo_splash_text"
-            android:id="@+id/imageView7" />
+            android:layout_toLeftOf="@+id/imageview9"
+            android:src="@mipmap/logo_splash_text" />
 
         <ImageView
+            android:id="@+id/imageview9"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:src="@drawable/logo_header_basket"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:id="@+id/imageview9" />
+            android:src="@drawable/logo_header_basket"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

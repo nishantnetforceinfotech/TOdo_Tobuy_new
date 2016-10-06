@@ -79,7 +79,7 @@ public class Group_checked_adapter extends RecyclerView.Adapter<CommonHolder_sel
         //checkbox listener
 
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       /* holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
@@ -95,7 +95,7 @@ public class Group_checked_adapter extends RecyclerView.Adapter<CommonHolder_sel
 
             }
         });
-
+*/
 
         position_et = position;
         //Picasso.with(context2).load(R.drawable.vegetables).into(holder.imageview);

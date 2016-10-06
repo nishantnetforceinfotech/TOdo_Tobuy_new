@@ -5,18 +5,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
+import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fragment_main#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_main extends Fragment {
+public class Fragment_main extends Fragment implements OnStartDragListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,9 +32,10 @@ public class Fragment_main extends Fragment {
     private String mParam1;
     private String mParam2;
     RecyclerView rl_view;
-GridLayoutManager gridLayoutManager;
+    GridLayoutManager gridLayoutManager;
     Fragment_main_grid_adapter main_grid_adapter;
-
+    private ItemTouchHelper mItemTouchHelper;
+    ArrayList<String> list = new ArrayList<>();
     public Fragment_main() {
         // Required empty public constructor
     }
@@ -64,15 +71,30 @@ GridLayoutManager gridLayoutManager;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        gridLayoutManager =  new GridLayoutManager(getActivity(),3);
-        rl_view=(RecyclerView)view.findViewById(R.id.RecyclerView_main);
-        main_grid_adapter=new Fragment_main_grid_adapter(getActivity(),getActivity().getSupportFragmentManager());
+        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        rl_view = (RecyclerView) view.findViewById(R.id.RecyclerView_main);
+
+        for(int i=1;i<19;i++){
+
+            list.add(i+"");
+        }
+        main_grid_adapter = new Fragment_main_grid_adapter(getActivity(),
+                getActivity().getSupportFragmentManager(),this,list);
 
         rl_view.setLayoutManager(gridLayoutManager);
         rl_view.setAdapter(main_grid_adapter);
         // Inflate the layout for this fragment
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(main_grid_adapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(rl_view);
+
         return view;
     }
 
-
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        //  mItemTouchHelper.startDrag(viewHolder);
+        Log.e("hhh", "test");
+    }
 }

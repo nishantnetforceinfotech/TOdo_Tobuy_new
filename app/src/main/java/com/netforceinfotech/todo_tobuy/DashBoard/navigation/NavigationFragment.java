@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -49,12 +48,12 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     private Context context;
     TextView footer;
     RelativeLayout header;
-   // CircleImageView circleImageViewProfilePic;
+    // CircleImageView circleImageViewProfilePic;
     TextView textViewName;
     private ImageView imageViewGB;
     private ExpandableListView expListView;
     private ImageView edit_profile_imgview;
-   // private ExpandableListAdapter listAdapter;
+    // private ExpandableListAdapter listAdapter;
     private ArrayList<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
     RecyclerView navigation_recycle;
@@ -80,10 +79,10 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
         loginPreferences = getActivity().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
         //expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
-        navigation_data_adapter=new Navigation_data_adapter(getActivity());
-       // edit_profile_imgview=(ImageView)view.findViewById(R.id.img_edit_profile);
-        rl_navigation_layoutmanager =  new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-       // edit_profile_imgview.setOnClickListener(this);
+        navigation_data_adapter = new Navigation_data_adapter(getActivity());
+        // edit_profile_imgview=(ImageView)view.findViewById(R.id.img_edit_profile);
+        rl_navigation_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        // edit_profile_imgview.setOnClickListener(this);
 
         // preparing list data
         prepareListData();
@@ -95,7 +94,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     }
 
     private void initrecycleview(View view) {
-        navigation_recycle = (RecyclerView)view.findViewById(R.id.recycler_navigatin_drawer);
+        navigation_recycle = (RecyclerView) view.findViewById(R.id.recycler_navigatin_drawer);
         navigation_recycle.setLayoutManager(rl_navigation_layoutmanager);
         navigation_recycle.setAdapter(navigation_data_adapter);
     }
@@ -184,7 +183,7 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-      //  mDrawerLayout.closeDrawers();
+        //  mDrawerLayout.closeDrawers();
 
     }
 
@@ -215,10 +214,10 @@ public class NavigationFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-           // case R.id.img_edit_profile:
+            // case R.id.img_edit_profile:
 //                Intent i=new Intent(getActivity(), Edit_profile_activity.class);
 //                startActivity(i);
-                //break;
+            //break;
         }
     }
 
