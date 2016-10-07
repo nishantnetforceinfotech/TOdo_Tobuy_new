@@ -1,6 +1,7 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.RelativeLayout;
 
 import com.netforceinfotech.todo_tobuy.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,22 +36,12 @@ import java.io.OutputStream;
 /**
  * Created by abcd on 8/30/2016.
  */
-public class Dialog_media_fragment extends DialogFragment implements View.OnClickListener {
+public class Dialog_media_fragment extends DialogFragment {
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+
     ImageView camera_call, by_gallery;
-    static String IMAGE_DIRECTORY_NAME = "tobuy";
-    static final int MEDIA_TYPE_IMAGE = 1;
-
-    static final int PICK_IMAGE = 1;
-    static final int TAKE_PHOTO_CODE = 2;
-    private final int REQUEST_CAMERA = 1;
-    Uri fileuri;
-    Context c;
+    static final int TAKE_PHOTO_GALLERY = 1;
+    private final int REQUEST_CAMERA = 2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,226 +54,142 @@ public class Dialog_media_fragment extends DialogFragment implements View.OnClic
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
         View rootView = inflater.inflate(R.layout.dialog_media_fragment, container, false);
-        c = getActivity();
+
+
         camera_call = (ImageView) rootView.findViewById(R.id.imageView27);
         by_gallery = (ImageView) rootView.findViewById(R.id.imageView24);
-        camera_call.setOnClickListener(this);
-        by_gallery.setOnClickListener(this);
 
+        clickEvent();
 
-        // Do something else
         return rootView;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    private void clickEvent(){
 
-            case R.id.imageView27:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    getPermission();
-                    Picture_click_Intent();
-//                    int permission = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//
-//                    if (permission != PackageManager.PERMISSION_GRANTED) {
-//                        // We don't have permission so prompt the user
-//                        ActivityCompat.requestPermissions(
-//                                getActivity(),
-//                                PERMISSIONS_STORAGE,
-//                                REQUEST_EXTERNAL_STORAGE
-//                        );
-//                        Picture_click_Intent();
-//                    } else {
-//                        Picture_click_Intent();
-//                    }
-                }
-                //verifyStoragePermissions(getActivity());
+        camera_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                cameraIntent();
 
-                //camera event
+            }
+        });
 
-                break;
-            case R.id.imageView24:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    getPermission();
-                    getbygallery();}
-//                int permission2 = ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//
-//                if (permission2 != PackageManager.PERMISSION_GRANTED) {
-//                    // We don't have permission so prompt the user
-//                    ActivityCompat.requestPermissions(
-//                            getActivity(),
-//                            PERMISSIONS_STORAGE,
-//                            REQUEST_EXTERNAL_STORAGE
-//                    );
-//                    getbygallery();
-//                } else {
-//                    getbygallery();
-//                }
-//                //image get by gallery
-//                getbygallery();
-                //  pickPictureIntent();
-                break;
+        by_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-        }
+                galleryIntent();
+            }
+        });
     }
 
-    private void getbygallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+ private void galleryIntent(){
 
-        startActivityForResult(intent, 2);
+     Intent in = new Intent();
+     in.setType("image/*");
+     in.setAction(Intent.ACTION_GET_CONTENT);
+     startActivityForResult(Intent.createChooser(in, "Select File"), TAKE_PHOTO_GALLERY);
+ }
+
+    private void cameraIntent(){
+
+        Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(in,REQUEST_CAMERA);
     }
-
-    private void Picture_click_Intent() {
-
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-        //pic = f;
-
-        startActivityForResult(intent, 1);
-
-    }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
 
-        if (resultCode == getActivity().RESULT_OK) {
+            if(requestCode == TAKE_PHOTO_GALLERY){
 
-            if (requestCode == 1) {
+                onSelectFromGalleryResult(data);
 
+            }else if(requestCode == REQUEST_CAMERA){
 
-                //h=0;
-                File f = new File(Environment.getExternalStorageDirectory().toString());
-
-                for (File temp : f.listFiles()) {
-
-                    if (temp.getName().equals("temp.jpg")) {
-
-                        f = temp;
-                        File photo = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
-                        //pic = photo;
-                        break;
-
-                    }
-
-                }
-
-                try {
-
-                    Bitmap bitmap;
-
-                    BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                onCaptureImageResult(data);
+            }
+        }
+    }
 
 
-                    bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
+    private void onCaptureImageResult(Intent data) {
 
-                            bitmapOptions);
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-                    Group_Fragment_tobuy.get_cameraorgalley_image.setImageBitmap(bitmap);
-                    getDialog().dismiss();
-                    //  a.setImageBitmap(bitmap);
+        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
+        if(!mydir.exists())
+            mydir.mkdirs();
+        else
+            Log.d("error", "dir. already exists");
 
+        File destination = new File(mydir.toString(),
+                System.currentTimeMillis() + ".jpg");
 
-                    String path = android.os.Environment
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                            .getExternalStorageDirectory()
+        Group_Fragment_tobuy.item_image = thumbnail;
+        Group_Fragment_tobuy.item_file = destination;
+        getDialog().cancel();
+        //ivImage.setImageBitmap(thumbnail);
+    }
 
-                            + File.separator
+    @SuppressWarnings("deprecation")
+    private void onSelectFromGalleryResult(Intent data) {
 
-                            + "Phoenix" + File.separator + "default";
-                    //p = path;
-
-                    f.delete();
-
-                    OutputStream outFile = null;
-
-                    File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-
-                    try {
-
-                        outFile = new FileOutputStream(file);
-
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                        //pic=file;
-                        outFile.flush();
-
-                        outFile.close();
-
-
-                    } catch (FileNotFoundException e) {
-
-                        e.printStackTrace();
-
-                    } catch (IOException e) {
-
-                        e.printStackTrace();
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-
-                    }
-
-                } catch (Exception e) {
-
-                    e.printStackTrace();
-
-                }
-
-            } else if (requestCode == 2) {
-
-
-                Uri selectedImage = data.getData();
-                // h=1;
-                //imgui = selectedImage;
-                String[] filePath = {MediaStore.Images.Media.DATA};
-
-                Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
-
-                c.moveToFirst();
-
-                int columnIndex = c.getColumnIndex(filePath[0]);
-
-                String picturePath = c.getString(columnIndex);
-
-                c.close();
-
-                Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-
-
-                Log.w("path o.", picturePath + "");
-                Group_Fragment_tobuy.get_cameraorgalley_image.setImageBitmap(thumbnail);
-                getDialog().dismiss();
-                // a.setImageBitmap(thumbnail);
-
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-    }
-    private void getPermission() {
+        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
+        if(!mydir.exists())
+            mydir.mkdirs();
+        else
+            Log.d("error", "dir. already exists");
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        File destination = new File(mydir.toString(),
+                System.currentTimeMillis() + ".jpg");
 
-            String[] permission = {
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-
-
-            };
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    permission, 1);
-
-
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Group_Fragment_tobuy.item_image = bm;
+        Group_Fragment_tobuy.item_file = destination;
+        getDialog().cancel();
+
+        //ivImage.setImageBitmap(bm);
     }
+
+
+
 }

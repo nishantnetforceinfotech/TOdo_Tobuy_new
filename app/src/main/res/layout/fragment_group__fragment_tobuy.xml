@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DashBoard.To_Buy_Group_Fragment.Group_Fragment_tobuy">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,80 +13,80 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:weightSum="10"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="10">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:weightSum="2"
-                    android:layout_height="0dp">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
                     <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:id="@+id/rl_imagegetter"
-                        android:background="@drawable/gallarybgbox_icon"
-                        android:layout_height="match_parent">
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/gallarybgbox_icon">
 
                         <ImageView
+                            android:id="@+id/imageView18"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/gallarybox_icon"
-                            android:scaleType="fitCenter"
                             android:layout_centerVertical="true"
-                            android:id="@+id/imageView18" />
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/gallarybox_icon" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="match_parent"
-                            android:weightSum="2"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:weightSum="2">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
 
                                 <Button
+                                    android:id="@+id/button"
+                                    style="?android:attr/buttonStyleSmall"
                                     android:layout_width="100dp"
                                     android:layout_height="20dp"
-                                    style="?android:attr/buttonStyleSmall"
-android:background="@drawable/group_button"
-                                    android:layout_margin="10dp"
-                                    android:id="@+id/button"
+                                    android:layout_centerHorizontal="true"
                                     android:layout_centerVertical="true"
-                                    android:layout_centerHorizontal="true" />
+                                    android:layout_margin="10dp"
+                                    android:background="@drawable/group_button" />
                             </RelativeLayout>
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent">
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
 
                                 <EditText
+                                    android:id="@+id/button2"
                                     style="?android:attr/buttonStyleSmall"
                                     android:layout_width="100dp"
                                     android:layout_height="20dp"
-                                    android:text="Vegetables"
-                                    android:singleLine="true"
-                                    android:textAllCaps="false"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
                                     android:layout_margin="10dp"
                                     android:background="@drawable/vegetabletext_box"
-                                    android:id="@+id/button2"
-                                    android:textColor="#32A007"
-                                    android:layout_centerVertical="true"
-                                    android:layout_centerHorizontal="true" />
+                                    android:singleLine="true"
+                                    android:text="Vegetables"
+                                    android:textAllCaps="false"
+                                    android:textColor="#32A007" />
                             </RelativeLayout>
                         </LinearLayout>
 
@@ -93,134 +94,133 @@ android:background="@drawable/group_button"
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="6"
-                    android:weightSum="10"
-                    android:layout_height="0dp">
+                    android:orientation="vertical"
+                    android:weightSum="10">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:weightSum="10">
 
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_weight="1"
-                            android:weightSum="10"
-                            android:layout_margin="10dp"
-                            android:layout_height="0dp">
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="8"
+                            android:background="@drawable/input_newitem">
 
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="8"
-                                android:layout_gravity="center_vertical"
-                                android:background="@drawable/input_newitem"
-                                android:layout_height="20dp">
+                            <EditText
+                                android:id="@+id/editText9"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:background="@android:color/transparent"
+                                android:gravity="center_horizontal|center_vertical"
 
-                                <EditText
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/editText9"
-                                    android:background="@android:color/transparent"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentLeft="true"
-                                    android:gravity="center_horizontal|center_vertical"
-                                    android:layout_alignParentStart="true"
-                                    android:singleLine="true"
-                                    android:hint="Search a new Item"
+                                android:hint="Search a new Item"
+                                android:singleLine="true" />
+                        </RelativeLayout>
 
-                                    android:layout_alignParentRight="true"
-                                    android:layout_alignParentEnd="true" />
-                            </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent">
+                            <ImageView
+                                android:id="@+id/imageView20"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/search_iconbox" />
+                        </RelativeLayout>
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:id="@+id/imageView20"
-                                    android:src="@drawable/search_iconbox"
-                                    android:scaleType="fitCenter"
-                                    android:layout_centerVertical="true"
-                                    android:layout_centerHorizontal="true" />
-                            </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
 
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:id="@+id/imageView21"
-                                    android:src="@drawable/add_box"
-                                    android:scaleType="fitCenter"
-                                    android:layout_centerVertical="true"
-                                    android:layout_centerHorizontal="true" />
-                            </RelativeLayout>
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/imageView21"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/add_box" />
+                        </RelativeLayout>
+                    </LinearLayout>
 
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="9"
+                        android:layout_height="0dp"
                         android:layout_margin="5dp"
-                        android:layout_height="0dp">
+                        android:layout_weight="9">
 
 
                         <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycleview_items"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="4dp"
 
-                            android:clipToPadding="false"
-                            android:id="@+id/recycleview_items"
-                            android:layout_alignParentTop="true"
+                            android:layout_alignParentBottom="true"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true" />
+                            android:layout_alignParentTop="true"
+                            android:clipToPadding="false"
+                            android:padding="4dp" />
 
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_weight="2"
-                    android:layout_margin="5dp"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp">
+                    android:layout_height="0dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/imageView22"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:id="@+id/imageView22"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/done_button"
+                            android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_margin="10dp"
+                            android:src="@drawable/done_button" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
 
                         <ImageView
+                            android:id="@+id/imageView23"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:id="@+id/imageView23"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/delete_group_button"
+                            android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true" />
+                            android:layout_margin="10dp"
+                            android:src="@drawable/delete_group_button" />
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>

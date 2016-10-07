@@ -5,114 +5,120 @@
 
     tools:context=".DashBoard.Offers.Offers_Fragments"
     tools:showIn="@layout/activity_deshboard">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
-    android:id="@+id/ll_store_main_container"
-    android:layout_height="match_parent">
+
     <LinearLayout
+        android:id="@+id/ll_store_main_container"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:layout_height="0dp">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_margin="5dp"
-            android:visibility="invisible"
-            android:src="@drawable/cross_logo"
-            android:id="@+id/imageView47" />
-    </LinearLayout>
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:weightSum="10"
-android:layout_weight="9"
-    android:layout_height="0dp">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="9"
-        android:id="@+id/ll_store_container"
-        android:layout_marginLeft="10dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible"
-        android:layout_height="match_parent">
+        android:weightSum="10">
 
-
-        <RelativeLayout
-
+        <LinearLayout
             android:layout_width="match_parent"
-            android:background="#32A007"
-            android:layout_height="100dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Stores"
-                android:textColor="#ffffff"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="10dp"
-
-                android:id="@+id/textView18"
-                />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:id="@+id/imageView39"
-                android:src="@drawable/logo_icon"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-        <RelativeLayout
+                android:id="@+id/imageView47"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:src="@drawable/cross_logo"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-            android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-
+            <LinearLayout
+                android:id="@+id/ll_store_container"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/rl_store_list" />
-        </RelativeLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_weight="9"
+                android:orientation="vertical"
+                android:visibility="invisible">
 
 
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="#32A007">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Stores"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+
+                        android:textColor="#ffffff" />
+
+                    <ImageView
+                        android:id="@+id/imageView39"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/logo_icon" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rl_store_list"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:id="@+id/imageView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/stores2button" />
+
+                <ImageView
+                    android:id="@+id/imageView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/coupan_button" />
+
+                <ImageView
+                    android:id="@+id/imageView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/service_button" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:weightSum="3"
-android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_height="0dp"
-            android:src="@drawable/stores2button"
-            android:id="@+id/imageView36" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="2dp"
-            android:src="@drawable/coupan_button"
-            android:layout_height="0dp"
-            android:id="@+id/imageView37" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_margin="2dp"
-             android:layout_weight="1"
-            android:src="@drawable/service_button"
-            android:id="@+id/imageView38" />
-    </LinearLayout>
-</LinearLayout>
-</LinearLayout>
 </FrameLayout>

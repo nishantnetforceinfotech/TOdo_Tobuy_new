@@ -30,7 +30,7 @@ public class All_group_tobuy_Fragment extends Fragment {
     private String mParam2;
     public static ArrayList groups_name = new ArrayList<>();
     LinearLayoutManager recycle_allgrp_layoutmanager;
-    RecyclerView recyclerView_all_group_main ;
+    RecyclerView recyclerView_all_group_main;
 
 
     public All_group_tobuy_Fragment() {
@@ -68,8 +68,8 @@ public class All_group_tobuy_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v= inflater.inflate(R.layout.fragment_all_group_tobuy_, container, false);
-temp_arraylistdata();
+        View v = inflater.inflate(R.layout.fragment_all_group_tobuy_, container, false);
+        temp_arraylistdata();
 
         Initview(v);
         InitRecycleview(v);
@@ -89,23 +89,16 @@ temp_arraylistdata();
 
     private void InitRecycleview(View v) {
 
-        recyclerView_all_group_main=(RecyclerView)v.findViewById(R.id.recycleview_allgroup);
+        recyclerView_all_group_main = (RecyclerView) v.findViewById(R.id.recycleview_allgroup);
         recycle_allgrp_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView_all_group_main.setLayoutManager(recycle_allgrp_layoutmanager);
-       // recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
+        // recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
         //recyclerView_all_group_main.setAdapter(recycle_adapter_main);
-
 
 
     }
 
     private void Initview(View v) {
-
-
-
-
-
-
 
 
     }

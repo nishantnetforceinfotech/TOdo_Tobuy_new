@@ -63,7 +63,7 @@ public class ItemDetailsAdapter extends RecyclerView.Adapter<ItemDetailsAdapter.
         });
 
         holder.star.setOnCheckedChangeListener(null);
-        if (groupDatas.get(position).isFav() == true) {
+        if (groupDatas.get(position).isFav()) {
 
             holder.star.setBackgroundResource(R.drawable.purple_star_item);
         } else {

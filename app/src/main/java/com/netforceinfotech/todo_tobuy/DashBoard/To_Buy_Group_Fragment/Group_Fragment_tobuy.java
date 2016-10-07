@@ -1,6 +1,8 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment;
 
 
+import android.app.Dialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Inf
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Item_recycler_adapter;
 import com.netforceinfotech.todo_tobuy.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -40,6 +43,8 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
     ArrayList checked_arraylist;
     ArrayList<GroupData> groupDatas = new ArrayList<>();
     public static ImageView get_cameraorgalley_image;
+    public static Bitmap item_image;
+    public  static File item_file;
 
     public Group_Fragment_tobuy() {
         // Required empty public constructor
@@ -78,6 +83,7 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         View v = inflater.inflate(R.layout.fragment_group__fragment_tobuy, container, false);
         checked_arraylist = new ArrayList();
         get_unselected_items = new ArrayList();
+
         get_cameraorgalley_image = (ImageView) v.findViewById(R.id.imageView18);
         rl_imagegetter = (RelativeLayout) v.findViewById(R.id.rl_imagegetter);
         done = (ImageView) v.findViewById(R.id.imageView22);
@@ -90,7 +96,18 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         Intializeecycleview(v);
 
         // Inflate the layout for this fragment
+
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if(item_image != null){
+
+            get_cameraorgalley_image.setImageBitmap(item_image);
+        }
     }
 
     private void setupDummyData() {
@@ -165,4 +182,5 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
 
 
     }
+
 }
