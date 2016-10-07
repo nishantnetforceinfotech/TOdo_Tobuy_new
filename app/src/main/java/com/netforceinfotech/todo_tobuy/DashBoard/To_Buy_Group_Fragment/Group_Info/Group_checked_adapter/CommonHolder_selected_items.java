@@ -26,12 +26,12 @@ public class CommonHolder_selected_items extends RecyclerView.ViewHolder {
         super(itemView);
         quantity=(EditText)itemView.findViewById(R.id.editText10);
         rl_quantity=(RelativeLayout)itemView.findViewById(R.id.rl_quantity) ;
-        checkBox=(CheckBox)itemView.findViewById(R.id.checkBox3);
+        /*checkBox=(CheckBox)itemView.findViewById(R.id.checkBox3);
         groupname=(TextView)itemView.findViewById(R.id.tv_3);
         rl_delete_item=(RelativeLayout)itemView.findViewById(R.id.rl_delete_item);
         delete=(ImageView)itemView.findViewById(R.id.imageView26);
         rl_description_unchecked=(RelativeLayout)itemView.findViewById(R.id.rl_description_unchecked);
-
+*/
         // imageview=(ImageView)itemView.findViewById(R.id.imageView14);
 
         // cardview= (CardView) itemView.findViewById(R.id.cardview_subcategory);

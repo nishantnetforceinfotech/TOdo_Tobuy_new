@@ -9,13 +9,23 @@ public class GroupData {
     boolean checked;
     boolean fav;
 
-    public GroupData(String name, String quantity, boolean checked, boolean fav) {
+    boolean text_chk;
+
+    public GroupData(String name, String quantity, boolean checked, boolean fav,boolean text_chk) {
         this.name = name;
         this.quantity = quantity;
         this.checked = checked;
         this.fav = fav;
+        this.text_chk = text_chk;
     }
 
+    public boolean isText_chk() {
+        return text_chk;
+    }
+
+    public void setText_chk(boolean text_chk) {
+        this.text_chk = text_chk;
+    }
 
     public String getName() {
         return name;

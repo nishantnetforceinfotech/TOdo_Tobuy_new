@@ -26,10 +26,10 @@
                     android:padding="4dp" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_below="@+id/recycleview_seleted_items"
+                    android:layout_below="@id/recycleview_seleted_items"
                     android:background="#32A007"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -37,7 +37,7 @@
                     android:id="@+id/recycleview_unseleted_items"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textView14"
+                    android:layout_below="@+id/line"
 
                     android:clipToPadding="false"
                     android:padding="4dp" />
@@ -58,7 +58,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/imageView22"
+                    android:id="@+id/done_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"
@@ -73,7 +73,7 @@
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/imageView23"
+                    android:id="@+id/clearlist"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_centerHorizontal="true"

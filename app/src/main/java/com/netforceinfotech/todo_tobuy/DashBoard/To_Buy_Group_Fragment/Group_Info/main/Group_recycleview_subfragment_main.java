@@ -69,26 +69,28 @@ public class Group_recycleview_subfragment_main extends Fragment {
        // v.findViewById(R.id.done).setOnClickListener(this);
        // v.findViewById(R.id.clearlist).setOnClickListener(this);
 
+
         ((ImageView)v.findViewById(R.id.done)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                // groupDatas.removeAll(Group_recycleview_subfragment.selectedGroupData);
-
+                Group_recycleview_subfragment.selectedGroupData.clear();
+                Group_recycleview_subfragment.unselectedGroupData.clear();
 
                 for (int i = 0; i < groupDatas.size(); i++) {
 
-                    if (!groupDatas.get(i).getQuantity().equals("0") && groupDatas.get(i).isChecked()== true){
+                    if (!groupDatas.get(i).getQuantity().equals("0") && groupDatas.get(i).isChecked()){
 
-                        Group_recycleview_subfragment.selectedGroupData = groupDatas;
+                        Group_recycleview_subfragment.selectedGroupData.add(groupDatas.get(i));
 
                     }else {
 
-                        Group_recycleview_subfragment.unselectedGroupData = groupDatas;
+                        Group_recycleview_subfragment.unselectedGroupData.add(groupDatas.get(i));
                     }
                 }
 
-                item_recycler_adapter.notifyDataSetChanged();
+               // item_recycler_adapter.notifyDataSetChanged();
 
                 setUpFragment();
 
@@ -103,7 +105,7 @@ public class Group_recycleview_subfragment_main extends Fragment {
 
         for (int i = 0; i < 10; i++) {
             //GroupData(String name,String quantity,boolean checked,boolean fav){
-            groupDatas.add(new GroupData("name", " ", false, false));
+            groupDatas.add(new GroupData("name", " ", false, false,false));
         }
         item_recycler_adapter.notifyDataSetChanged();
     }

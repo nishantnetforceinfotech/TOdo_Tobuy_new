@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.Group_recycleview_subfragment;
@@ -92,10 +97,12 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         rl_itemlist_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         item_recycler_adapter = new Item_recycler_adapter(getActivity(), groupDatas);
         get_checked_item = new ArrayList();
+
+        item_image = null;
+        item_file = null;
+
         setupDummyData();
         Intializeecycleview(v);
-
-        // Inflate the layout for this fragment
 
         return v;
     }
@@ -112,7 +119,7 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
 
     private void setupDummyData() {
         for (int i = 0; i < 10; i++) {
-            groupDatas.add(new GroupData("", "", false, false));
+            groupDatas.add(new GroupData("", "", false, false,false));
         }
     }
 
@@ -120,6 +127,20 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         recycle_itemlist = (RecyclerView) v.findViewById(R.id.recycleview_items);
         recycle_itemlist.setLayoutManager(rl_itemlist_layoutmanager);
         recycle_itemlist.setAdapter(item_recycler_adapter);
+
+        EditText group_name = (EditText) v.findViewById(R.id.group_name);
+        group_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+
+                    Toast.makeText(getActivity(),"press enter",Toast.LENGTH_LONG).show();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
     }
 

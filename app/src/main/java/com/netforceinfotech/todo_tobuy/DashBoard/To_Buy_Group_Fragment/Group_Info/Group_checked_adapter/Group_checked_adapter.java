@@ -2,17 +2,24 @@ package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_In
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
@@ -24,89 +31,116 @@ import java.util.ArrayList;
 /**
  * Created by abcd on 9/3/2016.
  */
-public class Group_checked_adapter extends RecyclerView.Adapter<CommonHolder_selected_items> implements View.OnClickListener {
-    Context context2;
-    Activity context3;
-    EditText quantity;
-    static public String dialog_data;
-    static int position_et;
-    ArrayList checkedlist = new ArrayList();
-    ArrayList uncheckedlist = new ArrayList();
-    ImageView deleteitem;
-    // ArrayList<CommomData> commomDatas;
-    CommonHolder_selected_items viewHolder;
-    int itemsize;
+public class Group_checked_adapter extends RecyclerView.Adapter<Group_checked_adapter.ViewHolder> {
     ArrayList<GroupData> groupDatas;
-    public static final int keypad_fragment = 1;
+    Context context;
 
     public Group_checked_adapter(Context context, ArrayList<GroupData> groupDatas) {
-        context2 = context;
-        context3 = (Activity) context;
-        checkedlist = new ArrayList();
-        uncheckedlist = new ArrayList();
+        this.context = context;
         this.groupDatas = groupDatas;
-
     }
 
     @Override
-    public CommonHolder_selected_items onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_group_checked_listitem_row, parent, false);
-        viewHolder = new CommonHolder_selected_items(view);
-        return viewHolder;
+    public Group_checked_adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewtype) {
+
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_group_checked_listitem_row,
+                viewGroup, false);
+
+        ViewHolder holder = new ViewHolder(view, new MyEditTextWatcher());
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(final CommonHolder_selected_items holder, final int position) {
-        quantity = holder.quantity;
-        quantity.setInputType(InputType.TYPE_NULL);
-        quantity.setOnClickListener(this);
-        holder.rl_quantity.setOnClickListener(this);
-        holder.rl_delete_item.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        holder.myedit.updatePosition(position);
+        holder.quantity.setBackgroundColor(Color.GREEN);
+        holder.button3.setBackgroundColor(Color.GREEN);
+        holder.quantity.setText(groupDatas.get(position).getQuantity());
+
+        holder.checkBox.setOnCheckedChangeListener(null);
+
+        holder.checkBox.setChecked(groupDatas.get(position).isChecked());
+
+        if (groupDatas.get(position).isText_chk()) {
+
+            holder.button3.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
+        } else {
+
+            holder.button3.setPaintFlags(Paint.LINEAR_TEXT_FLAG);
+        }
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                holder.checkBox.setBackgroundResource(R.drawable.cross_icon_fr_delete);
-
-                holder.delete.setBackgroundResource(R.drawable.red_deletebox_icon);
-
-                Confirm_delete_item confirm_delete_item=new Confirm_delete_item();
-
-                confirm_delete_item.show(context3.getFragmentManager(), "confirm_delete_item");
-
-            }
-        });
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
 
-        //checkbox listener
+                if (isChecked) {
 
+                    groupDatas.get(holder.getAdapterPosition()).setChecked(true);
+                    groupDatas.get(holder.getAdapterPosition()).setText_chk(false);
+                    notifyDataSetChanged();
 
-       /* holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                groupDatas.get(position).checked = b;
-                if (!groupDatas.get(position).checked == b) {
-
-                    // holder.groupname.setPaintFlags(holder.groupname.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 } else {
 
-                    holder.groupname.setPaintFlags(holder.groupname.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    groupDatas.get(holder.getAdapterPosition()).setChecked(false);
+                    groupDatas.get(holder.getAdapterPosition()).setText_chk(true);
+                    notifyDataSetChanged();
                 }
 
 
             }
         });
-*/
 
-        position_et = position;
-        //Picasso.with(context2).load(R.drawable.vegetables).into(holder.imageview);
-//        holder.cardview.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Intent intent = new Intent(context, CategoryActivity.class);
-////                context.startActivity(intent);
-//                ((AppCompatActivity)context2).overridePendingTransition(R.anim.enter, R.anim.exit);
-//            }
-//        });
+        holder.star.setOnCheckedChangeListener(null);
+        if (groupDatas.get(position).isFav()) {
+
+            holder.star.setBackgroundResource(R.drawable.purple_star_item);
+        } else {
+
+            holder.star.setBackgroundResource(R.drawable.star_icon_items);
+        }
+
+        holder.star.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+
+                    groupDatas.get(holder.getAdapterPosition()).setFav(true);
+                    holder.star.setBackgroundResource(R.drawable.purple_star_item);
+
+                } else {
+
+                    groupDatas.get(holder.getAdapterPosition()).setFav(false);
+                    holder.star.setBackgroundResource(R.drawable.star_icon_items);
+                }
+
+            }
+        });
+
+        holder.item_info.setTag(position);
+        holder.item_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int pos = (int) v.getTag();
+
+                Toast.makeText(context, "item : " + pos, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.delete_item.setTag(position);
+        holder.delete_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int pos = (int) v.getTag();
+
+                Toast.makeText(context, "delete item : " + pos, Toast.LENGTH_LONG).show();
+            }
+        });
 
 
     }
@@ -116,38 +150,60 @@ public class Group_checked_adapter extends RecyclerView.Adapter<CommonHolder_sel
         return groupDatas.size();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.editText10:
-                //quantity.clearFocus();
-                hideSoftKeyboard(quantity);
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-                break;
-            case R.id.rl_quantity:
-                // quantity.clearFocus();
-                hideSoftKeyboard(quantity);
-                Toast.makeText(context2, "clicked", Toast.LENGTH_SHORT).show();
+        EditText quantity;
+        RelativeLayout rl_quantity;
+        CheckBox checkBox;
+        Button button3;
+        CheckBox star;
+        ImageView item_info;
+        ImageView delete_item;
 
-                Keypad_dialog kd = new Keypad_dialog();
+        public MyEditTextWatcher myedit;
 
+        public ViewHolder(View itemView, MyEditTextWatcher myedit) {
+            super(itemView);
 
-                Bundle args = new Bundle();
-                args.putString("et_position", "" + position_et);
-                kd.setArguments(args);
+            quantity = (EditText) itemView.findViewById(R.id.editText10);
+            rl_quantity = (RelativeLayout) itemView.findViewById(R.id.rl_quantity);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkBox3);
+            button3 = (Button) itemView.findViewById(R.id.button3);
+            star = (CheckBox) itemView.findViewById(R.id.star);
+            item_info = (ImageView) itemView.findViewById(R.id.item_info);
+            delete_item = (ImageView) itemView.findViewById(R.id.delete_item);
 
-                // setup link back to use and display
-                // kd.setTargetFragment(this, keypad_fragment);
-                kd.show(context3.getFragmentManager(), "Keypad_dialog");
+            this.myedit = myedit;
+            quantity.addTextChangedListener(myedit);
 
-                break;
         }
-
     }
 
-    public void hideSoftKeyboard(EditText et) {
-        et.setInputType(0);
-        InputMethodManager imm = (InputMethodManager) context3.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+    public class MyEditTextWatcher implements TextWatcher {
+
+        int postion;
+
+        public void updatePosition(int pos) {
+
+            postion = pos;
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            String num = s.toString().replaceAll("\\s", "");
+            Log.e("num", num);
+            groupDatas.get(postion).setQuantity(s.toString());
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
     }
 }

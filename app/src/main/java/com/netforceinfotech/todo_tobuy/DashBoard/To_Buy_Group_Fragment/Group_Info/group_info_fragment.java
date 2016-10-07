@@ -123,7 +123,7 @@ public class group_info_fragment extends Fragment implements View.OnClickListene
         switch (view.getId()) {
             case R.id.rl_add_items:
                 //Log.e(" Group_recycleview_subfragment.unselectedGroupData 1",Group_recycleview_subfragment.unselectedGroupData.size()+"");
-                GroupData gp = new GroupData(et_add_item.getText().toString(), "", false, false);
+                GroupData gp = new GroupData(et_add_item.getText().toString(), "", false, false,false);
                 Group_recycleview_subfragment.unselectedGroupData.add(gp);
                 Group_recycleview_subfragment.grp_uncheck_adapter.notifyDataSetChanged();
                 // Log.e("add Sucessfully", "clicked 1");
@@ -133,7 +133,7 @@ public class group_info_fragment extends Fragment implements View.OnClickListene
             case R.id.imageView21:
                 // Log.e(" Group_recycleview_subfragment.unselectedGroupData 3",Group_recycleview_subfragment.unselectedGroupData.size()+"");
 
-                GroupData gp2 = new GroupData(et_add_item.getText().toString(), "", false, false);
+                GroupData gp2 = new GroupData(et_add_item.getText().toString(), "", false, false,false);
 
                 Group_recycleview_subfragment.unselectedGroupData.add(gp2);
                 Group_recycleview_subfragment.grp_uncheck_adapter.notifyDataSetChanged();

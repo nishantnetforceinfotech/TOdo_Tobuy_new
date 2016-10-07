@@ -58,7 +58,16 @@ public class ItemDetailsAdapter extends RecyclerView.Adapter<ItemDetailsAdapter.
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                groupDatas.get(holder.getAdapterPosition()).setChecked(isChecked);
+                if(isChecked) {
+
+                    groupDatas.get(holder.getAdapterPosition()).setChecked(true);
+                    groupDatas.get(holder.getAdapterPosition()).setText_chk(false);
+
+                }else {
+
+                    groupDatas.get(holder.getAdapterPosition()).setChecked(false);
+                    groupDatas.get(holder.getAdapterPosition()).setText_chk(true);
+                }
             }
         });
 
