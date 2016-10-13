@@ -3,6 +3,7 @@ package com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -10,7 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Fragment_tobuy;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
@@ -88,6 +92,32 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(main_grid_adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(rl_view);
+
+        ((TextView) view.findViewById(R.id.new_group)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Group_Fragment_tobuy f = new Group_Fragment_tobuy();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_main, f, "Group_Fragment_tobuy")
+                        .addToBackStack("Group_Fragment_tobuy")
+                        .commit();
+
+            }
+        });
+
+        ((ImageView)view.findViewById(R.id.new_group_img)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Group_Fragment_tobuy f = new Group_Fragment_tobuy();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_main, f, "Group_Fragment_tobuy")
+                        .addToBackStack("Group_Fragment_tobuy")
+                        .commit();
+
+            }
+        });
 
         return view;
     }

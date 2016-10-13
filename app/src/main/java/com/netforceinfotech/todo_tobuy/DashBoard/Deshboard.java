@@ -41,27 +41,12 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
         initview();
         Replace_fragment_main();
 
-
-        Window window = getWindow();
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // only for gingerbread and newer versions
-            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.greentranparent));
-        }
-
     }
 
     public void initview() {
         rl_all_group = (RelativeLayout) findViewById(R.id.rl_All_group);
         rl_all_group.setOnClickListener(this);
         transparency_on = (View) findViewById(R.id.show_transparency);
-        // rl_open_offers=(RelativeLayout)findViewById(R.id.rl_open_offers);
-        //rl_open_offers.setOnClickListener(this);
         downbutton = (ImageView) findViewById(R.id.imageView13);
         downbutton.setOnClickListener(this);
         offers_fragments = getSupportFragmentManager().findFragmentById(R.id.fragment_offers);
@@ -94,27 +79,14 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
         context = this;
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-//        String teams = "Home";
-//        getSupportActionBar().setTitle(teams);
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
     }
+
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dashboard, menu);
-//        ActionItemBadge.update(((AppCompatActivity) context), menu.findItem(R.id.add_to_cart), ContextCompat.getDrawable(context, R.drawable.ic_cart_black)
-//                , ActionItemBadge.BadgeStyles.GREY, 3);
-        return true;
-    }
-
-    //    @Override
     public void onBackPressed() {
-        //final Fragment_main fragment = (Fragment_main) getSupportFragmentManager().findFragmentByTag("Fragment_main");
-        //       super.onBackPressed();
+
         if (getSupportFragmentManager().getBackStackEntryCount() > 1) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
             super.onBackPressed();
             if (offers_fragments.getView().getVisibility() == View.VISIBLE) {

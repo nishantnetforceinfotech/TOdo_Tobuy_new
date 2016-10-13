@@ -29,43 +29,10 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
     ArrayList Services=new ArrayList();
     TextView Heading;
     public static  ImageView crossButton;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     ImageView store,coupons,service;
 
 
-    public Offers_Fragments() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Offers_Fragments.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Offers_Fragments newInstance(String param1, String param2) {
-        Offers_Fragments fragment = new Offers_Fragments();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -134,7 +101,6 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
             case R.id.imageView37:
                 Heading.setText("Coupons");
                 store.setImageResource(R.drawable.stores2button);
-
                 coupons.setImageResource(R.drawable.green_coupanicon);
                 service.setImageResource(R.drawable.service_button);
                 Custom_Recycleview_adapter(stores_name,"Coupons");
@@ -157,20 +123,15 @@ public class Offers_Fragments extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.imageView47:
-//                if(storemain_container.getVisibility()==View.VISIBLE)
-//                {
-//                    storemain_container.setVisibility(View.INVISIBLE);
-//                }
-//                else{
-//                    storemain_container.setVisibility(View.VISIBLE);
-//                }
-
 
                 if(store_container.getVisibility()==View.VISIBLE)
                 {
                     store_container.setVisibility(View.INVISIBLE);
                     crossButton.setVisibility(View.INVISIBLE);
-                    //storemain_container.setVisibility(View.INVISIBLE);
+                    store.setImageResource(R.drawable.stores2button);
+                    coupons.setImageResource(R.drawable.coupan_button);
+                    service.setImageResource(R.drawable.service_button);
+
                 }
 
 
