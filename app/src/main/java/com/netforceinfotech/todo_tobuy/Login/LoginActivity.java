@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.R;
 
@@ -160,7 +161,9 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
                 }
-                Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
+
+                //change code here
+                Intent i2 = new Intent(LoginActivity.this, TodoDashboardActivity.class);
                 startActivity(i2);
                 LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
                 finish();

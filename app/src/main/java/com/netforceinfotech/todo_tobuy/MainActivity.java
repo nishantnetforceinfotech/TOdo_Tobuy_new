@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.Login.LoginActivity;
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }else {
 
-                    startActivity(new Intent(MainActivity.this, Deshboard.class));
+                    startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
 

@@ -37,6 +37,9 @@
         <activity android:name=".DashBoard.Offers.Coupons.Coupons_activity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name="com.netforceinfotech.todo.task.TodoDashboardActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
