@@ -63,15 +63,16 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
 
     }
 
-    @Override
+    /*@Override
     public void onItemDismiss(int position) {
         //commomDatas.remove(position);
         //notifyItemRemoved(position);
-    }
+    }*/
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {
         Collections.swap(commomDatas, fromPosition, toPosition);
+        Collections.swap(commomDatas1, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
         return true;
     }

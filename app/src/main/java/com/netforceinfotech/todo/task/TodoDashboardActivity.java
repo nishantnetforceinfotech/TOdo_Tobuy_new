@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import com.netforceinfotech.todo.task.dashboard.mainfragment.MainFragment;
 import com.netforceinfotech.todo.task.dashboard.mainfragment.SubFragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.navigation.NavigationFragment;
@@ -28,13 +29,17 @@ public class TodoDashboardActivity extends AppCompatActivity {
     }
 
     private void setupNavigationCustom() {
+
+
         drawer = (NavigationFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         drawer.setup(R.id.fragment, (DrawerLayout) findViewById(R.id.drawer), toolbar);
+
+
     }
 
     private void setupToolBar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setContentInsetsAbsolute(0, 0);
+        //toolbar.setContentInsetsAbsolute(0, 0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -48,14 +53,14 @@ public class TodoDashboardActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_frag, f, "main_fragment")
-                .addToBackStack("main")
+              //  .addToBackStack("main")
                 .commit();
 
         SubFragment ff = new SubFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.sub_frag, ff, "sub_fragment")
-                .addToBackStack("sub")
+              //  .addToBackStack("sub")
                 .commit();
 
     }

@@ -72,11 +72,13 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
 
     }
 
+/*
     @Override
     public void onItemDismiss(int position) {
         //commomDatas.remove(position);
         //notifyItemRemoved(position);
     }
+*/
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition) {

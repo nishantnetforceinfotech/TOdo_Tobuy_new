@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }else {
 
-                    startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
+                    startActivity(new Intent(MainActivity.this, Deshboard.class));
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
 

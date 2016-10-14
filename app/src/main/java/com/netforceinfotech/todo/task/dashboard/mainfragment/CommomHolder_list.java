@@ -37,13 +37,13 @@ public class CommomHolder_list extends RecyclerView.ViewHolder implements
     @Override
     public void onItemSelected() {
 
-        itemView.setBackgroundColor(Color.WHITE);
+        itemView.setBackgroundColor(Color.parseColor("#E2E0E0"));
         Log.e("test", "test");
     }
 
     @Override
     public void onItemClear() {
-        itemView.setBackgroundColor(Color.WHITE);
+        itemView.setBackgroundColor(Color.parseColor("#E2E0E0"));
         Log.e("test1", "test1");
     }
 }

@@ -40,6 +40,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/container_main"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_deshboard">
+
+                <!--<include layout="@layout/content_main" />-->
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fragmentAd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_horizontal|bottom">
+
+
+                <!---add your views here-->
+
+                <!-- <ImageView
+                     android:id="@+id/imageView_close"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top|right"
+                     android:clickable="true"
+                     android:src="@drawable/close" />-->
+            </FrameLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_deshboard"

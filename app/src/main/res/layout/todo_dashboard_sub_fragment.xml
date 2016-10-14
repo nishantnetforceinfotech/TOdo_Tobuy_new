@@ -22,7 +22,7 @@
             <EditText
                 android:id="@+id/editText9"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentRight="true"
@@ -76,14 +76,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview_items"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:layout_above="@+id/relativeLayout5" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true">
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/relativeLayout5">
 
             <TextView
                 android:id="@+id/newlist"
@@ -109,8 +111,4 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView17" />
 </LinearLayout>
