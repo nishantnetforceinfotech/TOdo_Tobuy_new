@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/checkbox_selector"
+        android:button="@null"
+        android:checked="false" />
+
+    <RelativeLayout
+        android:id="@+id/relright"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/input_newitem">
+
+        <TextView
+            android:id="@+id/taskname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_toStartOf="@+id/taskdate"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="task name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/taskdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@+id/checkstar"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="friday,10 sep 2016"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#53AC30"
+            android:textSize="12dp" />
+
+
+        <CheckBox
+            android:id="@+id/checkstar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/star_selector"
+            android:button="@null"
+            android:checked="true" />
+    </RelativeLayout>
+</LinearLayout>

@@ -16,8 +16,8 @@ import com.netforceinfotech.todo_tobuy.R;
 /**
  * Created by Ritesh on 22-Aug-16.
  */
-public class CommomHolder_list extends RecyclerView.ViewHolder implements
-        ItemTouchHelperViewHolder {
+public class CommomHolder_list extends RecyclerView.ViewHolder {
+      //  implements ItemTouchHelperViewHolder {
 
         TextView msg;
         TextView msg_num;
@@ -34,6 +34,7 @@ public class CommomHolder_list extends RecyclerView.ViewHolder implements
 
     }
 
+/*
     @Override
     public void onItemSelected() {
 
@@ -46,4 +47,5 @@ public class CommomHolder_list extends RecyclerView.ViewHolder implements
         itemView.setBackgroundColor(Color.parseColor("#E2E0E0"));
         Log.e("test1", "test1");
     }
+*/
 }

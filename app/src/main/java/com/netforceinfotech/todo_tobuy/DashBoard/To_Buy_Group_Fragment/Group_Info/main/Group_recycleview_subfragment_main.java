@@ -23,29 +23,13 @@ import java.util.ArrayList;
 
 
 public class Group_recycleview_subfragment_main extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     LinearLayoutManager rl_itemlist_layoutmanager;
     public static RecyclerView recycle_itemlist;
     ItemDetailsAdapter item_recycler_adapter;
-    Group_checked_adapter gp_checked;
-    Group_unchecked_adapter gp_unchecked;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
-    Activity activity ;
     public static ArrayList<GroupData> groupDatas = new ArrayList<>();
     private Group_recycleview_subfragment dashboardFragment;
     private String tagName;
-
-
-    public Group_recycleview_subfragment_main() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -58,17 +42,13 @@ public class Group_recycleview_subfragment_main extends Fragment {
         Intializeecycleview(v);
 
         setDummyData();
-        // Inflate the layout for this fragment
+
         return v;
     }
 
     private void initView(View v) {
 
         groupDatas.clear();
-
-       // v.findViewById(R.id.done).setOnClickListener(this);
-       // v.findViewById(R.id.clearlist).setOnClickListener(this);
-
 
         ((ImageView)v.findViewById(R.id.done)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,8 +70,6 @@ public class Group_recycleview_subfragment_main extends Fragment {
                     }
                 }
 
-               // item_recycler_adapter.notifyDataSetChanged();
-
                 setUpFragment();
 
             }
@@ -104,7 +82,7 @@ public class Group_recycleview_subfragment_main extends Fragment {
 
 
         for (int i = 0; i < 10; i++) {
-            //GroupData(String name,String quantity,boolean checked,boolean fav){
+
             groupDatas.add(new GroupData("name", " ", false, false,false));
         }
         item_recycler_adapter.notifyDataSetChanged();
@@ -130,19 +108,4 @@ public class Group_recycleview_subfragment_main extends Fragment {
         replaceFragment(dashboardFragment, tagName);
     }
 
-   /* @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.done:
-
-                groupDatas.removeAll(Group_recycleview_subfragment.selectedGroupData);
-               Log.e("groupDatas.remove",Group_recycleview_subfragment.selectedGroupData.get(0).toString());
-                Group_recycleview_subfragment.unselectedGroupData=groupDatas;
-
-                item_recycler_adapter.notifyDataSetChanged();
-
-                setUpFragment();
-                break;
-        }
-    }*/
 }

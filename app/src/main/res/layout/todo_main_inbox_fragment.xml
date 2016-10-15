@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_inbox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#E2E0E0">
+
+        <RelativeLayout
+
+            android:id="@+id/relativeLayout6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/right_redarrow" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_open_offers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/arrowicon_left" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/list_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/message_icon"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_toEndOf="@+id/relativeLayout6"
+            android:layout_alignParentBottom="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Inbox"
+            android:id="@+id/list_itemname"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/list_img"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:textColor="#53AC30"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

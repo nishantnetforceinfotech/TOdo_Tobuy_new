@@ -39,6 +39,8 @@
 
         <activity android:name="com.netforceinfotech.todo.task.TodoDashboardActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.netforceinfotech.todo.task.TodoListFolderActivity"
+            android:screenOrientation="portrait"/>
 
     </application>
 

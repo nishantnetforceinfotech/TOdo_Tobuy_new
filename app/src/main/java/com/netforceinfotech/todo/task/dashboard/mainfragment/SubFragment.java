@@ -1,6 +1,7 @@
 package com.netforceinfotech.todo.task.dashboard.mainfragment;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,12 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment.Fragment_main_grid_adapter;
-import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Fragment_tobuy;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by owner on 10/13/2016.
  */
-public class SubFragment extends Fragment implements OnStartDragListener {
+public class SubFragment extends Fragment{ //implements OnStartDragListener {
 
     RecyclerView rl_view;
     LinearLayoutManager linearLayoutManager;
@@ -47,23 +47,54 @@ public class SubFragment extends Fragment implements OnStartDragListener {
             list.add("Item"+i);
             list1.add(i+"");
         }
-        sub_list_adapter = new Subfragment_listAdapter(getActivity(),this,list,list1);
+       // sub_list_adapter = new Subfragment_listAdapter(getActivity(),this,list,list1);
+        sub_list_adapter = new Subfragment_listAdapter(getActivity(),list,list1);
 
         rl_view.setLayoutManager(linearLayoutManager);
         rl_view.setAdapter(sub_list_adapter);
         // Inflate the layout for this fragment
 
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(sub_list_adapter);
+       /* ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(sub_list_adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(rl_view);
+*/
 
+        ((TextView)view.findViewById(R.id.newlist)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                createNewListDialog();
+            }
+        });
         return view;
     }
 
-    @Override
+   /* @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         //  mItemTouchHelper.startDrag(viewHolder);
         Log.e("hhh", "test");
     }
+*/
 
+    private void createNewListDialog(){
+
+        final Dialog dd = new Dialog(getActivity());
+        dd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dd.setContentView(R.layout.todo_sub_fragment_createnew_list);
+        EditText listname = (EditText) dd.findViewById(R.id.listname);
+        EditText email = (EditText) dd.findViewById(R.id.email);
+        EditText password = (EditText) dd.findViewById(R.id.password);
+        ImageView save = (ImageView) dd.findViewById(R.id.save);
+        ImageView quit = (ImageView) dd.findViewById(R.id.quit);
+
+        dd.show();
+
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dd.cancel();
+            }
+        });
+    }
 }

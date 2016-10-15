@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         rl=(RelativeLayout)findViewById(R.id.rl_spalsh);
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }else {
 
-                    startActivity(new Intent(MainActivity.this, Deshboard.class));
+                    startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
                     overridePendingTransition(R.anim.enter, R.anim.exit);
                     finish();
 
