@@ -1,6 +1,7 @@
 package com.netforceinfotech.todo.task.list.folder.fragment;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by owner on 10/14/2016.
@@ -56,11 +59,12 @@ public class ListSubFragmentNewtaskAdapter extends
                 if (isChecked) {
 
                     groupDatas.get(holder.getAdapterPosition()).setTask_select(true);
-
+                    holder.task_name.setPaintFlags(holder.task_name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
                 } else {
 
                     groupDatas.get(holder.getAdapterPosition()).setTask_select(false);
+                    holder.task_name.setPaintFlags(Paint.LINEAR_TEXT_FLAG);
 
                 }
             }
@@ -77,6 +81,13 @@ public class ListSubFragmentNewtaskAdapter extends
                 if (isChecked) {
 
                     groupDatas.get(holder.getAdapterPosition()).setStar_select(true);
+                    //Collections.rotate(groupDatas.subList(holder.getAdapterPosition(), 0), 1) ;
+                    //Collections.swap(groupDatas, holder.getAdapterPosition(), 0);
+
+int a=holder.getAdapterPosition();
+                    groupDatas.add(0, groupDatas.get(holder.getAdapterPosition()));
+                    groupDatas.remove(a+1);
+                    notifyDataSetChanged();
 
 
                 } else {

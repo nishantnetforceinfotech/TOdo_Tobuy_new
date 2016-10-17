@@ -2,6 +2,7 @@ package com.netforceinfotech.todo.task.dashboard.mainfragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,8 +16,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.netforceinfotech.todo.task.TodoListFolderActivity;
+import com.netforceinfotech.todo.task.list.folder.fragment.ListMainFragment;
+import com.netforceinfotech.todo.task.list.folder.fragment.ListSubFragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
@@ -34,6 +39,8 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
     private ItemTouchHelper mItemTouchHelper;
     ArrayList<String> list = new ArrayList<>();
     ArrayList<String> list1 = new ArrayList<>();
+    RelativeLayout rl_inbox;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,13 +48,23 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
         View view = inflater.inflate(R.layout.todo_dashboard_sub_fragment, container, false);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         rl_view = (RecyclerView) view.findViewById(R.id.recycleview_items);
+        rl_inbox=(RelativeLayout)view.findViewById(R.id.rl_inbox);
+        rl_inbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), TodoListFolderActivity.class);
+                getActivity().startActivity(in);
+            }
+        });
 
-        for(int i=1;i<19;i++){
+//        for(int i=1;i<19;i++){
+//
+//            list.add("Item"+i);
+//            list1.add(i+"");
+//        }
+      list.add("demo");
+        list1.add("demo1");
 
-            list.add("Item"+i);
-            list1.add(i+"");
-        }
-       // sub_list_adapter = new Subfragment_listAdapter(getActivity(),this,list,list1);
         sub_list_adapter = new Subfragment_listAdapter(getActivity(),list,list1);
 
         rl_view.setLayoutManager(linearLayoutManager);
@@ -97,4 +114,9 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
             }
         });
     }
+
+
+
+
+
 }

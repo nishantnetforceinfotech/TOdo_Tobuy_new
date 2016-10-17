@@ -72,13 +72,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#E2E0E0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/rl_inbox"
+            android:layout_margin="7dp"
+            android:background="@drawable/box_inbox"
+            android:layout_height="50dp">
+
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
+                android:id="@+id/imageView17"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+android:src="@drawable/message_icon"
+
+              />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Inbox"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/textView22"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/imageView17" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="12"
+                android:textSize="16sp"
+                android:id="@+id/textView23"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycleview_items"
+            android:layout_below="@+id/rl_inbox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="5dp"
+
+
             android:layout_above="@+id/relativeLayout5" />
 
         <RelativeLayout

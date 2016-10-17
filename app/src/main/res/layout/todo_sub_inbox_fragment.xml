@@ -21,21 +21,21 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/add_box" />
 
-        <TextView
-            android:id="@+id/addnewtask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/addtask"
-            android:layout_alignTop="@+id/addtask"
-            android:layout_marginLeft="10dp"
-            android:layout_toEndOf="@+id/addtask"
-            android:gravity="center"
-            android:text="Add New Task"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#53AC30"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:visibility="visible" />
+        <!--<TextView-->
+            <!--android:id="@+id/addnewtask"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/addtask"-->
+            <!--android:layout_alignTop="@+id/addtask"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_toEndOf="@+id/addtask"-->
+            <!--android:gravity="center"-->
+            <!--android:text="Add New Task"-->
+            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+            <!--android:textColor="#53AC30"-->
+            <!--android:textSize="18dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:visibility="visible" />-->
 
         <EditText
             android:id="@+id/edittaskname"
@@ -49,7 +49,7 @@
             android:padding="5dp"
             android:textColor="#66000000"
             android:textSize="15dp"
-            android:visibility="gone" />
+           />
 
         <RelativeLayout
             android:id="@+id/add_rel"
@@ -59,7 +59,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="10dp"
             android:background="#E2E0E0"
-            android:visibility="gone">
+            >
 
             <TextView
                 android:id="@+id/textView14"

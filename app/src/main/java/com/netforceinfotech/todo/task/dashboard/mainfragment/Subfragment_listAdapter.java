@@ -109,7 +109,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
 
     @Override
     public int getItemCount() {
-        return 18;
+        return commomDatas.size();
     }
 
 
