@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.netforceinfotech.database.DBHelper;
 import com.netforceinfotech.todo.task.dashboard.mainfragment.MainFragment;
 import com.netforceinfotech.todo.task.dashboard.mainfragment.SubFragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.navigation.NavigationFragment;
@@ -23,6 +24,10 @@ public class TodoDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.todo_dashboard);
         setupToolBar();
+        DBHelper db=new DBHelper(this);
+
+
+
         setupNavigationCustom();
         Replace_all_fragment_main();
 

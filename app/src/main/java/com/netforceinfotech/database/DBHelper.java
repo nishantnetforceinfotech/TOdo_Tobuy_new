@@ -27,7 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
     // Contacts Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_Category_NAME = "category_name";
-    private static final String KEY_Folder_count = "category_count";
+    private static final String KEY_Subcategory_count = "category_count";
+    private static final String KEY_List_Name = "list_name";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,8 +39,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CATEGORY_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_Category_NAME + " TEXT,"
-                + KEY_Folder_count + " TEXT" + ")";
+                + KEY_List_Name + " TEXT,"
+                + KEY_Subcategory_count + " TEXT" + ")";
         db.execSQL(CREATE_CATEGORY_TABLE);
+        
     }
 
     // Upgrading database
@@ -58,29 +61,50 @@ public class DBHelper extends SQLiteOpenHelper {
     // All operations
 
 
-    void addCategory(String category_name,String category_count) {
+    void addCategory(String category_name ,String listname ,String category_count) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_Category_NAME,category_name); // Contact Name
-        values.put(KEY_Folder_count,category_count); // Contact Phone
-
+        values.put(KEY_List_Name,listname); // Contact Phone
+        values.put(KEY_Subcategory_count,category_count);
         // Inserting Row
         db.insert(TABLE_CATEGORY, null, values);
         db.close(); // Closing database connection
     }
 
     // Getting single contact
-    void getCategory(int id) {
+    void getCategory(String categoryname) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_CATEGORY, new String[]{KEY_ID,
-                        KEY_Category_NAME, KEY_Folder_count}, KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CATEGORY, new String[]{
+                        KEY_Subcategory_count}, KEY_Category_NAME + "=?",
+                new String[]{categoryname}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
-        String category_name=cursor.getString(1);
-        String category_count=cursor.getString(2);
+        String category_count=cursor.getString(1);
+
+
+
+//        String category_count=cursor.getString(2);
+
+//        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
+//                cursor.getString(1), cursor.getString(2));
+        // return contact
+
+    }
+
+
+    void getList(String listname) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CATEGORY, new String[]{
+                       KEY_Subcategory_count}, KEY_List_Name + "=?",
+                new String[]{listname}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+        String list_count=cursor.getString(1);
+      //  String category_count=cursor.getString(2);
 
 //        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
 //                cursor.getString(1), cursor.getString(2));
@@ -119,26 +143,52 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Updating single contact
-    public int updateContact(String id,String category_name,String category_count) {
+    public void updateCategory(String id,String category_name,String list_name,String category_count) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_Category_NAME, category_name);
-        values.put(KEY_Folder_count, category_count);
+        values.put(KEY_List_Name, list_name);
+        values.put(KEY_Subcategory_count, category_count);
 
         // updating row
-        return db.update(TABLE_CATEGORY, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(id) });
+//        return
+                db.update(TABLE_CATEGORY, values, KEY_Category_NAME + " = ?",
+                new String[] { category_name });
+    }
+    public void updateList(String id,String category_name,String list_name,String category_count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_Category_NAME, category_name);
+        values.put(KEY_List_Name, list_name);
+        values.put(KEY_Subcategory_count, category_count);
+
+        // updating row
+//        return
+        db.update(TABLE_CATEGORY, values, KEY_List_Name + " = ?",
+                new String[] { list_name });
     }
 
     // Deleting single contact
-    public void deleteContact(int id) {
+    public void deleteCategory(String category_name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CATEGORY, KEY_ID + " = ?",
-                new String[] { String.valueOf(id) });
+        db.delete(TABLE_CATEGORY, KEY_Category_NAME + " = ?",
+                new String[] { category_name });
         db.close();
     }
-
+    public void deletelist(String list_name) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CATEGORY, KEY_List_Name + " = ?",
+                new String[] { list_name });
+        db.close();
+    }
+    public void delete_all_Category() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_CATEGORY, null ,null
+                );
+        db.close();
+    }
 
     // Getting contacts Count
     public int getCategoryCount() {
