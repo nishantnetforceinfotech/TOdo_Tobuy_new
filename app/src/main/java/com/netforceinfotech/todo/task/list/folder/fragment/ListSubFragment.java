@@ -69,8 +69,8 @@ public class ListSubFragment extends Fragment {
 
         recycle_new.setLayoutManager(ln_newmanager);
         recycle_old.setLayoutManager(ln_oldmanager);
-        newdata.clear();
-        olddata.clear();
+//        newdata.clear();
+//        olddata.clear();
 
 
         if(newdata.size()>0) {
