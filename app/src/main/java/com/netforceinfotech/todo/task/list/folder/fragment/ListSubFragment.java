@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.netforceinfotech.database.Category_pojo;
+import com.netforceinfotech.database.DBHelper;
 import com.netforceinfotech.genral.Validation;
+import com.netforceinfotech.genral.global_variable;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
@@ -33,13 +37,14 @@ public class ListSubFragment extends Fragment {
   //  TextView addnewtask;
     EditText edittaskname;
     RelativeLayout add_rel;
+    DBHelper db;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.todo_sub_inbox_fragment, container, false);
-
+db=new DBHelper(getActivity());
 
 
         ln_newmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -52,6 +57,8 @@ public class ListSubFragment extends Fragment {
        // addnewtask = (TextView) v.findViewById(R.id.addnewtask);
         edittaskname = (EditText) v.findViewById(R.id.edittaskname);
         add_rel = (RelativeLayout) v.findViewById(R.id.add_rel);
+
+
 
         //.setVisibility(View.VISIBLE);
 //        edittaskname.setVisibility(View.GONE);
@@ -88,6 +95,7 @@ public class ListSubFragment extends Fragment {
                 if(Validation.hasText(edittaskname))
 
                 {
+                    //if(global_variable.category_name=="Inbox")
                     if (newdata.size() <= 0) {
                         newdata.add(new NewGroupData(edittaskname.getText().toString(), "Friday,15 May 2016", false, false));
                         newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), newdata);
@@ -97,6 +105,20 @@ public class ListSubFragment extends Fragment {
                         newtaskAdapter.notifyDataSetChanged();
                     }
 
+                   ArrayList<Category_pojo> category = new ArrayList<Category_pojo>();
+
+                    try {
+                        category = db.getcategory("Inbox");
+
+                        String category_count = category.get(0).getCount();
+                        db.updateCategory(global_variable.category_name,null,
+                                String.valueOf(Integer.parseInt(category_count)+1));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        db.close();
+                    }
 
                 }
 
@@ -149,4 +171,6 @@ public class ListSubFragment extends Fragment {
         });
         return v;
     }
+
+
 }

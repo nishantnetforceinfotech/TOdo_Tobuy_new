@@ -5,6 +5,7 @@ package com.netforceinfotech.genral;
  */
 public class global_variable {
 
-
+public static String category_name;
+    public  static boolean check_db_foldername=false;
 
 }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.netforceinfotech.database.Category_pojo;
 import com.netforceinfotech.todo.task.TodoListFolderActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.ItemTouchHelperAdapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
@@ -33,13 +34,13 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
     // implements ItemTouchHelperAdapter {
 
     Context context2;
-    ArrayList<String> commomDatas, commomDatas1;
+    ArrayList<Category_pojo> commomDatas, commomDatas1;
     // private final OnStartDragListener mDragStartListener;
 
 
     public Subfragment_listAdapter(Context context,
                                    // OnStartDragListener dragStartListener,
-                                   ArrayList<String> commomDatas, ArrayList<String> commomDatas1) {
+                                   ArrayList<Category_pojo> commomDatas) {
         context2 = context;
         //  mDragStartListener = dragStartListener;
         this.commomDatas = commomDatas;
@@ -55,28 +56,30 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
 
     @Override
     public void onBindViewHolder(final CommomHolder_list holder, int position) {
+        if (commomDatas.get(position).getCategory_name().equals("Urgent")) {
+            Picasso.with(context2).load(R.drawable.star_icon).into(holder.img);
+        } else if (commomDatas.get(position).getCategory_name().equals("Today") ||
+                commomDatas.get(position).getCategory_name().equals("Tomorrow") ||
+                commomDatas.get(position).getCategory_name().equals("7 Days") ||
+                commomDatas.get(position).getCategory_name().equals("Calender")) {
+            Picasso.with(context2).load(R.drawable.calender_icon).into(holder.img);
+        } else {
+            Picasso.with(context2).load(R.drawable.list_icon).into(holder.img);
 
-        Picasso.with(context2).load(R.drawable.vegetables).into(holder.img);
-        holder.msg.setText(commomDatas.get(position));
-        holder.msg_num.setText(commomDatas1.get(position));
+        }
+
+
+        holder.msg.setText(commomDatas.get(position).getCategory_name());
+        holder.msg_num.setText(commomDatas.get(position).getCount());
 
         holder.main_rel.setTag(position);
-       /* holder.main_rel.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-                    mDragStartListener.onStartDrag(holder);
-                }
-                return false;
-            }
-        });
-*/
+
         holder.main_rel.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
 
                 int pos = (Integer) v.getTag();
-                customDialog(commomDatas.get(pos));
+                customDialog(commomDatas.get(pos).getCategory_name());
                 return true;
             }
         });
@@ -91,21 +94,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
         });
     }
 
-    /*@Override
-    public void onItemDismiss(int position) {
-        //commomDatas.remove(position);
-        //notifyItemRemoved(position);
-    }*/
 
-/*
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        Collections.swap(commomDatas, fromPosition, toPosition);
-        Collections.swap(commomDatas1, fromPosition, toPosition);
-        notifyItemMoved(fromPosition, toPosition);
-        return true;
-    }
-*/
 
     @Override
     public int getItemCount() {
@@ -248,7 +237,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
         TextView delete = (TextView) dd.findViewById(R.id.delete);
         TextView quit = (TextView) dd.findViewById(R.id.quit);
 
-        deletemsg.setText(listname +" will be removed permanently.\n You can not go back permanently.");
+        deletemsg.setText(listname + " will be removed permanently.\n You can not go back permanently.");
         dd.show();
 
         quit.setOnClickListener(new View.OnClickListener() {
