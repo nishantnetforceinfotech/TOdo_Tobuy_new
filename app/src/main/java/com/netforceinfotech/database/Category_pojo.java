@@ -6,10 +6,20 @@ package com.netforceinfotech.database;
 public class Category_pojo {
     String category_name;
     String count;
+    String type;
 
-    public Category_pojo(String category_name, String count) {
+    public Category_pojo(String category_name, String count,String type) {
         this.category_name = category_name;
         this.count = count;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCategory_name() {

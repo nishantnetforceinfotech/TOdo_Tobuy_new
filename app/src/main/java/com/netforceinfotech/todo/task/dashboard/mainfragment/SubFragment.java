@@ -2,15 +2,11 @@ package com.netforceinfotech.todo.task.dashboard.mainfragment;
 
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,25 +18,21 @@ import android.widget.TextView;
 
 import com.netforceinfotech.database.Category_pojo;
 import com.netforceinfotech.database.DBHelper;
-import com.netforceinfotech.genral.global_variable;
+import com.netforceinfotech.genral.Global_Variable;
 import com.netforceinfotech.todo.task.TodoListFolderActivity;
-import com.netforceinfotech.todo.task.list.folder.fragment.ListMainFragment;
-import com.netforceinfotech.todo.task.list.folder.fragment.ListSubFragment;
-import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
-import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
 
 /**
  * Created by owner on 10/13/2016.
+ * db type will be category and list
  */
-public class SubFragment extends Fragment{ //implements OnStartDragListener {
+public class SubFragment extends Fragment{
 
     RecyclerView rl_view;
     LinearLayoutManager linearLayoutManager;
     Subfragment_listAdapter sub_list_adapter;
-    private ItemTouchHelper mItemTouchHelper;
     RelativeLayout rl_inbox;
     ArrayList<Category_pojo> category;
     ArrayList<Category_pojo> category_all;
@@ -68,8 +60,11 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
         rl_inbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Global_Variable.category_name = "Inbox";
+                Global_Variable.listname = "";
+                Global_Variable.type = "category";
                 Intent in = new Intent(getActivity(), TodoListFolderActivity.class);
-                global_variable.category_name = "Inbox";
                 getActivity().startActivity(in);
             }
         });
@@ -117,13 +112,6 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
     }
 
 
-    /* @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        //  mItemTouchHelper.startDrag(viewHolder);
-        Log.e("hhh", "test");
-    }
-*/
-
     private void createNewListDialog(){
 
         final Dialog dd = new Dialog(getActivity());
@@ -152,10 +140,8 @@ public class SubFragment extends Fragment{ //implements OnStartDragListener {
         int a=db.getCategoryCount();
         if(a==0)
         {
-            db.addCategory("Inbox", null, "0");
+            db.addCategory("Inbox", null, "0","category");
         }
-        Log.e("count", "" + a);
-
 
     }
 

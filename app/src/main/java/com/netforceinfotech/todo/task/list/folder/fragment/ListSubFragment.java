@@ -4,19 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.netforceinfotech.database.Category_pojo;
 import com.netforceinfotech.database.DBHelper;
+import com.netforceinfotech.database.Task_Pojo;
 import com.netforceinfotech.genral.Validation;
-import com.netforceinfotech.genral.global_variable;
+import com.netforceinfotech.genral.Global_Variable;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
@@ -26,15 +25,16 @@ import java.util.ArrayList;
  */
 public class ListSubFragment extends Fragment {
 
-    LinearLayoutManager ln_newmanager,ln_oldmanager;
-    public static RecyclerView recycle_new,recycle_old;
+    LinearLayoutManager ln_newmanager, ln_oldmanager;
+    public static RecyclerView recycle_new, recycle_old;
     ListSubFragmentNewtaskAdapter newtaskAdapter;
     ListSubFragmentOldtaskAdapter oldtaskAdapter;
     ImageView clearlist_checked;
     public static ArrayList<NewGroupData> newdata = new ArrayList<>();
     public static ArrayList<OldGroupData> olddata = new ArrayList<>();
-    ImageView addtask;
-  //  TextView addnewtask;
+
+    public static ArrayList<Task_Pojo> taskpojo = new ArrayList<>();
+
     EditText edittaskname;
     RelativeLayout add_rel;
     DBHelper db;
@@ -44,43 +44,38 @@ public class ListSubFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.todo_sub_inbox_fragment, container, false);
-db=new DBHelper(getActivity());
+        db = new DBHelper(getActivity());
 
 
         ln_newmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         ln_oldmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recycle_new = (RecyclerView) v.findViewById(R.id.recycleview_newtask);
-        clearlist_checked=(ImageView)v.findViewById(R.id.clearlist);
+        clearlist_checked = (ImageView) v.findViewById(R.id.clearlist);
         recycle_old = (RecyclerView) v.findViewById(R.id.recycleview_oldtask);
-
-        //addtask = (ImageView) v.findViewById(R.id.addtask);
-       // addnewtask = (TextView) v.findViewById(R.id.addnewtask);
         edittaskname = (EditText) v.findViewById(R.id.edittaskname);
         add_rel = (RelativeLayout) v.findViewById(R.id.add_rel);
 
-
-
-        //.setVisibility(View.VISIBLE);
-//        edittaskname.setVisibility(View.GONE);
-//        add_rel.setVisibility(View.GONE);
-
-//        addtask.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-////                addnewtask.setVisibility(View.GONE);
-////                edittaskname.setVisibility(View.VISIBLE);
-////                add_rel.setVisibility(View.VISIBLE);
-//            }
-//        });
-
         recycle_new.setLayoutManager(ln_newmanager);
         recycle_old.setLayoutManager(ln_oldmanager);
-//        newdata.clear();
-//        olddata.clear();
 
+        taskpojo.clear();
+        //Check database and get task from database
 
-        if(newdata.size()>0) {
+        if(Global_Variable.type.equals("category")){
+
+            taskpojo = db.getCategoryTask(Global_Variable.category_name);
+            if(taskpojo !=null && taskpojo.size()>0){
+
+                newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
+                recycle_new.setAdapter(newtaskAdapter);
+            }
+
+        }else {
+
+           //add stuff here for list
+        }
+
+       /* if (newdata.size() > 0) {
 
 
             newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), newdata);
@@ -88,31 +83,53 @@ db=new DBHelper(getActivity());
             recycle_new.setAdapter(newtaskAdapter);
             recycle_old.setAdapter(oldtaskAdapter);
         }
-
+*/
         add_rel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Validation.hasText(edittaskname))
+                if (Validation.hasText(edittaskname))
 
                 {
-                    //if(global_variable.category_name=="Inbox")
-                    if (newdata.size() <= 0) {
-                        newdata.add(new NewGroupData(edittaskname.getText().toString(), "Friday,15 May 2016", false, false));
-                        newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), newdata);
+
+                    if (taskpojo.size() <= 0) {
+                        //newdata.add(new NewGroupData(edittaskname.getText().toString(), "", false, false));
+                        taskpojo.add(new Task_Pojo(Global_Variable.category_name,Global_Variable.listname,
+                                edittaskname.getText().toString(),"false","",false,false ));
+                        newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
                         recycle_new.setAdapter(newtaskAdapter);
                     } else {
-                        newdata.add(new NewGroupData(edittaskname.getText().toString(), "Friday,15 May 2016", false, false));
+                        taskpojo.add(new Task_Pojo(Global_Variable.category_name,Global_Variable.listname,
+                                edittaskname.getText().toString(),"false","",false,false ));
                         newtaskAdapter.notifyDataSetChanged();
                     }
 
-                   ArrayList<Category_pojo> category = new ArrayList<Category_pojo>();
+
+                    try{
+
+                        db.addTask(Global_Variable.category_name,Global_Variable.listname,
+                                edittaskname.getText().toString(),"false","");
+
+                    }catch (Exception e){
+
+                        e.printStackTrace();
+                    }
+
+                    ArrayList<Category_pojo> category = new ArrayList<Category_pojo>();
 
                     try {
-                        category = db.getcategory("Inbox");
 
-                        String category_count = category.get(0).getCount();
-                        db.updateCategory(global_variable.category_name,null,
-                                String.valueOf(Integer.parseInt(category_count)+1));
+                        if (Global_Variable.listname.equals("") && !Global_Variable.category_name.equals("")) {
+
+                            category = db.getcategory(Global_Variable.category_name);
+
+                            String category_count = category.get(0).getCount();
+                            db.updateCategory(Global_Variable.category_name, null,
+                                    String.valueOf(Integer.parseInt(category_count) + 1), Global_Variable.type);
+
+                        }else {
+
+                            //add stuff here for list
+                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -122,13 +139,6 @@ db=new DBHelper(getActivity());
 
                 }
 
-               // olddata.add(new OldGroupData("task #","Maonday,25 May 2016",false,false));
-//                ListAddtaskFragment ff = new ListAddtaskFragment();
-//                getActivity().getSupportFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.sub_frag, ff, "add_task_fragment")
-//                        .addToBackStack("addtask")
-//                        .commit();
 
             }
         });
@@ -137,27 +147,20 @@ db=new DBHelper(getActivity());
             @Override
             public void onClick(View view) {
 
-                for (int i = 0; i < newdata.size(); i++)
-                {
-                    if(newdata.get(i).isTask_select())
-                    {
-//                        olddata.get(i).setStar_select(false);
-//                        olddata.get(i).setTask_date(newdata.get(i).getTask_date());
-//                        olddata.get(i).setTask_name(newdata.get(i).getTask_name());
-//                        olddata.get(i).setTask_select(false);
+                for (int i = 0; i < newdata.size(); i++) {
+                    if (newdata.get(i).isTask_select()) {
 
-                        if(olddata.size()<=0)
-                        {olddata.add(new OldGroupData(newdata.get(i).getTask_name(),newdata.get(i).getTask_date(),false,false));
+                        if (olddata.size() <= 0) {
+                            olddata.add(new OldGroupData(newdata.get(i).getTask_name(), newdata.get(i).getTask_date(), false, false));
                             oldtaskAdapter = new ListSubFragmentOldtaskAdapter(getActivity(), olddata);
                             recycle_old.setAdapter(oldtaskAdapter);
 
-                        }
-                        else{
+                        } else {
 
                             olddata.get(i).setStar_select(false);
-                        olddata.get(i).setTask_date(newdata.get(i).getTask_date());
-                        olddata.get(i).setTask_name(newdata.get(i).getTask_name());
-                        olddata.get(i).setTask_select(false);
+                            olddata.get(i).setTask_date(newdata.get(i).getTask_date());
+                            olddata.get(i).setTask_name(newdata.get(i).getTask_name());
+                            olddata.get(i).setTask_select(false);
 
                             oldtaskAdapter.notifyDataSetChanged();
                         }
@@ -171,6 +174,5 @@ db=new DBHelper(getActivity());
         });
         return v;
     }
-
 
 }

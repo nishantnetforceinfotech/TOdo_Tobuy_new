@@ -16,12 +16,11 @@ import android.widget.TextView;
 
 import com.netforceinfotech.database.Category_pojo;
 import com.netforceinfotech.database.DBHelper;
-import com.netforceinfotech.genral.global_variable;
+import com.netforceinfotech.database.Task_Pojo;
+import com.netforceinfotech.genral.Global_Variable;
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * Created by owner on 10/14/2016.
@@ -29,12 +28,12 @@ import java.util.Collections;
 public class ListSubFragmentNewtaskAdapter extends
         RecyclerView.Adapter<ListSubFragmentNewtaskAdapter.ViewHolder> {
 
-    ArrayList<NewGroupData> groupDatas;
+    ArrayList<Task_Pojo> groupDatas;
     ArrayList<Category_pojo> category;
     DBHelper db;
     Context context;
 
-    public ListSubFragmentNewtaskAdapter(Context context, ArrayList<NewGroupData> groupDatas) {
+    public ListSubFragmentNewtaskAdapter(Context context, ArrayList<Task_Pojo> groupDatas) {
         this.context = context;
         this.groupDatas = groupDatas;
         db = new DBHelper(context);
@@ -54,9 +53,10 @@ public class ListSubFragmentNewtaskAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        NewGroupData data = groupDatas.get(position);
+        Task_Pojo data = groupDatas.get(position);
         holder.task_name.setText(data.getTask_name());
         holder.task_date.setText(data.getTask_date());
+
         holder.task_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,9 +69,10 @@ public class ListSubFragmentNewtaskAdapter extends
                         .commit();
             }
         });
+
         holder.row_chk.setOnCheckedChangeListener(null);
 
-        holder.row_chk.setChecked(groupDatas.get(position).isTask_select());
+        holder.row_chk.setChecked(groupDatas.get(position).isChk_selected());
 
         holder.row_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -79,12 +80,12 @@ public class ListSubFragmentNewtaskAdapter extends
 
                 if (isChecked) {
 
-                    groupDatas.get(holder.getAdapterPosition()).setTask_select(true);
+                    groupDatas.get(holder.getAdapterPosition()).setChk_selected(true);
                     holder.task_name.setPaintFlags(holder.task_name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
                 } else {
 
-                    groupDatas.get(holder.getAdapterPosition()).setTask_select(false);
+                    groupDatas.get(holder.getAdapterPosition()).setChk_selected(false);
                     holder.task_name.setPaintFlags(Paint.LINEAR_TEXT_FLAG);
 
                 }
@@ -93,7 +94,7 @@ public class ListSubFragmentNewtaskAdapter extends
 
         holder.star_chk.setOnCheckedChangeListener(null);
 
-        holder.star_chk.setChecked(groupDatas.get(position).isStar_select());
+        holder.star_chk.setChecked(groupDatas.get(position).isStar_selected());
 
         holder.star_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -105,17 +106,17 @@ public class ListSubFragmentNewtaskAdapter extends
                     try {
                         category = db.getcategory("Urgent");
 
-                        if (global_variable.check_db_foldername == false) {
+                        if (Global_Variable.check_db_foldername == false) {
                             String categoryname = category.get(0).getCategory_name();
                             String category_count = category.get(0).getCount();
 
                             int a = Integer.parseInt(category_count) + 1;
                             Log.e("update2", category_count);
-                            db.updateCategory("Urgent", null, String.valueOf(a));
+                            db.updateCategory("Urgent", null, String.valueOf(a),Global_Variable.type);
                             Log.e("update", "update");
 
                         } else {
-                            db.addCategory("Urgent", null, "1");
+                            db.addCategory("Urgent", null, "1",Global_Variable.type);
                             Log.e("Insert", "Insert");
                         }
                     } catch (Exception e) {
@@ -124,9 +125,7 @@ public class ListSubFragmentNewtaskAdapter extends
                     } finally {
                         db.close();
                     }
-                    groupDatas.get(holder.getAdapterPosition()).setStar_select(true);
-                    //Collections.rotate(groupDatas.subList(holder.getAdapterPosition(), 0), 1) ;
-                    //Collections.swap(groupDatas, holder.getAdapterPosition(), 0);
+                    groupDatas.get(holder.getAdapterPosition()).setStar_selected(true);
 
                     int a = holder.getAdapterPosition();
                     groupDatas.add(0, groupDatas.get(holder.getAdapterPosition()));
@@ -139,17 +138,17 @@ public class ListSubFragmentNewtaskAdapter extends
                     try {
                         category = db.getcategory("Urgent");
 
-                        if (global_variable.check_db_foldername == false) {
+                        if (Global_Variable.check_db_foldername == false) {
                             String categoryname = category.get(0).getCategory_name();
                             String category_count = category.get(0).getCount();
 
                             int a = Integer.parseInt(category_count) - 1;
                             Log.e("update2", category_count);
-                            db.updateCategory("Urgent", null, String.valueOf(a));
+                            db.updateCategory("Urgent", null, String.valueOf(a),Global_Variable.type);
                             Log.e("update", "update");
 
                         } else {
-                            db.addCategory("Urgent", null, "1");
+                            db.addCategory("Urgent", null, "1",Global_Variable.type);
                             Log.e("Insert", "Insert");
                         }
                     } catch (Exception e) {
@@ -158,7 +157,7 @@ public class ListSubFragmentNewtaskAdapter extends
                     } finally {
                         db.close();
                     }
-                    groupDatas.get(holder.getAdapterPosition()).setStar_select(false);
+                    groupDatas.get(holder.getAdapterPosition()).setStar_selected(false);
 
                 }
             }
