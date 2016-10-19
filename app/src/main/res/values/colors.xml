@@ -30,4 +30,5 @@
     <color name="white_transparent">#73d2cdcd</color>
     <color name="transparent">#00000000</color>
     <color name="translution">#a3000000</color>
+    <color name="dateformate">#32A007</color>
 </resources>

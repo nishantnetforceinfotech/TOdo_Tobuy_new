@@ -58,4 +58,5 @@ dependencies {
     compile 'com.github.techery:properratingbar:0.0.5'
     compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.jakewharton:butterknife:5.1.1'
+    compile 'com.wdullaer:materialdatetimepicker:2.5.0'
 }
