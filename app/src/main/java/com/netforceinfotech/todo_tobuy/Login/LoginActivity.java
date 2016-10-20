@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("RememberMe", MODE_PRIVATE);
         editor = pref.edit();
 
-        pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", MODE_PRIVATE);
+        pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
         editor1 = pref1.edit();
 
         clickEvent();
@@ -163,10 +163,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 //change code here
-                Intent i2 = new Intent(LoginActivity.this, TodoDashboardActivity.class);
-                startActivity(i2);
-                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();
+
+                if(chk_to.equals("todo")) {
+
+                    Intent i2 = new Intent(LoginActivity.this, TodoDashboardActivity.class);
+                    startActivity(i2);
+                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                    finish();
+
+                }else {
+
+                    Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
+                    startActivity(i2);
+                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                    finish();
+
+                }
             }
         });
 
