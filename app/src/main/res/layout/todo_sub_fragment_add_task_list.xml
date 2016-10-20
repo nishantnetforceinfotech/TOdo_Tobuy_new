@@ -144,6 +144,16 @@
                 android:textColor="#66000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_date"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cross_icon"
+             />
         </RelativeLayout>
 
         <RelativeLayout
@@ -174,6 +184,15 @@
                 android:textColor="#66000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_notice"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cross_icon"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -204,6 +223,15 @@
                 android:textColor="#66000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_assign"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cross_icon"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -234,6 +262,15 @@
                 android:textColor="#66000000"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_subtask"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cross_icon"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -266,11 +303,14 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imgnoteright"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_note"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/add_note" />
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/cross_icon"
+                />
 
         </RelativeLayout>
 
@@ -304,11 +344,15 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imgfileright"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_clear_file"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/add_file" />
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+
+                android:src="@drawable/cross_icon"
+                />
 
 
         </RelativeLayout>
