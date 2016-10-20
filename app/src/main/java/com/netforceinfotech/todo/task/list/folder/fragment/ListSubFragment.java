@@ -103,12 +103,15 @@ public class ListSubFragment extends Fragment {
                 {
 
                     if (taskpojo.size() <= 0) {
-                        //newdata.add(new NewGroupData(edittaskname.getText().toString(), "", false, false));
+
                         taskpojo.add(new Task_Pojo(Global_Variable.category_name, Global_Variable.listname,
                                 edittaskname.getText().toString(), "false", "", false, false, "0"));
+
                         newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
                         recycle_new.setAdapter(newtaskAdapter);
+
                     } else {
+
                         taskpojo.add(new Task_Pojo(Global_Variable.category_name, Global_Variable.listname,
                                 edittaskname.getText().toString(), "false", "", false, false, "0"));
                         newtaskAdapter.notifyDataSetChanged();

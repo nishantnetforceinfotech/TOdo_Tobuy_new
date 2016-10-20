@@ -221,7 +221,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Category_pojo> getcategory(String categoryname,String listname) {
         ArrayList<Category_pojo> categorydata = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " Where " + KEY_Category_NAME + " =" +
-                "'" + categoryname + "' or "+KEY_List_Name  +" = '"+listname+"'";
+                "'" + categoryname + "' And "+KEY_List_Name  +" = '"+listname+"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -258,7 +258,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
 
             do {
-                categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3), cursor.getString(4),cursor.getString(2)));
+                categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2)));
 
                 Global_Variable.check_db_foldername = false;
 
@@ -320,8 +320,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // updating row
 //        return
-        db.update(TABLE_CATEGORY, values, KEY_List_Name + " = ?",
-                new String[]{list_name});
+        db.update(TABLE_CATEGORY, values, KEY_Category_NAME + " = ? and "+KEY_List_Name + " = ?",
+                new String[]{category_name,list_name});
     }
 
     // Deleting single contact
@@ -332,10 +332,10 @@ public class DBHelper extends SQLiteOpenHelper {
         //db.close();
     }
 
-    public void deletelist(String list_name) {
+    public void deletelist(String category_name,String list_name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CATEGORY, KEY_List_Name + " = ?",
-                new String[]{list_name});
+        db.delete(TABLE_CATEGORY, KEY_Category_NAME + " = ? and "+KEY_List_Name + " = ?",
+                new String[]{category_name,list_name});
         // db.close();
     }
 
@@ -361,7 +361,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<Category_pojo> categorydata = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY ;//+ " Where " + KEY_ID + ">1";
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " Where " + KEY_ID + ">1";
 
 
         SQLiteDatabase db = this.getWritableDatabase();
