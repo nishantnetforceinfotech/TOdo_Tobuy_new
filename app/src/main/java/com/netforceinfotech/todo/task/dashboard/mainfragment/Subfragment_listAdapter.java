@@ -56,12 +56,12 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
 
     @Override
     public void onBindViewHolder(final CommomHolder_list holder, int position) {
-        if (commomDatas.get(position).getCategory_name().equals("Urgent")) {
+        if (commomDatas.get(position).getList_name().equals("Urgent")) {
             Picasso.with(context2).load(R.drawable.star_icon).into(holder.img);
-        } else if (commomDatas.get(position).getCategory_name().equals("Today") ||
-                commomDatas.get(position).getCategory_name().equals("Tomorrow") ||
-                commomDatas.get(position).getCategory_name().equals("7 Days") ||
-                commomDatas.get(position).getCategory_name().equals("Calender")) {
+        } else if (commomDatas.get(position).getList_name().equals("Today") ||
+                commomDatas.get(position).getList_name().equals("Tomorrow") ||
+                commomDatas.get(position).getList_name().equals("7 Days") ||
+                commomDatas.get(position).getList_name().equals("Calender")) {
             Picasso.with(context2).load(R.drawable.calender_icon).into(holder.img);
         } else {
             Picasso.with(context2).load(R.drawable.list_icon).into(holder.img);
@@ -69,7 +69,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
         }
 
 
-        holder.msg.setText(commomDatas.get(position).getCategory_name());
+        holder.msg.setText(commomDatas.get(position).getList_name());
         holder.msg_num.setText(commomDatas.get(position).getCount());
 
         holder.main_rel.setTag(position);
@@ -79,7 +79,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
             public boolean onLongClick(View v) {
 
                 int pos = (Integer) v.getTag();
-                customDialog(commomDatas.get(pos).getCategory_name());
+                customDialog(commomDatas.get(pos).getList_name());
                 return true;
             }
         });

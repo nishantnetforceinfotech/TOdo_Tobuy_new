@@ -41,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_TASK_NAME = "task_name";
     private static final String KEY_TASK_SELECTED = "task_selected";
     private static final String KEY_TASK_DATE = "task_date";
-
+    private static final String KEY_TASK_ROW_POSITION = "row_position";
 
     public DBHelper(Context context) {
 
@@ -57,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + KEY_Category_NAME + " TEXT,"
                 + KEY_List_Name + " TEXT,"
                 + KEY_Subcategory_count + " TEXT,"
-                + KEY_TYPE + " TEXT"+ ")";
+                + KEY_TYPE + " TEXT" + ")";
         db.execSQL(CREATE_CATEGORY_TABLE);
 
 
@@ -67,7 +67,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + KEY_LIST_TASK_NAME + " TEXT,"
                 + KEY_TASK_NAME + " TEXT,"
                 + KEY_TASK_SELECTED + " TEXT,"
-                + KEY_TASK_DATE + " TEXT" + ")";
+                + KEY_TASK_DATE + " TEXT,"
+                +KEY_TASK_ROW_POSITION +" Text"+ ")";
         db.execSQL(CREATE_TASK_TABLE);
 
 
@@ -93,7 +94,8 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param taskdate
      */
 
-    public void addTask(String category_name, String list_name, String taskname, String taskselected, String taskdate) {
+    public void addTask(String category_name, String list_name, String taskname,
+                        String taskselected, String taskdate,String row_pos) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -102,6 +104,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(KEY_TASK_NAME, taskname);
         values.put(KEY_TASK_SELECTED, taskselected);
         values.put(KEY_TASK_DATE, taskdate);
+        values.put(KEY_TASK_ROW_POSITION, row_pos);
+
         // Inserting Row
         db.insert(TABLE_TASK_DEATILS, null, values);
 
@@ -112,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<Task_Pojo> categorydata = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_TASK_DEATILS + " Where " + KEY_Category_TASK_NAME + " =" +
-                "'" + categoryname + "'";
+                "'" + categoryname + "'"+" order by "+KEY_TASK_ROW_POSITION +" DESC ";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -122,7 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
             do {
                 categorydata.add(new Task_Pojo(cursor.getString(1), cursor.getString(2)
-                        , cursor.getString(3), cursor.getString(4), cursor.getString(5),false,false));
+                        , cursor.getString(3), cursor.getString(4), cursor.getString(5), false, false,cursor.getString(6)));
 
             } while (cursor.moveToNext());
         }
@@ -145,7 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
             do {
                 listdata.add(new Task_Pojo(cursor.getString(1), cursor.getString(2)
-                        , cursor.getString(3), cursor.getString(4), cursor.getString(5),false,false));
+                        , cursor.getString(3), cursor.getString(4), cursor.getString(5), false, false,cursor.getString(6)));
 
             } while (cursor.moveToNext());
         }
@@ -155,7 +159,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void updateCategoryTask(String category_name, String list_name, String taskname, String taskselected, String taskdate) {
+    public void updateCategoryTask(String category_name, String list_name, String taskname,
+                                   String taskselected, String taskdate,String row_pos) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -164,15 +169,17 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(KEY_TASK_NAME, taskname);
         values.put(KEY_TASK_SELECTED, taskselected);
         values.put(KEY_TASK_DATE, taskdate);
+        values.put(KEY_TASK_ROW_POSITION, row_pos);
 
         db.update(TABLE_TASK_DEATILS, values, KEY_TASK_NAME + " = ?",
                 new String[]{taskname});
+
     }
 
 
     // All for maincategory operations
 
-    public void addCategory(String category_name, String listname, String category_count,String type) {
+    public void addCategory(String category_name, String listname, String category_count, String type) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -211,12 +218,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Category_pojo> getcategory(String categoryname) {
+    public ArrayList<Category_pojo> getcategory(String categoryname,String listname) {
         ArrayList<Category_pojo> categorydata = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " Where " + KEY_Category_NAME + " =" +
-                "'" + categoryname + "'";
-
-        Log.e("Query", selectQuery);
+                "'" + categoryname + "' or "+KEY_List_Name  +" = '"+listname+"'";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -225,7 +230,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
 
             do {
-                categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3),cursor.getString(4)));
+                categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3), cursor.getString(4),cursor.getString(2)));
 
                 Log.e("cursor.getString(2)", cursor.getString(3));
 
@@ -240,6 +245,33 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return categorydata;
     }
+
+    public ArrayList<Category_pojo> getcategoryInbox(String categoryname) {
+        ArrayList<Category_pojo> categorydata = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " Where " + KEY_Category_NAME + " =" +
+                "'" + categoryname + "' ";//KEY_List_Name  +" = '"+listname+"'";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        //looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+
+            do {
+                categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3), cursor.getString(4),cursor.getString(2)));
+
+                Global_Variable.check_db_foldername = false;
+
+            } while (cursor.moveToNext());
+        } else {
+            Log.e("categorydata", "Helll");
+            Global_Variable.check_db_foldername = true;
+        }
+
+
+        return categorydata;
+    }
+
 
 
     // Getting All Contacts
@@ -262,7 +294,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // Updating single contact
-    public void updateCategory(String category_name, String list_name, String category_count,String type) {
+    public void updateCategory(String category_name, String list_name, String category_count, String type) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -277,7 +309,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[]{category_name});
     }
 
-    public void updateList(String id, String category_name, String list_name, String category_count,String type) {
+    public void updateList(String category_name, String list_name, String category_count, String type) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -329,14 +361,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<Category_pojo> categorydata = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY + " Where " + KEY_ID + ">1";
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORY ;//+ " Where " + KEY_ID + ">1";
 
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         while (cursor.moveToNext()) {
-            categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3),cursor.getString(4)));
-            Log.e("cursordta", cursor.getString(cursor.getColumnIndex("category_name")));
+            categorydata.add(new Category_pojo(cursor.getString(1), cursor.getString(3), cursor.getString(4), cursor.getString(2)));
+           Log.e("cursordta", cursor.getString(cursor.getColumnIndex("list_name")));
         }
         return categorydata;
 

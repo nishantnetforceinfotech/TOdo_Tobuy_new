@@ -9,6 +9,6 @@ public class Global_Variable {
     public static boolean check_db_foldername = false;
     public static String listname = "";
     public static String type = "";
-
+    public static String row_pos_count = "0";
 
 }

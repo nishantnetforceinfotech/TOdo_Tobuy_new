@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
  */
 public class ListSubFragment extends Fragment {
 
-    LinearLayoutManager ln_newmanager, ln_oldmanager;
     public static RecyclerView recycle_new, recycle_old;
     ListSubFragmentNewtaskAdapter newtaskAdapter;
     ListSubFragmentOldtaskAdapter oldtaskAdapter;
@@ -47,8 +47,8 @@ public class ListSubFragment extends Fragment {
         db = new DBHelper(getActivity());
 
 
-        ln_newmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        ln_oldmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager ln_newmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager ln_oldmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recycle_new = (RecyclerView) v.findViewById(R.id.recycleview_newtask);
         clearlist_checked = (ImageView) v.findViewById(R.id.clearlist);
         recycle_old = (RecyclerView) v.findViewById(R.id.recycleview_oldtask);
@@ -61,19 +61,30 @@ public class ListSubFragment extends Fragment {
         taskpojo.clear();
         //Check database and get task from database
 
-        if(Global_Variable.type.equals("category")){
+        if (Global_Variable.type.equals("category")) {
 
             taskpojo = db.getCategoryTask(Global_Variable.category_name);
-            if(taskpojo !=null && taskpojo.size()>0){
+            if (taskpojo != null && taskpojo.size() > 0) {
 
+                Global_Variable.row_pos_count = taskpojo.get(0).getRow_pos();
+                for (int i = 0; i < taskpojo.size(); i++) {
+
+                    if (taskpojo.get(i).getTask_selected().equals("true")) {
+                        taskpojo.get(i).setStar_selected(true);
+                    } else {
+                        taskpojo.get(i).setStar_selected(false);
+
+                    }
+                }
                 newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
                 recycle_new.setAdapter(newtaskAdapter);
             }
 
-        }else {
+        } else {
 
-           //add stuff here for list
+            //add stuff here for list
         }
+
 
        /* if (newdata.size() > 0) {
 
@@ -93,23 +104,23 @@ public class ListSubFragment extends Fragment {
 
                     if (taskpojo.size() <= 0) {
                         //newdata.add(new NewGroupData(edittaskname.getText().toString(), "", false, false));
-                        taskpojo.add(new Task_Pojo(Global_Variable.category_name,Global_Variable.listname,
-                                edittaskname.getText().toString(),"false","",false,false ));
+                        taskpojo.add(new Task_Pojo(Global_Variable.category_name, Global_Variable.listname,
+                                edittaskname.getText().toString(), "false", "", false, false, "0"));
                         newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
                         recycle_new.setAdapter(newtaskAdapter);
                     } else {
-                        taskpojo.add(new Task_Pojo(Global_Variable.category_name,Global_Variable.listname,
-                                edittaskname.getText().toString(),"false","",false,false ));
+                        taskpojo.add(new Task_Pojo(Global_Variable.category_name, Global_Variable.listname,
+                                edittaskname.getText().toString(), "false", "", false, false, "0"));
                         newtaskAdapter.notifyDataSetChanged();
                     }
 
 
-                    try{
+                    try {
 
-                        db.addTask(Global_Variable.category_name,Global_Variable.listname,
-                                edittaskname.getText().toString(),"false","");
+                        db.addTask(Global_Variable.category_name, Global_Variable.listname,
+                                edittaskname.getText().toString(), "false", "", "0");
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                         e.printStackTrace();
                     }
@@ -120,13 +131,13 @@ public class ListSubFragment extends Fragment {
 
                         if (Global_Variable.listname.equals("") && !Global_Variable.category_name.equals("")) {
 
-                            category = db.getcategory(Global_Variable.category_name);
+                            category = db.getcategoryInbox(Global_Variable.category_name);
 
                             String category_count = category.get(0).getCount();
-                            db.updateCategory(Global_Variable.category_name, null,
+                            db.updateCategory(Global_Variable.category_name, Global_Variable.listname,
                                     String.valueOf(Integer.parseInt(category_count) + 1), Global_Variable.type);
 
-                        }else {
+                        } else {
 
                             //add stuff here for list
                         }

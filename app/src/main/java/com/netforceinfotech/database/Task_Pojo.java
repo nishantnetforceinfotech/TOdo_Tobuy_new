@@ -12,9 +12,12 @@ public class Task_Pojo {
     String task_date;
     boolean chk_selected;
     boolean star_selected;
+    String row_pos;
 
     public Task_Pojo(String category_name,String list_name, String task_name,
-                     String task_selected, String task_date,boolean chk,boolean star) {
+                     String task_selected, String task_date,
+                     boolean chk,boolean star,String row_pos) {
+
         this.category_name = category_name;
         this.list_name = list_name;
         this.task_name = task_name;
@@ -22,6 +25,15 @@ public class Task_Pojo {
         this.task_date = task_date;
         chk_selected = chk;
         star_selected = star;
+        this.row_pos = row_pos;
+    }
+
+    public String getRow_pos() {
+        return row_pos;
+    }
+
+    public void setRow_pos(String row_pos) {
+        this.row_pos = row_pos;
     }
 
     public boolean isStar_selected() {

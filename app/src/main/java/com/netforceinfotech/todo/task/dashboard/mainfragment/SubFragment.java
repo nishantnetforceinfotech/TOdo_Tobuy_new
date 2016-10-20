@@ -85,12 +85,11 @@ public class SubFragment extends Fragment{
     public void onResume() {
         super.onResume();
 
-        category = db.getcategory("Inbox");
+        //category = db.getcategory("Inbox","");
 
         try {
-            category = db.getcategory("Inbox");
+            category = db.getcategoryInbox("Inbox");
 
-            String categoryname = category.get(0).getCategory_name();
             String category_count = category.get(0).getCount();
             TextView inbox_count=(TextView)view.findViewById(R.id.textView23);
             inbox_count.setText(category_count);
@@ -140,7 +139,7 @@ public class SubFragment extends Fragment{
         int a=db.getCategoryCount();
         if(a==0)
         {
-            db.addCategory("Inbox", null, "0","category");
+            db.addCategory("Inbox", "", "0","category");
         }
 
     }

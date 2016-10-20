@@ -62,7 +62,7 @@ public class ListSubFragmentNewtaskAdapter extends
             public void onClick(View view) {
                 ListAddtaskFragment ff = new ListAddtaskFragment();
                 FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-                         manager
+                manager
                         .beginTransaction()
                         .replace(R.id.sub_frag, ff, "add_task_fragment")
                         .addToBackStack("addtask")
@@ -94,7 +94,7 @@ public class ListSubFragmentNewtaskAdapter extends
 
         holder.star_chk.setOnCheckedChangeListener(null);
 
-        holder.star_chk.setChecked(groupDatas.get(position).isStar_selected());
+        holder.star_chk.setChecked (groupDatas.get(position).isStar_selected());
 
         holder.star_chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -102,29 +102,42 @@ public class ListSubFragmentNewtaskAdapter extends
 
                 if (isChecked) {
 
+                    try {
+
+                        int pos = Integer.parseInt(groupDatas.get(holder.getAdapterPosition()).getRow_pos())+1;
+
+                        db.updateCategoryTask(Global_Variable.category_name,"Urgent",groupDatas.get(holder.getAdapterPosition()).getTask_name(),
+                                "true","",String.valueOf(pos));
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
 
                     try {
-                        category = db.getcategory("Urgent");
 
-                        if (Global_Variable.check_db_foldername == false) {
-                            String categoryname = category.get(0).getCategory_name();
+                        category = db.getcategory(Global_Variable.category_name, "Urgent");
+
+                        if (!Global_Variable.check_db_foldername) {
+
                             String category_count = category.get(0).getCount();
-
                             int a = Integer.parseInt(category_count) + 1;
-                            Log.e("update2", category_count);
-                            db.updateCategory("Urgent", null, String.valueOf(a),Global_Variable.type);
-                            Log.e("update", "update");
+                            db.updateCategory(Global_Variable.category_name, "Urgent", String.valueOf(a), Global_Variable.type);
 
                         } else {
-                            db.addCategory("Urgent", null, "1",Global_Variable.type);
-                            Log.e("Insert", "Insert");
+
+                            db.addCategory(Global_Variable.category_name,"Urgent", "1", Global_Variable.type);
+
                         }
+
                     } catch (Exception e) {
-                        // db.addCategory("Urgent", null, "1");
+
                         e.printStackTrace();
+
                     } finally {
                         db.close();
                     }
+
                     groupDatas.get(holder.getAdapterPosition()).setStar_selected(true);
 
                     int a = holder.getAdapterPosition();
@@ -135,24 +148,33 @@ public class ListSubFragmentNewtaskAdapter extends
 
                 } else {
 
-                    try {
-                        category = db.getcategory("Urgent");
 
-                        if (Global_Variable.check_db_foldername == false) {
-                            String categoryname = category.get(0).getCategory_name();
+                    try {
+
+
+                        db.updateCategoryTask(Global_Variable.category_name,"Urgent",groupDatas.get(holder.getAdapterPosition()).getTask_name(),
+                                "false","","0");
+
+                    } catch (Exception e) {
+
+                        e.printStackTrace();
+                    }
+
+
+                    try {
+                        category = db.getcategory(Global_Variable.category_name,"Urgent");
+
+                        if (!Global_Variable.check_db_foldername) {
+
                             String category_count = category.get(0).getCount();
 
                             int a = Integer.parseInt(category_count) - 1;
-                            Log.e("update2", category_count);
-                            db.updateCategory("Urgent", null, String.valueOf(a),Global_Variable.type);
-                            Log.e("update", "update");
+                            db.updateCategory(Global_Variable.category_name, "Urgent", String.valueOf(a), Global_Variable.type);
 
                         } else {
-                            db.addCategory("Urgent", null, "1",Global_Variable.type);
-                            Log.e("Insert", "Insert");
+                            db.addCategory(Global_Variable.category_name, "Urgent", "1", Global_Variable.type);
                         }
                     } catch (Exception e) {
-                        // db.addCategory("Urgent", null, "1");
                         e.printStackTrace();
                     } finally {
                         db.close();

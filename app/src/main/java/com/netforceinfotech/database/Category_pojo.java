@@ -7,11 +7,22 @@ public class Category_pojo {
     String category_name;
     String count;
     String type;
+    String list_name;
 
-    public Category_pojo(String category_name, String count,String type) {
+    public Category_pojo(String category_name, String count,String type,String list_name) {
         this.category_name = category_name;
         this.count = count;
         this.type = type;
+        this.list_name = list_name;
+    }
+
+
+    public String getList_name() {
+        return list_name;
+    }
+
+    public void setList_name(String list_name) {
+        this.list_name = list_name;
     }
 
     public String getType() {
