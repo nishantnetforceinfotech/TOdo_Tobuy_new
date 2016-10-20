@@ -135,11 +135,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return categorydata;
     }
 
-    public ArrayList<Task_Pojo> getListTask(String listname) {
+
+    public ArrayList<Task_Pojo> getListTask(String category_name,String listname) {
 
         ArrayList<Task_Pojo> listdata = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_TASK_DEATILS + " Where " + KEY_LIST_TASK_NAME + " =" +
-                "'" + listname + "'";
+                "'" + listname + "'"+" And "+KEY_Category_TASK_NAME+" = '"+category_name+"'"
+                +" order by "+KEY_TASK_ROW_POSITION +" DESC ";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -174,6 +176,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(TABLE_TASK_DEATILS, values, KEY_TASK_NAME + " = ?",
                 new String[]{taskname});
 
+    }
+
+    public void deleteTask(String category_name,String list_name,String task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_TASK_DEATILS, KEY_Category_TASK_NAME + " = ? and " + KEY_LIST_TASK_NAME + " = ? and "+ KEY_TASK_NAME+" = ?",
+                new String[]{category_name, list_name,task});
+        // db.close();
     }
 
 

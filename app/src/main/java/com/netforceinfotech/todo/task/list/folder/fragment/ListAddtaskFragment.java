@@ -48,7 +48,7 @@ public class ListAddtaskFragment extends Fragment {
         clear_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectdate.setText("");
+                selectdate.setText("Due Date:");
             }
         });
 

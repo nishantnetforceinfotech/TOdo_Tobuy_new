@@ -63,6 +63,7 @@ public class ListSubFragment extends Fragment {
 
         if (Global_Variable.type.equals("category")) {
 
+            Log.e("if","if");
             taskpojo = db.getCategoryTask(Global_Variable.category_name);
             if (taskpojo != null && taskpojo.size() > 0) {
 
@@ -82,7 +83,23 @@ public class ListSubFragment extends Fragment {
 
         } else {
 
-            //add stuff here for list
+            Log.e("else","else");
+            taskpojo = db.getListTask(Global_Variable.category_name, Global_Variable.listname);
+            if (taskpojo != null && taskpojo.size() > 0) {
+
+                Global_Variable.row_pos_count = taskpojo.get(0).getRow_pos();
+                for (int i = 0; i < taskpojo.size(); i++) {
+
+                    if (taskpojo.get(i).getTask_selected().equals("true")) {
+                        taskpojo.get(i).setStar_selected(true);
+                    } else {
+                        taskpojo.get(i).setStar_selected(false);
+
+                    }
+                }
+                newtaskAdapter = new ListSubFragmentNewtaskAdapter(getActivity(), taskpojo);
+                recycle_new.setAdapter(newtaskAdapter);
+            }
         }
 
 

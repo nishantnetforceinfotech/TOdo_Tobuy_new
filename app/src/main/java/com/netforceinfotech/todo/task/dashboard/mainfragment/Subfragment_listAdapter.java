@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.netforceinfotech.database.Category_pojo;
+import com.netforceinfotech.genral.Global_Variable;
 import com.netforceinfotech.todo.task.TodoListFolderActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.ItemTouchHelperAdapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
@@ -55,7 +56,7 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
     }
 
     @Override
-    public void onBindViewHolder(final CommomHolder_list holder, int position) {
+    public void onBindViewHolder(final CommomHolder_list holder, final int position) {
         if (commomDatas.get(position).getList_name().equals("Urgent")) {
             Picasso.with(context2).load(R.drawable.star_icon).into(holder.img);
         } else if (commomDatas.get(position).getList_name().equals("Today") ||
@@ -88,6 +89,9 @@ public class Subfragment_listAdapter extends RecyclerView.Adapter<CommomHolder_l
             @Override
             public void onClick(View v) {
 
+                Global_Variable.category_name = commomDatas.get(holder.getAdapterPosition()).getCategory_name();
+                Global_Variable.listname = commomDatas.get(holder.getAdapterPosition()).getList_name();
+                Global_Variable.type = "list";
                 Intent in = new Intent(context2, TodoListFolderActivity.class);
                 context2.startActivity(in);
             }

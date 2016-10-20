@@ -152,8 +152,9 @@ public class ListSubFragmentNewtaskAdapter extends
 
                     try {
 
-
-                        db.updateCategoryTask(Global_Variable.category_name, "Urgent", groupDatas.get(holder.getAdapterPosition()).getTask_name(),
+                        groupDatas.get(holder.getAdapterPosition()).setRow_pos("0");
+                        //db.deleteTask(Global_Variable.category_name,"Urgent",groupDatas.get(holder.getAdapterPosition()).getTask_name());
+                        db.updateCategoryTask(Global_Variable.category_name, "", groupDatas.get(holder.getAdapterPosition()).getTask_name(),
                                 "false", "", "0");
 
                     } catch (Exception e) {
@@ -184,7 +185,13 @@ public class ListSubFragmentNewtaskAdapter extends
                         db.close();
                     }
                     groupDatas.get(holder.getAdapterPosition()).setStar_selected(false);
+                    int a = holder.getAdapterPosition();
+                    if(Global_Variable.type.equals("category")) {
 
+                        groupDatas.add(groupDatas.size(), groupDatas.get(holder.getAdapterPosition()));
+                    }
+                    groupDatas.remove(a);
+                    notifyDataSetChanged();
                 }
             }
 
