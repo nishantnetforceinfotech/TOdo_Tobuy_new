@@ -10,42 +10,42 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/RecyclerView_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp"
             android:layout_below="@+id/relativeLayout3"
             android:clipToPadding="false"
-            android:id="@+id/RecyclerView_main" />
+            android:padding="4dp" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-
             android:id="@+id/relativeLayout3"
 
-            android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/new_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="New Group"
-                android:gravity="right"
+                android:layout_alignBottom="@+id/new_group_img"
                 android:layout_marginRight="5dp"
-                android:textColor="#E45936"
-                android:id="@+id/textView12"
-                android:layout_alignBottom="@+id/imageView17"
-                android:layout_toLeftOf="@+id/imageView17"
-                android:layout_toStartOf="@+id/imageView17" />
+                android:layout_toLeftOf="@+id/new_group_img"
+                android:layout_toStartOf="@+id/new_group_img"
+                android:gravity="right"
+                android:text="New Group"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#E45936" />
 
             <ImageView
+                android:id="@+id/new_group_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_margin="5dp"
-                android:src="@drawable/plus_icon_red"
-                android:id="@+id/imageView17"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/plus_icon_red" />
         </RelativeLayout>
     </RelativeLayout>
 

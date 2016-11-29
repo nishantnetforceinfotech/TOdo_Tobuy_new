@@ -23,25 +23,11 @@ public class ForgotPassword extends AppCompatActivity {
     EditText email_id;
     @InjectView(R.id.rel_send)
     RelativeLayout rel_send;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_password);
-        Window window = getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
-            // only for gingerbread and newer versions
-            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.greentranparent));
-        }
 
         ButterKnife.inject(this);
 

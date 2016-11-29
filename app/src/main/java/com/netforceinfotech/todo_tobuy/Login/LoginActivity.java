@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.R;
 
@@ -63,12 +65,13 @@ public class LoginActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.greentranparent));
         }
 
+
         ButterKnife.inject(this);
 
         pref = getApplicationContext().getSharedPreferences("RememberMe", MODE_PRIVATE);
         editor = pref.edit();
 
-        pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", MODE_PRIVATE);
+        pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
         editor1 = pref1.edit();
 
         clickEvent();
@@ -158,10 +161,24 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
                 }
-                Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
-                startActivity(i2);
-                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
-                finish();
+
+                //change code here
+
+                if(chk_to.equals("todo")) {
+
+                    Intent i2 = new Intent(LoginActivity.this, TodoDashboardActivity.class);
+                    startActivity(i2);
+                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                    finish();
+
+                }else {
+
+                    Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
+                    startActivity(i2);
+                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                    finish();
+
+                }
             }
         });
 

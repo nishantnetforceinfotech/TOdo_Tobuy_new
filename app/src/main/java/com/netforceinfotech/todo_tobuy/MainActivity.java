@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.Login.LoginActivity;
 
@@ -22,22 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Window window = getWindow();
-
-// clear FLAG_TRANSLUCENT_STATUS flag:
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
-// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // only for gingerbread and newer versions
-            window.setStatusBarColor(ContextCompat.getColor(getApplicationContext(), R.color.greentranparent));
-        }
-
         rl=(RelativeLayout)findViewById(R.id.rl_spalsh);
-
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -45,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 // do something
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("RememberMe", MODE_PRIVATE);
-                Boolean bool = pref.getBoolean("remember",false);
+                boolean bool = pref.getBoolean("remember", false);
+                SharedPreferences pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
+                String chkto = pref1.getString("chkto", "tobuy");
 
                 if(bool == false) {
 
@@ -55,9 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
                 }else {
 
-                    startActivity(new Intent(MainActivity.this, Deshboard.class));
-                    overridePendingTransition(R.anim.enter, R.anim.exit);
-                    finish();
+                    if(chkto.equals("tobuy")){
+
+                        startActivity(new Intent(MainActivity.this, Deshboard.class));
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
+                        finish();
+
+
+                    }else {
+
+                        startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
+                        overridePendingTransition(R.anim.enter, R.anim.exit);
+                        finish();
+
+                    }
 
                 }
             }

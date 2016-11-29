@@ -67,7 +67,7 @@
 
                                 <RelativeLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="30dp"
                                     android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal">
 
@@ -87,15 +87,30 @@
                                             android:button="@null"
                                             android:checked="true" />
 
-                                        <ImageView
+                                        <!--<ImageView
                                             android:id="@+id/imageView15"
                                             android:layout_width="100dp"
                                             android:layout_height="20dp"
                                             android:layout_centerVertical="true"
                                             android:layout_toRightOf="@id/tobuy"
                                             android:scaleType="fitCenter"
-                                            android:src="@drawable/tobuy_text_icon"
+                                            android:src="@drawable/to_buy_normal"
                                             />
+-->
+
+                                        <TextView
+                                            android:id="@+id/tobuy_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="match_parent"
+                                            android:text="TO BUY"
+                                            android:layout_marginLeft="18dp"
+                                            android:textSize="20dp"
+                                            android:textAppearance="?android:attr/textAppearanceSmall"
+                                            android:textColor="#ffffff"
+                                            android:layout_alignParentBottom="true"
+                                            android:layout_toEndOf="@+id/tobuy" />
+
+
                                     </RelativeLayout>
 
 
@@ -137,7 +152,7 @@
 
                                     <RelativeLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="30dp"
                                         android:layout_gravity="center_horizontal"
                                         android:gravity="center_horizontal">
 
@@ -158,14 +173,28 @@
                                                 android:checked="false"
                                                 android:textColor="#ffffff" />
 
-                                            <ImageView
+                                            <!--<ImageView
                                                 android:id="@+id/imageView19"
                                                 android:layout_width="100dp"
                                                 android:layout_height="20dp"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toRightOf="@id/todo"
                                                 android:scaleType="fitCenter"
-                                                android:src="@drawable/todo_text_icon" />
+                                                android:src="@drawable/to_doicon" />-->
+
+                                            <TextView
+                                                android:id="@+id/todo_text"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:text="TO DO"
+                                                android:layout_marginLeft="18dp"
+                                                android:textSize="20dp"
+                                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                                android:textColor="#ffffff"
+                                                android:layout_alignParentBottom="true"
+                                                android:layout_toEndOf="@+id/todo" />
+
+
                                         </RelativeLayout>
 
                                     </RelativeLayout>
