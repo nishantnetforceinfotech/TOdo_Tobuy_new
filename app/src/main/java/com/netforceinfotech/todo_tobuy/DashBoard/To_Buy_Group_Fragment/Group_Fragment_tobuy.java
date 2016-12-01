@@ -2,11 +2,13 @@ package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter.Group_recycleview_subfragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Item_recycler_adapter;
@@ -44,12 +51,14 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
     LinearLayoutManager rl_itemlist_layoutmanager;
     RelativeLayout rl_imagegetter;
     RecyclerView recycle_itemlist;
-    ImageView done;
+
     ArrayList checked_arraylist;
     ArrayList<GroupData> groupDatas = new ArrayList<>();
     public static ImageView get_cameraorgalley_image;
     public static Bitmap item_image;
     public  static File item_file;
+    ImageView search_item,add_item,done;
+    EditText enter_search_item;
 
     public Group_Fragment_tobuy() {
         // Required empty public constructor
@@ -90,6 +99,9 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         get_unselected_items = new ArrayList();
 
         get_cameraorgalley_image = (ImageView) v.findViewById(R.id.imageView18);
+        enter_search_item=(EditText)v.findViewById(R.id.editText9);
+        search_item=(ImageView)v.findViewById(R.id.imageView20);
+        add_item=(ImageView)v.findViewById(R.id.imageView21);
         rl_imagegetter = (RelativeLayout) v.findViewById(R.id.rl_imagegetter);
         done = (ImageView) v.findViewById(R.id.imageView22);
         done.setOnClickListener(this);
@@ -101,8 +113,60 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         item_image = null;
         item_file = null;
 
+
         setupDummyData();
         Intializeecycleview(v);
+
+
+        //click search item
+
+        search_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                if(enter_search_item.getText().length()>3)
+                {
+
+
+                    String search_url="http://netforce.biz/todotobuy/users/authenticate";
+                    Ion.with(Group_Fragment_tobuy.this)
+                            .load(search_url)
+                            //.setJsonObjectBody(js)
+                            .asJsonObject()
+                            .setCallback(new FutureCallback<JsonObject>() {
+                                @Override
+                                public void onCompleted(Exception e, JsonObject result) {
+                                    try {
+                                        Log.e("result", result.toString());
+                                        Intent i2 = new Intent(getActivity(), Deshboard.class);
+                                        startActivity(i2);
+                                        getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
+                                        getActivity().finish();
+                                    } catch (Exception e1) {
+                                        Log.e("loginresponseerror", e1.toString());
+                                    }
+
+                                }
+                            });
+
+                    new MaterialDialog.Builder(getActivity())
+                            .title("Hello")
+
+                            .itemsCallback(new MaterialDialog.ListCallback() {
+                                @Override
+                                public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                                }
+                            })
+                            .show();
+
+                }
+
+            }
+        });
+
+
 
         return v;
     }

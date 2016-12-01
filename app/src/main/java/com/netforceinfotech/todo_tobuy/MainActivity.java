@@ -34,31 +34,34 @@ public class MainActivity extends AppCompatActivity {
                 boolean bool = pref.getBoolean("remember", false);
                 SharedPreferences pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
                 String chkto = pref1.getString("chkto", "tobuy");
-
-                if(bool == false) {
-
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    overridePendingTransition(R.anim.enter, R.anim.exit);
-                    finish();
-
-                }else {
-
-                    if(chkto.equals("tobuy")){
-
-                        startActivity(new Intent(MainActivity.this, Deshboard.class));
-                        overridePendingTransition(R.anim.enter, R.anim.exit);
-                        finish();
-
-
-                    }else {
-
-                        startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
-                        overridePendingTransition(R.anim.enter, R.anim.exit);
-                        finish();
-
-                    }
-
-                }
+//
+//                if(bool == false) {
+//
+//                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+//                    overridePendingTransition(R.anim.enter, R.anim.exit);
+//                    finish();
+//
+//                }else {
+//
+//                    if(chkto.equals("tobuy")){
+//
+//                        startActivity(new Intent(MainActivity.this, Deshboard.class));
+//                        overridePendingTransition(R.anim.enter, R.anim.exit);
+//                        finish();
+//
+//
+//                    }else {
+//
+//                        startActivity(new Intent(MainActivity.this, TodoDashboardActivity.class));
+//                        overridePendingTransition(R.anim.enter, R.anim.exit);
+//                        finish();
+//
+//                    }
+//
+//                }
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                overridePendingTransition(R.anim.enter, R.anim.exit);
+                finish();
             }
         }, 2000);
     }

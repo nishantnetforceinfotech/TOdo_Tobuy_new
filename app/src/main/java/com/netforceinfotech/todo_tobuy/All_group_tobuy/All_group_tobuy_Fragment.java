@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.netforceinfotech.todo_tobuy.All_group_tobuy.main_recycleview.Recycle_adapter_main;
 import com.netforceinfotech.todo_tobuy.R;
 
@@ -93,6 +94,7 @@ public class All_group_tobuy_Fragment extends Fragment {
         recyclerView_all_group_main = (RecyclerView) v.findViewById(R.id.recycleview_allgroup);
         recycle_allgrp_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView_all_group_main.setLayoutManager(recycle_allgrp_layoutmanager);
+
         // recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
         //recyclerView_all_group_main.setAdapter(recycle_adapter_main);
 

@@ -16,6 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
 import com.netforceinfotech.todo_tobuy.R;
@@ -173,10 +176,35 @@ public class LoginActivity extends AppCompatActivity {
 
                 }else {
 
-                    Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
-                    startActivity(i2);
-                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
-                    finish();
+
+                    JsonObject js=new JsonObject();
+
+                    js.addProperty("email", email);
+                    js.addProperty("password", pass);
+
+
+
+                    String url="http://netforce.biz/todotobuy/users/authenticate";
+                    Ion.with(LoginActivity.this)
+                            .load(url)
+                            .setJsonObjectBody(js).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            try {
+                                Log.e("result", result.toString());
+                                Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
+                                startActivity(i2);
+                                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                                finish();
+                            } catch (Exception e1) {
+                                Log.e("loginresponseerror", e1.toString());
+                            }
+
+                        }
+                    });
+
+
+
 
                 }
             }
