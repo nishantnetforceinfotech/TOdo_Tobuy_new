@@ -1,8 +1,10 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +16,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Fragment_tobuy;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Searchdatas_pojo;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.OnStartDragListener;
 import com.netforceinfotech.todo_tobuy.DashBoard.grid.helper.SimpleItemTouchHelperCallback;
 import com.netforceinfotech.todo_tobuy.R;
@@ -31,7 +38,8 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
     GridLayoutManager gridLayoutManager;
     Fragment_main_grid_adapter main_grid_adapter;
     private ItemTouchHelper mItemTouchHelper;
-    ArrayList<String> list = new ArrayList<>();
+    ArrayList<Group_dashboard_datas> list = new ArrayList<Group_dashboard_datas>();
+    SharedPreferences sh;
 
 
     @Override
@@ -41,20 +49,9 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         rl_view = (RecyclerView) view.findViewById(R.id.RecyclerView_main);
 
-        for(int i=1;i<19;i++){
+        get_all_group_webservice(getActivity());
 
-            list.add(i+"");
-        }
-        main_grid_adapter = new Fragment_main_grid_adapter(getActivity(),
-                getActivity().getSupportFragmentManager(),this,list);
 
-        rl_view.setLayoutManager(gridLayoutManager);
-        rl_view.setAdapter(main_grid_adapter);
-        // Inflate the layout for this fragment
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(main_grid_adapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(rl_view);
 
         ((TextView) view.findViewById(R.id.new_group)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +80,81 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
         });
 
         return view;
+    }
+
+    private void get_all_group_webservice(final FragmentActivity activity) {
+        SharedPreferences pref1 = getActivity().getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
+
+
+        String userid=pref1.getString("userId", "demo");
+        if(userid!=null)
+        {
+            String getall_group_webservice_url="http://netforce.biz/todotobuy/products/list_group/"+userid;
+            Ion.with(getActivity())
+                    .load(getall_group_webservice_url)
+
+                    .asJsonObject().setCallback(new FutureCallback<JsonObject>() {
+                @Override
+                public void onCompleted(Exception e, JsonObject result) {
+                 if(result!=null)
+                 {
+                     String status = result.get("status").getAsString();
+                     if (status.contains("Success")) {
+
+                         JsonArray data = result.getAsJsonArray("groups");
+
+                         for (int i = 0; i < data.size(); i++)
+
+                         {
+                             JsonObject js2 = data.get(i).getAsJsonObject();
+
+                             String group_id = js2.get("id").getAsString();
+                             String group_name = js2.get("name").getAsString();
+                             String group_image_url=js2.get("image").getAsString();
+                             String group_item_qty=js2.get("item_qty").getAsString();
+                             Log.e("result_getgroup_detail", group_id + "****" + group_name + group_image_url +group_item_qty);
+                             //searchdatas.add(new Searchdatas_pojo(item_id, "0", item_name));
+                             //  Log.e("searchdatas",searchdatas.toString());
+                             //   item_ids.add(item_id);
+                             //  item_quantity.add("0");
+                            // aa.add(item_name);
+                             list.add(new Group_dashboard_datas(group_id,group_name,group_image_url,group_item_qty));
+
+                         }
+
+//                         for(int k=1;k<list.size();k++){
+//
+//                             list.add(k+"");
+//                         }
+                         main_grid_adapter = new Fragment_main_grid_adapter(activity,
+                                 activity.getSupportFragmentManager(), new OnStartDragListener() {
+                             @Override
+                             public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+
+                             }
+                         }, list);
+
+                         rl_view.setLayoutManager(gridLayoutManager);
+                         rl_view.setAdapter(main_grid_adapter);
+                         // Inflate the layout for this fragment
+
+                         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(main_grid_adapter);
+                         mItemTouchHelper = new ItemTouchHelper(callback);
+                         mItemTouchHelper.attachToRecyclerView(rl_view);
+                     }
+
+
+                     Log.e("get_all_group_response",result.toString());
+                 }
+                }
+            });
+
+
+        }
+
+
+
+
     }
 
     @Override

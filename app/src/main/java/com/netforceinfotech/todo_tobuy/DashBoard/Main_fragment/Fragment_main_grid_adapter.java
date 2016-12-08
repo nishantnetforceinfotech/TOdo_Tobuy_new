@@ -29,13 +29,13 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
         implements View.OnClickListener, ItemTouchHelperAdapter {
 
     Context context2;
-    ArrayList<String> commomDatas;
+    ArrayList<Group_dashboard_datas> commomDatas;
     FragmentManager fm;
     private final OnStartDragListener mDragStartListener;
 
     public Fragment_main_grid_adapter(Context context,
                                       FragmentManager fm,
-                                      OnStartDragListener dragStartListener,ArrayList<String> commomDatas) {
+                                      OnStartDragListener dragStartListener,ArrayList<Group_dashboard_datas> commomDatas) {
         context2 = context;
         this.fm = fm;
         mDragStartListener = dragStartListener;
@@ -57,8 +57,8 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
         holder.imageview.setOnClickListener(this);
         holder.add_or_delete_grp.setOnClickListener(this);
         holder.desription_grp.setOnClickListener(this);
-        holder.item_count.setText(commomDatas.get(position));
-        Log.e("jj",commomDatas.get(position));
+//        holder.item_count.setText(commomDatas.get(position).itemcount);
+        //Log.e("jj",commomDatas.get(position).itemcount);
 
         holder.imageview.setOnTouchListener(new View.OnTouchListener() {
             @Override

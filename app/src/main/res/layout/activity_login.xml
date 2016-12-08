@@ -239,8 +239,8 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/transparent"
                     android:ems="10"
-                    android:hint="Username"
-                    android:inputType="textPersonName"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="#AE8F50" />
             </LinearLayout>
 

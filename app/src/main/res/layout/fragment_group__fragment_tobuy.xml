@@ -56,13 +56,14 @@
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+
                                 android:layout_weight="1">
 
                                 <Button
                                     android:id="@+id/button"
                                     style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="100dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_centerHorizontal="true"
                                     android:layout_centerVertical="true"
                                     android:layout_margin="10dp"
@@ -77,15 +78,16 @@
                                 <EditText
                                     android:id="@+id/group_name"
                                     style="?android:attr/buttonStyleSmall"
-                                    android:layout_width="100dp"
-                                    android:layout_height="20dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_centerHorizontal="true"
                                     android:layout_centerVertical="true"
                                     android:layout_margin="10dp"
                                     android:background="@drawable/vegetabletext_box"
                                     android:singleLine="true"
-                                    android:text="Vegetables"
+                                    android:hint="Enter Group Name"
                                     android:textAllCaps="false"
+                                    android:textSize="12sp"
                                     android:imeOptions="actionSend"
                                     android:textColor="#32A007" />
                             </RelativeLayout>
@@ -97,7 +99,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:orientation="vertical"
                     android:weightSum="10">
 
@@ -106,27 +108,29 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_margin="10dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:orientation="horizontal"
                         android:weightSum="10">
 
                         <RelativeLayout
                             android:layout_width="0dp"
-                            android:layout_height="20dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_weight="8"
-                            android:background="@drawable/input_newitem">
+                            android:layout_weight="7"
+                            android:padding="10dp"
+                            >
 
                             <EditText
                                 android:id="@+id/editText9"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
                                 android:layout_alignParentEnd="true"
                                 android:layout_alignParentLeft="true"
                                 android:layout_alignParentRight="true"
                                 android:layout_alignParentStart="true"
                                 android:layout_centerVertical="true"
-                                android:background="@android:color/transparent"
+
+                                android:background="@drawable/input_newitem"
                                 android:gravity="center_horizontal|center_vertical"
 
                                 android:hint="Search a new Item"
@@ -136,12 +140,14 @@
                         <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+
+                            android:padding="10dp"
+                            android:layout_weight="1.5">
 
                             <ImageView
                                 android:id="@+id/imageView20"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:scaleType="fitCenter"
@@ -151,12 +157,14 @@
                         <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+
+                            android:padding="10dp"
+                            android:layout_weight="1.5">
 
                             <ImageView
                                 android:id="@+id/imageView21"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:layout_centerVertical="true"
                                 android:scaleType="fitCenter"
@@ -191,7 +199,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_margin="5dp"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <RelativeLayout
@@ -221,7 +229,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
                             android:layout_margin="10dp"
-                            android:src="@drawable/delete_group_button" />
+                            android:src="@drawable/create_group_back" />
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>

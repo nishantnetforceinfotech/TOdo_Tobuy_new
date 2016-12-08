@@ -21,8 +21,14 @@ import android.widget.RelativeLayout;
 import com.netforceinfotech.todo.task.TodoListFolderActivity;
 import com.netforceinfotech.todo_tobuy.All_group_tobuy.All_group_tobuy_Fragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment.Fragment_main;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Adapter.Alternate_item_pojo;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Adapter.Brandproduct_pojo;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Adapter.Storeproduct_pojo;
+import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Item_recycler_adapter;
 import com.netforceinfotech.todo_tobuy.DashBoard.navigation.NavigationFragment;
 import com.netforceinfotech.todo_tobuy.R;
+
+import java.util.ArrayList;
 
 public class Deshboard extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;
@@ -62,8 +68,8 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container_main, f, "Fragment_main")
-                .addToBackStack("Fragment_main")
+                .replace(R.id.container_main, f)
+                .addToBackStack(null)
                 .commit();
 
 
@@ -148,6 +154,7 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
 
 
     }
+
 
 
 }
