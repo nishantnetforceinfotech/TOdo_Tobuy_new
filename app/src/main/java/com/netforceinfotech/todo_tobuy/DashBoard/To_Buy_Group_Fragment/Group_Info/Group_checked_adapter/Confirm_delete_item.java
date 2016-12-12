@@ -1,10 +1,12 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +22,19 @@ import com.netforceinfotech.todo_tobuy.R;
  */
 public class Confirm_delete_item extends DialogFragment {
 
-
+    Group_checked_adapter grp_checked_adapter;
+    private DialogInterface.OnDismissListener onDismissListener;
     public Confirm_delete_item() {
 
     }
+
+
+
+    public void setOnDismissListener(DialogInterface.OnDismissListener onDismissListener) {
+        this.onDismissListener = onDismissListener;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,22 +47,37 @@ public class Confirm_delete_item extends DialogFragment {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
         View rootView = inflater.inflate(R.layout.delete_confirm_dialog, container, false);
+
+        Bundle bundle=getArguments();
+        grp_checked_adapter = new Group_checked_adapter(getActivity(), Group_recycleview_subfragment.selectedGroupData);
+        //here is your list array
+       final int position=bundle.getInt("num",121);
         ImageView sure=(ImageView)rootView.findViewById(R.id.imageView29);
-        ImageView  confirm_delete=(ImageView)rootView.findViewById(R.id.imageView30);
+        ImageView  cancel_delete=(ImageView)rootView.findViewById(R.id.imageView30);
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                show_Alert_dialog();
-                getDialog().dismiss();
+                if(position!=121) {
+
+                    //Group_checked_adapter grp_checked_adapter = new Group_checked_adapter(getActivity(), Group_recycleview_subfragment.selectedGroupData);
+
+                    Group_recycleview_subfragment.selectedGroupData.remove(position);
+                    grp_checked_adapter.notifyDataSetChanged();
+                    Log.e("list_pos", Group_recycleview_subfragment.selectedGroupData.size() + "'");
+                    show_Alert_dialog();
+                    getDialog().dismiss();
+                }
+
 
             }
 
 
         });
 
-        confirm_delete.setOnClickListener(new View.OnClickListener() {
+        cancel_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getDialog().dismiss();
             }
         });
@@ -90,6 +116,13 @@ public class Confirm_delete_item extends DialogFragment {
 //        alertDialog.show();
 
 
+    }
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (onDismissListener != null) {
+            onDismissListener.onDismiss(dialog);
+        }
     }
 
 

@@ -19,6 +19,7 @@ import com.netforceinfotech.todo_tobuy.Login.LoginActivity;
 public class MainActivity extends AppCompatActivity {
     RelativeLayout rl;
    public static String userid;
+    protected static final int REQUEST_CHECK_SETTINGS = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

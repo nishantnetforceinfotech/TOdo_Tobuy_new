@@ -1,6 +1,7 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.Main_fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -38,20 +42,41 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
     GridLayoutManager gridLayoutManager;
     Fragment_main_grid_adapter main_grid_adapter;
     private ItemTouchHelper mItemTouchHelper;
+    ImageView More;
     ArrayList<Group_dashboard_datas> list = new ArrayList<Group_dashboard_datas>();
     SharedPreferences sh;
 
-
+ProgressDialog pd;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+        More=(ImageView)view.findViewById(R.id.imageView19);
+        pd=new ProgressDialog(getActivity());
         gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         rl_view = (RecyclerView) view.findViewById(R.id.RecyclerView_main);
 
         get_all_group_webservice(getActivity());
 
+        More.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(getActivity(), More);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater().inflate(R.menu.more_menu_fragment_main, popup.getMenu());
 
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                       // Toast.makeText(getActivity(), "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                });
+
+                popup.show();//showing popup menu
+            }
+        });
 
         ((TextView) view.findViewById(R.id.new_group)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +109,8 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
 
     private void get_all_group_webservice(final FragmentActivity activity) {
         SharedPreferences pref1 = getActivity().getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
-
-
+        list.clear();
+        pd.show();
         String userid=pref1.getString("userId", "demo");
         if(userid!=null)
         {
@@ -143,7 +168,10 @@ public class Fragment_main extends Fragment implements OnStartDragListener {
                          mItemTouchHelper.attachToRecyclerView(rl_view);
                      }
 
-
+if(pd!=null)
+{
+    pd.dismiss();
+}
                      Log.e("get_all_group_response",result.toString());
                  }
                 }

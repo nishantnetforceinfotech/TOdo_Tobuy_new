@@ -143,31 +143,60 @@ public class Dialog_media_fragment extends DialogFragment {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
+        File mydir = new File(Environment.getExternalStorageDirectory().getPath());
         if(!mydir.exists())
-            mydir.mkdirs();
-        else
-            Log.d("error", "dir. already exists");
+        {  mydir.mkdirs();
+            Log.e("working 1", "dir. already exists");
+            setimage(mydir,thumbnail,bytes);
+        }
+        else {
+            Log.e("working 2", "dir. already exists");
+            Log.e("error", "dir. already exists");
+            setimage(mydir,thumbnail,bytes);
 
-        File destination = new File(mydir.toString(),
-                System.currentTimeMillis() + ".jpg");
+//            File destination = new File(mydir,
+//                    System.currentTimeMillis()+".jpg");
+//            Log.e("destination_file", destination.getAbsolutePath());
+//            FileOutputStream fo;
+//            try {
+//                destination.createNewFile();
+//                fo = new FileOutputStream(destination);
+//                fo.write(bytes.toByteArray());
+//                fo.close();
+//            } catch (FileNotFoundException e) {
+//                Log.e("FileNot_dialog_media", e.toString());
+//            } catch (IOException e) {
+//                Log.e("IOExce_dialog_media", e.toString());
+//            }
+//
+//            Group_Fragment_tobuy.item_image = thumbnail;
+//            Group_Fragment_tobuy.item_file = destination;
+//            getDialog().cancel();
+        }
+        //ivImage.setImageBitmap(thumbnail);
+    }
 
+    private void setimage(File mydir, Bitmap thumbnail, ByteArrayOutputStream bytes) {
+
+        File destination = new File(mydir,
+                System.currentTimeMillis()+".jpg");
+        Log.e("destination_file", destination.getAbsolutePath());
         FileOutputStream fo;
         try {
             destination.createNewFile();
-            fo = new FileOutputStream(destination);
+            fo = new FileOutputStream(destination.getAbsoluteFile());
             fo.write(bytes.toByteArray());
             fo.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Log.e("FileNot_dialog_media", e.toString());
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("IOExce_dialog_media", e.toString());
         }
 
         Group_Fragment_tobuy.item_image = thumbnail;
         Group_Fragment_tobuy.item_file = destination;
         getDialog().cancel();
-        //ivImage.setImageBitmap(thumbnail);
+
     }
 
     @SuppressWarnings("deprecation")

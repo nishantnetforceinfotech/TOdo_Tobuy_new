@@ -71,7 +71,7 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
     public static ImageView get_cameraorgalley_image;
     public static Bitmap item_image;
     public  static File item_file;
-    ImageView search_item,add_item,done;
+    ImageView search_item,add_item,done,back_to_previous;
     Searchdatas_pojo s_pojo;
     //ArrayList<SearchData> searchdatas;
     ArrayList<Searchdatas_pojo> searchdatas=new ArrayList<Searchdatas_pojo>();
@@ -125,6 +125,8 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
         group_name=(EditText)v.findViewById(R.id.group_name);
         search_item=(ImageView)v.findViewById(R.id.imageView20);
         add_item=(ImageView)v.findViewById(R.id.imageView21);
+        back_to_previous=(ImageView)v.findViewById(R.id.imageView23);
+
         rl_imagegetter = (RelativeLayout) v.findViewById(R.id.rl_imagegetter);
         done = (ImageView) v.findViewById(R.id.imageView22);
         done.setOnClickListener(this);
@@ -134,6 +136,12 @@ public class Group_Fragment_tobuy extends Fragment implements View.OnClickListen
 
         item_image = null;
         item_file = null;
+        back_to_previous.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         // Add items
         add_item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -397,7 +405,8 @@ item_recycler_adapter.notifyDataSetChanged();
         //JsonObject itemdata = new JsonObject();
 
             //itemdata.addProperty("items", myCustomArray.toString());
-
+        pp=new ProgressDialog(getActivity());
+        pp.show();
 
             String creategroup="http://netforce.biz/todotobuy/products/create_group";
 //            JsonObject js=new JsonObject();
@@ -426,7 +435,7 @@ item_recycler_adapter.notifyDataSetChanged();
 
 
                                 String status=js2.getString("status");
-                                if(status.contains("status"))
+                                if(status.contains("success"))
                                 {
                                     Toast.makeText(getActivity(),"group created sucessfully",Toast.LENGTH_SHORT).show();
 
@@ -434,6 +443,7 @@ item_recycler_adapter.notifyDataSetChanged();
 
                                 }
                                 } else {
+                                    getActivity().getSupportFragmentManager().popBackStack();
                                     Log.e("eeeee2", e.toString());
                                 }
                             } catch (JSONException e1) {

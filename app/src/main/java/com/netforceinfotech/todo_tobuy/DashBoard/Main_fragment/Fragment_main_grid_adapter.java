@@ -53,11 +53,12 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
     @Override
     public void onBindViewHolder(final CommomHolder_grid holder, int position) {
 
-        Picasso.with(context2).load(R.drawable.vegetables).into(holder.imageview);
+        Picasso.with(context2).load(commomDatas.get(position).group_image_url).into(holder.imageview);
         holder.imageview.setOnClickListener(this);
         holder.add_or_delete_grp.setOnClickListener(this);
         holder.desription_grp.setOnClickListener(this);
-//        holder.item_count.setText(commomDatas.get(position).itemcount);
+       holder.item_count.setText(commomDatas.get(position).itemcount);
+        holder.groupname.setText(commomDatas.get(position).groupname);
         //Log.e("jj",commomDatas.get(position).itemcount);
 
         holder.imageview.setOnTouchListener(new View.OnTouchListener() {
@@ -89,7 +90,7 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
 
     @Override
     public int getItemCount() {
-        return 18;
+        return commomDatas.size();
     }
 
     @Override
