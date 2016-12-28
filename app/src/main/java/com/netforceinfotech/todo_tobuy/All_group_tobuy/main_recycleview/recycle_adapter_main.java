@@ -2,6 +2,7 @@ package com.netforceinfotech.todo_tobuy.All_group_tobuy.main_recycleview;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Inf
 import com.netforceinfotech.todo_tobuy.R;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by abcd on 9/8/2016.
@@ -42,11 +44,16 @@ public class Recycle_adapter_main extends RecyclerView.Adapter<CommonHolder_Recy
     Recycle_adapter_sub recycle_adapter_sub;
     int itemsize;
     RecyclerView recycleview_allgroup_sub;
-    ArrayList<GroupData> groupDatas;
+    ArrayList groupDatas;
     public static final int keypad_fragment = 1;
     LinearLayoutManager recycle_allgrp_layoutmanager;
+    static final int[] colors16 = {
+            Color.rgb(255, 0, 0),
+            Color.rgb(0, 255, 0),
+            Color.rgb(0, 0, 255)
+    };
 
-    public Recycle_adapter_main(Context context, ArrayList<GroupData> groupDatas) {
+    public Recycle_adapter_main(Context context, ArrayList groupDatas) {
         context2 = context;
         context3 = (Activity) context;
         checkedlist = new ArrayList();
@@ -57,7 +64,7 @@ public class Recycle_adapter_main extends RecyclerView.Adapter<CommonHolder_Recy
 
     @Override
     public CommonHolder_Recycler_main onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_all_group_tobuy_row,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_all_group_tobuy_row, parent, false);
         viewHolder = new CommonHolder_Recycler_main(view);
         return viewHolder;
     }
@@ -65,6 +72,11 @@ public class Recycle_adapter_main extends RecyclerView.Adapter<CommonHolder_Recy
     @Override
     public void onBindViewHolder(final CommonHolder_Recycler_main holder, final int position) {
         initrecycleview(holder);
+        holder.group_name.setText(groupDatas.get(position).toString());
+        int rand = new Random().nextInt(colors16.length);
+        Integer color = colors16[rand];
+        holder.group_name.setTextColor(color);
+        holder.list_border.setTextColor(color);
 
 
     }

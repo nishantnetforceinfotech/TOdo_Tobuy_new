@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v13.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -23,6 +24,7 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -58,6 +60,7 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
     int REQUEST_CHECK_SETTINGS=1;
     Get_location get;
     int PERMISSION_ALL = 1;
+    TextView blinking_text;
     String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_SMS,
             Manifest.permission.CAMERA,Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE};
 
@@ -78,12 +81,13 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
         rl_all_group.setOnClickListener(this);
         transparency_on = (View) findViewById(R.id.show_transparency);
         downbutton = (ImageView) findViewById(R.id.imageView13);
+        //blinking_text=(TextView)findViewById(R.id.textView25);
         downbutton.setOnClickListener(this);
         offers_fragments = getSupportFragmentManager().findFragmentById(R.id.fragment_offers);
         offers_fragments.getView().setVisibility(View.INVISIBLE);
         show_blinking_images=(ImageView)findViewById(R.id.imageView9);
         displayLocationSettingsRequest(this);
-        showanimation(show_blinking_images);
+       // showanimation(blinking_text);
         if(!hasPermissions(this, PERMISSIONS)){
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
             get=new Get_location(this);
@@ -109,7 +113,9 @@ public class Deshboard extends AppCompatActivity implements View.OnClickListener
 
 
 
-    private void showanimation(ImageView show_blinking_images) {
+    private void showanimation(TextView show_blinking_images) {
+        show_blinking_images.setText("2");
+
         ScaleAnimation scale = new ScaleAnimation(0, 1, 0, 1, ScaleAnimation.RELATIVE_TO_SELF, .5f, ScaleAnimation.RELATIVE_TO_SELF, .5f);
         scale.setDuration(300);
         scale.setRepeatMode(ScaleAnimation.INFINITE);

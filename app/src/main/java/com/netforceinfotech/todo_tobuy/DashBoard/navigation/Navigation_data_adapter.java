@@ -1,9 +1,12 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.navigation;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,7 +17,9 @@ import android.view.ViewGroup;
 
 import com.netforceinfotech.todo.task.TodoDashboardActivity;
 import com.netforceinfotech.todo.task.TodoListFolderActivity;
+import com.netforceinfotech.todo_tobuy.All_group_tobuy.All_group_tobuy_Fragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.Deshboard;
+import com.netforceinfotech.todo_tobuy.DashBoard.navigation.Navigation_items.Contact_us;
 import com.netforceinfotech.todo_tobuy.R;
 
 /**
@@ -73,6 +78,16 @@ public class Navigation_data_adapter extends RecyclerView.Adapter<CommonHolder_m
 
                 }
 
+                if (data_title[pos].equals("Contact Us")) {
+
+                    Replace_contact_us();
+                    NavigationFragment.mDrawerLayout.closeDrawers();
+                   // NavigationFragment.mDrawerToggle.syncState();
+
+                }
+
+
+
 
             }
         });
@@ -83,5 +98,18 @@ public class Navigation_data_adapter extends RecyclerView.Adapter<CommonHolder_m
     @Override
     public int getItemCount() {
         return data_title.length;
+    }
+
+
+
+    private void Replace_contact_us() {
+        Contact_us f = new Contact_us();
+       ((FragmentActivity)context).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, f, "Replace_contact_us")
+                .addToBackStack("Replace_contact_us")
+                .commit();
+
+
     }
 }
