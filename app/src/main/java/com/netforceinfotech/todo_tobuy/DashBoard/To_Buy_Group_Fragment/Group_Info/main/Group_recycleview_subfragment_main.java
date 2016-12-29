@@ -98,7 +98,6 @@ public class Group_recycleview_subfragment_main extends Fragment {
 
     private void replaceFragment(Fragment newFragment, String tag) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.addToBackStack(tag);
         transaction.replace(R.id.fl_groupdata, newFragment, tag);
         transaction.commit();
     }

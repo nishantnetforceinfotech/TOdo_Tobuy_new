@@ -1,6 +1,5 @@
 package com.netforceinfotech.todo_tobuy.Login;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -45,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox tobuy;
     @InjectView(R.id.todo)
     CheckBox todo;
-    ProgressDialog progress_dialog;
+
     Boolean bool = true;
     String chk_to = "tobuy";
     SharedPreferences pref,pref1;
@@ -161,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                 String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
                 if (email.matches(emailPattern)) {
-                   // Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "valid email address", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
                 }
@@ -184,38 +183,23 @@ public class LoginActivity extends AppCompatActivity {
                     js.addProperty("password", pass);
 
 
-                    progress_dialog=new ProgressDialog(LoginActivity.this);
-                    progress_dialog.show();
+
                     String url="http://netforce.biz/todotobuy/users/authenticate";
                     Ion.with(LoginActivity.this)
                             .load(url)
-
                             .setJsonObjectBody(js).asJsonObject().setCallback(new FutureCallback<JsonObject>() {
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
-//                            try {
+                            try {
                                 Log.e("result", result.toString());
-                           String Status=    result.get("success").getAsString();
-                                if(Status.contains("1"))
-                                {JsonObject data= result.getAsJsonObject("data");
-                                  String userId=  data.get("userId").getAsString();
-                                    editor1.putString("userId", userId);
-                                    editor1.commit();
+                                Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
+                                startActivity(i2);
+                                LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
+                                finish();
+                            } catch (Exception e1) {
+                                Log.e("loginresponseerror", e1.toString());
+                            }
 
-                                    Intent i2 = new Intent(LoginActivity.this, Deshboard.class);
-                                    startActivity(i2);
-                                    LoginActivity.this.overridePendingTransition(R.anim.enter, R.anim.exit);
-                                    finish();
-                                }
-
-
-//                            } catch (Exception e1) {
-//                                Log.e("loginresponseerror", e1.toString());
-//                            }
-if(progress_dialog!=null)
-{
-    progress_dialog.dismiss();
-}
                         }
                     });
 

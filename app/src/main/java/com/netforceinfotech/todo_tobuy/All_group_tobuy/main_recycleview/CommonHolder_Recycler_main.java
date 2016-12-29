@@ -2,7 +2,6 @@ package com.netforceinfotech.todo_tobuy.All_group_tobuy.main_recycleview;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
 
 import com.netforceinfotech.todo_tobuy.R;
 
@@ -11,7 +10,6 @@ import com.netforceinfotech.todo_tobuy.R;
  */
 public class CommonHolder_Recycler_main extends RecyclerView.ViewHolder {
     RecyclerView recyclerView;
-    TextView group_name,list_border;
 
         //    CardView cardview;
 //    ImageView imageview;
@@ -21,8 +19,7 @@ public CommonHolder_Recycler_main(View itemView) {
         super(itemView);
 
     recyclerView=(RecyclerView)itemView.findViewById(R.id.recycleview_allgroup_sub);
-    group_name=(TextView)itemView.findViewById(R.id.textView17);
-    list_border=(TextView)itemView.findViewById(R.id.textView24);
+
 
         }
         }

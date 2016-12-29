@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -21,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
    public static String userid;
     int a;
     protected static final int REQUEST_CHECK_SETTINGS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-
-
-
                 // do something
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("RememberMe", MODE_PRIVATE);
                 boolean bool = pref.getBoolean("remember", false);
