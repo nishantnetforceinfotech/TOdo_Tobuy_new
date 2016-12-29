@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                // do something
+
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("RememberMe", MODE_PRIVATE);
                 boolean bool = pref.getBoolean("remember", false);
                 SharedPreferences pref1 = getApplicationContext().getSharedPreferences("ToDo-ToBuy", 0);
@@ -66,9 +66,7 @@ Log.e("userid",userid);
                     }
 
                 }
-//                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                overridePendingTransition(R.anim.enter, R.anim.exit);
-//                finish();
+//
             }
         }, 2000);
     }
