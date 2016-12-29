@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     int a;
     protected static final int REQUEST_CHECK_SETTINGS = 1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
