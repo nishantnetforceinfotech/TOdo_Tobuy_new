@@ -9,9 +9,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo_header_basket"
@@ -33,7 +30,6 @@
         <activity
             android:name=".DashBoard.Deshboard"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|adjustPan"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".DashBoard.Offers.Strores.Stores_activity"

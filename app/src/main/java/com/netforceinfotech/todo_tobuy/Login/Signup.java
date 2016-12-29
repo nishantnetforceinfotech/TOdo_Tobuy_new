@@ -38,8 +38,6 @@ public class Signup extends AppCompatActivity {
     @InjectView(R.id.spin_country)
     Spinner spin_country;
     @InjectView(R.id.spin_state)
-    Spinner spin_loc_dis;
-    @InjectView(R.id.spin_loc_dis)
     Spinner spin_state;
     @InjectView(R.id.email_id)
     EditText email_id;
@@ -61,7 +59,7 @@ public class Signup extends AppCompatActivity {
     String countrylist[] = {"Country"};
 
     String statelist[] = {"State"};
-String locationlist[]={"Select Distance","5 KM","10 KM","15 KM","20 KM","25 KM","30 KM","35 KM","40 KM","45 KM","50 KM","55 KM","60 KM","More then 60 Km"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +148,6 @@ String locationlist[]={"Select Distance","5 KM","10 KM","15 KM","20 KM","25 KM",
 
 
         allClickEvents();
-        setlocation_spinner();
         callwebservice();
        spin_country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
            @Override
@@ -194,17 +191,6 @@ String locationlist[]={"Select Distance","5 KM","10 KM","15 KM","20 KM","25 KM",
            }
        });
         }
-
-    private void setlocation_spinner() {
-
-
-        ArrayAdapter<String> spinnerArrayAdapter_loc = new ArrayAdapter<String>(this, R.layout.spinnertext, locationlist); //selected item will look like a spinner set from XML
-        spinnerArrayAdapter_loc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin_loc_dis.setAdapter(spinnerArrayAdapter_loc);
-
-
-
-    }
 
     private void setStatespinner(ArrayList<String> state_ids, ArrayList<String> state_names) {
 

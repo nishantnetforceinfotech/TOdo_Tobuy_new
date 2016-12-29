@@ -1,16 +1,10 @@
 package com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.Group_checked_adapter;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
@@ -38,7 +32,7 @@ import java.util.ArrayList;
  * Created by abcd on 9/3/2016.
  */
 public class Group_checked_adapter extends RecyclerView.Adapter<Group_checked_adapter.ViewHolder> {
-  public static   ArrayList<GroupData> groupDatas;
+    ArrayList<GroupData> groupDatas;
     Context context;
 
     public Group_checked_adapter(Context context, ArrayList<GroupData> groupDatas) {
@@ -142,23 +136,7 @@ public class Group_checked_adapter extends RecyclerView.Adapter<Group_checked_ad
             @Override
             public void onClick(View v) {
 
-                final int pos = (int) v.getTag();
-
-                Confirm_delete_item cc=new Confirm_delete_item();
-                Bundle args = new Bundle();
-                args.putInt("num", pos);
-             //   android.app.FragmentManager manager = ((Activity) context).getFragmentManager();
-                FragmentManager manager = ((Activity)context).getFragmentManager();
-                cc.setArguments(args);
-                cc.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-//                        groupDatas.remove(pos);
-                        notifyDataSetChanged();
-                    }
-                });
-                cc.show(manager, cc.getTag());
-
+                int pos = (int) v.getTag();
 
                 Toast.makeText(context, "delete item : " + pos, Toast.LENGTH_LONG).show();
             }

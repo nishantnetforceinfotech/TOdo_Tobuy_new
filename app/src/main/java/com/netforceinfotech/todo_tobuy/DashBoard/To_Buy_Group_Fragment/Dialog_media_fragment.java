@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +15,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -46,15 +43,10 @@ public class Dialog_media_fragment extends DialogFragment {
     static final int TAKE_PHOTO_GALLERY = 1;
     private final int REQUEST_CAMERA = 2;
 
-    int PERMISSION_ALL = 1;
-    String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_SMS, Manifest.permission.CAMERA};
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-//        if(!hasPermissions(getActivity(), PERMISSIONS)){
-//            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-//        }
+
 
         ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();
         params.width = RecyclerView.LayoutParams.WRAP_CONTENT;
@@ -102,22 +94,8 @@ public class Dialog_media_fragment extends DialogFragment {
 
     private void cameraIntent(){
 
-//        Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(in,REQUEST_CAMERA);
-
-
-
-        if(!hasPermissions(getActivity(), PERMISSIONS)){
-            ActivityCompat.requestPermissions(getActivity(), PERMISSIONS, PERMISSION_ALL);
-            Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(in, REQUEST_CAMERA);
-        }
-        else{
-            Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(in, REQUEST_CAMERA);
-        }
-
-
+        Intent in = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(in,REQUEST_CAMERA);
     }
 
     @Override
@@ -143,60 +121,31 @@ public class Dialog_media_fragment extends DialogFragment {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        File mydir = new File(Environment.getExternalStorageDirectory().getPath());
+        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
         if(!mydir.exists())
-        {  mydir.mkdirs();
-            Log.e("working 1", "dir. already exists");
-            setimage(mydir,thumbnail,bytes);
-        }
-        else {
-            Log.e("working 2", "dir. already exists");
-            Log.e("error", "dir. already exists");
-            setimage(mydir,thumbnail,bytes);
+            mydir.mkdirs();
+        else
+            Log.d("error", "dir. already exists");
 
-//            File destination = new File(mydir,
-//                    System.currentTimeMillis()+".jpg");
-//            Log.e("destination_file", destination.getAbsolutePath());
-//            FileOutputStream fo;
-//            try {
-//                destination.createNewFile();
-//                fo = new FileOutputStream(destination);
-//                fo.write(bytes.toByteArray());
-//                fo.close();
-//            } catch (FileNotFoundException e) {
-//                Log.e("FileNot_dialog_media", e.toString());
-//            } catch (IOException e) {
-//                Log.e("IOExce_dialog_media", e.toString());
-//            }
-//
-//            Group_Fragment_tobuy.item_image = thumbnail;
-//            Group_Fragment_tobuy.item_file = destination;
-//            getDialog().cancel();
-        }
-        //ivImage.setImageBitmap(thumbnail);
-    }
+        File destination = new File(mydir.toString(),
+                System.currentTimeMillis() + ".jpg");
 
-    private void setimage(File mydir, Bitmap thumbnail, ByteArrayOutputStream bytes) {
-
-        File destination = new File(mydir,
-                System.currentTimeMillis()+".jpg");
-        Log.e("destination_file", destination.getAbsolutePath());
         FileOutputStream fo;
         try {
             destination.createNewFile();
-            fo = new FileOutputStream(destination.getAbsoluteFile());
+            fo = new FileOutputStream(destination);
             fo.write(bytes.toByteArray());
             fo.close();
         } catch (FileNotFoundException e) {
-            Log.e("FileNot_dialog_media", e.toString());
+            e.printStackTrace();
         } catch (IOException e) {
-            Log.e("IOExce_dialog_media", e.toString());
+            e.printStackTrace();
         }
 
         Group_Fragment_tobuy.item_image = thumbnail;
         Group_Fragment_tobuy.item_file = destination;
         getDialog().cancel();
-
+        //ivImage.setImageBitmap(thumbnail);
     }
 
     @SuppressWarnings("deprecation")
@@ -206,72 +155,41 @@ public class Dialog_media_fragment extends DialogFragment {
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-
             } catch (IOException e) {
-               Log.e("IOException",e.toString());
+                e.printStackTrace();
             }
         }
 
-//        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//        bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-//
-//        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
-//        if(!mydir.exists())
-//            mydir.mkdirs();
-//        else
-//            Log.d("error", "dir. already exists");
-//
-//        File destination = new File(mydir.toString(),
-//                System.currentTimeMillis() + ".jpg");
-//
-//        FileOutputStream fo;
-//        try {
-//            destination.createNewFile();
-//            fo = new FileOutputStream(destination);
-//            fo.write(bytes.toByteArray());
-//            fo.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        Group_Fragment_tobuy.item_image = bm;
-        Uri tempUri = getImageUri(getActivity().getApplicationContext(), bm);
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        // CALL THIS METHOD TO GET THE ACTUAL PATH
-        File finalFile = new File(getRealPathFromURI(tempUri));
-        Group_Fragment_tobuy.item_file = finalFile;
-        Log.e(" Group_Fragm", Group_Fragment_tobuy.item_file.getAbsolutePath());
+        File mydir = new File(Environment.getExternalStorageDirectory() + "Todo-ToBuy/To-Buy/");
+        if(!mydir.exists())
+            mydir.mkdirs();
+        else
+            Log.d("error", "dir. already exists");
+
+        File destination = new File(mydir.toString(),
+                System.currentTimeMillis() + ".jpg");
+
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Group_Fragment_tobuy.item_image = bm;
+        Group_Fragment_tobuy.item_file = destination;
         getDialog().cancel();
 
         //ivImage.setImageBitmap(bm);
     }
 
 
-
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
 
 }

@@ -11,5 +11,4 @@ public class Global_Variable {
     public static String type = "";
     public static String row_pos_count = "0";
 
-
 }
