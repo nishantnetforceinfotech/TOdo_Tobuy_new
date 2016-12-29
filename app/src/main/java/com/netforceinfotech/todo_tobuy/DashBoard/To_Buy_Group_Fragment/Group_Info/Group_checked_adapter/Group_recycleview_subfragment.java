@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.netforceinfotech.todo_tobuy.All_group_tobuy.All_group_tobuy_Fragment;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.GroupData;
 import com.netforceinfotech.todo_tobuy.DashBoard.To_Buy_Group_Fragment.Group_Info.main.Item_recycler_adapter;
 import com.netforceinfotech.todo_tobuy.R;
@@ -43,6 +44,10 @@ public class Group_recycleview_subfragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_group_recycleview_subfragment, container, false);
+        if(grp_checked_adapter!=null)
+        {
+            grp_checked_adapter.notifyDataSetChanged();
+        }
 
 
         rl_itemlist_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -59,39 +64,48 @@ public class Group_recycleview_subfragment extends Fragment {
         return v;
     }
 
-    private void clickevent(View v) {
+    public void clickevent(View v) {
 
         ((ImageView) v.findViewById(R.id.clearlist)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                int i = 0;
-                for (i = 0; i < selectedGroupData.size(); i++) {
+//                int i = 0;
+//                for (i = 0; i < selectedGroupData.size(); i++) {
+//
+//                    if (!selectedGroupData.get(i).isChecked()) {
+//
+//                        selectedGroupData.get(i).setChecked(false);
+//                        selectedGroupData.get(i).setFav(false);
+//                        selectedGroupData.get(i).setQuantity(" ");
+//                        selectedGroupData.get(i).setText_chk(false);
+//
+//                        unselectedGroupData.add(selectedGroupData.get(i));
+//                        grp_uncheck_adapter.notifyDataSetChanged();
+//
+//                        selectedGroupData.remove(i);
+//                        grp_checked_adapter.notifyDataSetChanged();
+//                        Log.e("hhh2", selectedGroupData.size() + "");
+//                        Log.e("ddd2", unselectedGroupData.size() + "");
+//                        getActivity().getSupportFragmentManager().popBackStack();
+////                        ((ImageView) v.findViewById(R.id.clearlist)).performClick();
+////                        System.gc();
+//
+//
+//                    } else {
+////Log.e("selectedGroupData",selectedGroupData.size()+selectedGroupData.toString());
+//                        //do stuff
+//
+//                    }
+   //             }
 
-                    if (!selectedGroupData.get(i).isChecked()) {
-
-                        selectedGroupData.get(i).setChecked(false);
-                        selectedGroupData.get(i).setFav(false);
-                        selectedGroupData.get(i).setQuantity(" ");
-                        selectedGroupData.get(i).setText_chk(false);
-
-                        unselectedGroupData.add(selectedGroupData.get(i));
-                        grp_uncheck_adapter.notifyDataSetChanged();
-
-                        selectedGroupData.remove(i);
-                        grp_checked_adapter.notifyDataSetChanged();
-
-                        ((ImageView) v.findViewById(R.id.clearlist)).performClick();
-                        System.gc();
-
-                    } else {
-
-                        //do stuff
-
-                    }
-                }
-
-
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
+        ((ImageView)v.findViewById(R.id.done_btn)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view2) {
+                Replace_all_fragment_main();
             }
         });
 
@@ -110,4 +124,23 @@ public class Group_recycleview_subfragment extends Fragment {
     }
 
 
+
+    private void Replace_all_fragment_main() {
+        All_group_tobuy_Fragment f = new All_group_tobuy_Fragment();
+       getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container_main, f, "All_group_tobuy_Fragment")
+                .addToBackStack("All_group_tobuy_Fragment")
+                .commit();
+
+
+    }
+
+    @Override
+    public void onResume() {
+        Log.e("hhh2", selectedGroupData.size() + "");
+        Log.e("ddd2", unselectedGroupData.size() + "");
+        super.onResume();
+
+    }
 }

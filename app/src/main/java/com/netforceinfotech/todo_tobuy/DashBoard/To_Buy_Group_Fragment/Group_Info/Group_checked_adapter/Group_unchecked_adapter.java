@@ -46,7 +46,7 @@ public class Group_unchecked_adapter extends RecyclerView.Adapter<Group_unchecke
     @Override
     public Group_unchecked_adapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewtype) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_group_listitem_row,
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_group_item_row,
                 viewGroup, false);
 
         ViewHolder holder = new ViewHolder(view, new MyEditTextWatcher());

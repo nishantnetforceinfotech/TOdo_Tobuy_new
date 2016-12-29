@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.netforceinfotech.todo_tobuy.Login.login">
+    tools:context="com.netforceinfotech.todo_tobuy.Login.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -239,8 +239,8 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/transparent"
                     android:ems="10"
-                    android:hint="Username"
-                    android:inputType="textPersonName"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
                     android:textColorHint="#AE8F50" />
             </LinearLayout>
 
