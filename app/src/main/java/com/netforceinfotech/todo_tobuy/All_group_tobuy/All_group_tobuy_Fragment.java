@@ -95,8 +95,8 @@ public class All_group_tobuy_Fragment extends Fragment {
         recycle_allgrp_layoutmanager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView_all_group_main.setLayoutManager(recycle_allgrp_layoutmanager);
 
-        Recycle_adapter_main  recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
-        recyclerView_all_group_main.setAdapter(recycle_adapter_main);
+        // recycle_adapter_main = new Recycle_adapter_main(getActivity(), groups_name);
+        //recyclerView_all_group_main.setAdapter(recycle_adapter_main);
 
 
     }

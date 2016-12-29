@@ -21,7 +21,7 @@ public class CommomHolder_grid extends RecyclerView.ViewHolder implements
     CardView cardview;
     ImageView imageview;
     RelativeLayout add_or_delete_grp, desription_grp;
-    TextView item_count,groupname;
+    TextView item_count;
 
     public CommomHolder_grid(View itemView) {
         super(itemView);
@@ -29,7 +29,6 @@ public class CommomHolder_grid extends RecyclerView.ViewHolder implements
         add_or_delete_grp = (RelativeLayout) itemView.findViewById(R.id.relativeLayout16);
         desription_grp = (RelativeLayout) itemView.findViewById(R.id.relativeLayout17);
         item_count = (TextView) itemView.findViewById(R.id.item_count);
-        groupname= (TextView) itemView.findViewById(R.id.textView10);
 
         // cardview= (CardView) itemView.findViewById(R.id.cardview_subcategory);
     }

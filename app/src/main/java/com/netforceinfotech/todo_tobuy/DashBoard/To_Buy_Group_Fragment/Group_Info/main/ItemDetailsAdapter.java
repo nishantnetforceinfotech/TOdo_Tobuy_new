@@ -37,7 +37,7 @@ public class ItemDetailsAdapter extends RecyclerView.Adapter<ItemDetailsAdapter.
     @Override
     public ItemDetailsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewtype) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_group_item_row,
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_group_listitem_row,
                 viewGroup, false);
 
         ViewHolder holder = new ViewHolder(view, new MyEditTextWatcher());

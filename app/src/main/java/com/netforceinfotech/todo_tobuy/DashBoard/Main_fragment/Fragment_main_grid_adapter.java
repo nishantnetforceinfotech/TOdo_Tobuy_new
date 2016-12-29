@@ -29,13 +29,13 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
         implements View.OnClickListener, ItemTouchHelperAdapter {
 
     Context context2;
-    ArrayList<Group_dashboard_datas> commomDatas;
+    ArrayList<String> commomDatas;
     FragmentManager fm;
     private final OnStartDragListener mDragStartListener;
 
     public Fragment_main_grid_adapter(Context context,
                                       FragmentManager fm,
-                                      OnStartDragListener dragStartListener,ArrayList<Group_dashboard_datas> commomDatas) {
+                                      OnStartDragListener dragStartListener,ArrayList<String> commomDatas) {
         context2 = context;
         this.fm = fm;
         mDragStartListener = dragStartListener;
@@ -53,13 +53,12 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
     @Override
     public void onBindViewHolder(final CommomHolder_grid holder, int position) {
 
-        Picasso.with(context2).load(commomDatas.get(position).group_image_url).into(holder.imageview);
+        Picasso.with(context2).load(R.drawable.vegetables).into(holder.imageview);
         holder.imageview.setOnClickListener(this);
         holder.add_or_delete_grp.setOnClickListener(this);
         holder.desription_grp.setOnClickListener(this);
-       holder.item_count.setText(commomDatas.get(position).itemcount);
-        holder.groupname.setText(commomDatas.get(position).groupname);
-        //Log.e("jj",commomDatas.get(position).itemcount);
+        holder.item_count.setText(commomDatas.get(position));
+        Log.e("jj",commomDatas.get(position));
 
         holder.imageview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -90,7 +89,7 @@ public class Fragment_main_grid_adapter extends RecyclerView.Adapter<CommomHolde
 
     @Override
     public int getItemCount() {
-        return commomDatas.size();
+        return 18;
     }
 
     @Override
